@@ -1,0 +1,30 @@
+{
+  "success": true,
+  "query": "grey jogger sweatpants mens",
+  "count": 3,
+  "ranked": false,
+  "captioned_count": 0,
+  "results": [
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/6186fb163c71.jpg",
+      "caption": "",
+      "source": "American Tall",
+      "original_width": "1500px",
+      "original_height": "2100px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/6eceef5a620d.jpg",
+      "caption": "",
+      "source": "American Tall",
+      "original_width": "1500px",
+      "original_height": "2100px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/375a651e6d1d.jpg",
+      "caption": "",
+      "source": "bruce bolt",
+      "original_width": "2048px",
+      "original_height": "2048px"
+    }
+  ]
+}

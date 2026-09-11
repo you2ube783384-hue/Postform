@@ -1,0 +1,58 @@
+{
+  "hero": [
+    "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/845e331c05cb.jpeg",
+    "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/7d30bb5dd531.jpg",
+    "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/e404bf44161e.jpg",
+    "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/6e30183bd886.jpg"
+  ],
+  "tee-black": [
+    "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/ecfec6ea5e52.webp",
+    "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/07b936b5255e.jpg",
+    "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/a367b8a8aa41.png"
+  ],
+  "tee-graphic": [
+    "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/5e7dbaf19e95.png",
+    "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/874a7f62708f.jpg",
+    "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/bf3a3e3ce0a5.jpeg"
+  ],
+  "flannel": [
+    "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/b7524f68c1bb.jpg",
+    "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/281aa07ef1c1.jpg",
+    "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/86f6ea711e55.jpg"
+  ],
+  "hoodie": [
+    "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/da3be1d5fd44.png",
+    "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/57194111f0b4.jpeg",
+    "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/6c945fbbbc36.jpg"
+  ],
+  "sneakers-white": [
+    "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/a8cc34d235bb.jpg",
+    "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/e6c8b9e88f10.jpg",
+    "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/f047160922cc.jpg"
+  ],
+  "sneakers-chunky": [
+    "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/b8ee91fb4abd.webp",
+    "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/91c5ead0fc7f.jpeg",
+    "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/43bee77294fc.jpg"
+  ],
+  "cargo": [
+    "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/1554a2a7349f.jpg",
+    "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/1022b184feb5.jpeg",
+    "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/1854044add79.jpeg"
+  ],
+  "beanie": [
+    "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/58a328150952.jpg",
+    "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/1d494c909a8a.jpg",
+    "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/e2d75058f95c.jpg"
+  ],
+  "tote": [
+    "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/0d7b602dc005.jpg",
+    "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/41e57ac2871c.png",
+    "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/3f23bcfe2592.jpg"
+  ],
+  "shirt": [
+    "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/6ea946c7202c.jpg",
+    "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/2ff9d5cf6012.jpg",
+    "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/cd30ce58daf5.jpg"
+  ]
+}

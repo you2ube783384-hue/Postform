@@ -1,0 +1,67 @@
+// POSTFORM — Prisma schema
+// Turso (libsql) via driver adapter
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["driverAdapters"]
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// Products — curated resale stock
+model Product {
+  id           String   @id @default(cuid())
+  slug         String   @unique
+  name         String
+  category     String
+  brand        String?
+  price        Float
+  originalPrice Float?
+  condition    String   @default("NEW") // NEW | LIKE NEW | EXCELLENT | USED | VINTAGE | OTHER
+  description  String?
+  material     String?
+  sizeChart    String? // plain text size chart
+  tags         String? // JSON array of tags
+  featured     Boolean  @default(false)
+  active       Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  images  ProductImage[]
+  variants ProductVariant[]
+
+  @@index([category])
+  @@index([active, featured])
+}
+
+model ProductImage {
+  id        String  @id @default(cuid())
+  productId String
+  url       String
+  alt       String?
+  sortOrder Int     @default(0)
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@index([productId])
+}
+
+// Variant-aware stock: S:0 / M:2 / L:3 ...
+model ProductVariant {
+  id        String  @id @default(cuid())
+  productId String
+  size      String?
+  color     String?
+  stock     Int     @default(0)
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@index([productId])
+}
+
+// Simple key/value store settings (shipping rules etc.)
+model StoreSetting {
+  key   String @id
+  value String
+}

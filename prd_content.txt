@@ -1,0 +1,972 @@
+POSTFORM — Master Website Build Prompt
+Full UI/UX, Product, Ordering, Admin & Technical Specification for an AI Web Development Agent
+DIRECT-USE MASTER PROMPT
+
+# Project Snapshot
+
+[TABLE]
+Brand || POSTFORM
+Business || International reseller / curated-stock fashion store
+Core aesthetic || Neo-Brutalist + Fashion Editorial, brutality 4–5/10
+Background || Warm milky white
+Accents || Yellow + Purple + Black
+Typography || Editorial + monospace/technical utility
+Ordering || Cart/Buy Now → checkout → secure payment → prefilled email
+Order recipient || postformproducts@haren.uk
+Customer accounts || Not required; local profile/address storage
+Admin || Protected product + inventory CRUD
+Deployment target || Vercel
+Framework || Next.js + TypeScript
+Payments || PayPal + Visa/prepaid via secure provider
+Shipping || Current policy says initial shipping is free; final rules configurable
+Returns || Defect/significant mismatch; unboxing video required
+[/TABLE]
+
+
+# Visual Reference
+Use the following supplied reference image only as a visual-language reference. Do not copy its brand, text, assets or exact layout.
+
+# MASTER PROMPT — COPY FROM HERE INTO YOUR AI DEVELOPMENT AGENT
+
+# 1. PROJECT MISSION
+Build a production-ready, responsive e-commerce website for POSTFORM, a fashion/streetwear resale business that acquires available clothing, footwear and accessories and resells them internationally.
+The primary objective is NOT to build a complicated enterprise commerce platform. The objective is to create a visually exceptional, memorable and highly usable storefront with a distinctive Neo-Brutalist / Editorial Fashion aesthetic, while keeping the business workflow intentionally simple.
+The website must feel like a real, premium streetwear brand—not a generic AI-generated template.
+The current visual reference is a product-page design with warm white background, strong black rectangular borders, bold typography, monospace/technical UI text, yellow primary actions, purple secondary accents, structured product imagery and a highly organized editorial layout. Use this reference as a design-language reference only. Do not copy its branding, exact layout, assets, text, or identity.
+
+# 2. BRAND PROFILE
+Brand name: POSTFORM
+Logo: There is currently no graphic logo. Use the word “POSTFORM” as a black typographic wordmark. Do not invent a complex icon unless it genuinely improves the identity. The wordmark should feel intentional and distinctive through typography, spacing and proportion.
+Business model: POSTFORM is a reseller/curated-stock business. Inventory may vary depending on what products the business obtains. Products can include new, used, vintage, or other available stock, so the product model must support varying conditions and inventory.
+Main categories:
+• T-shirts
+• Oversized T-shirts
+• Shirts
+• Hoodies
+• Pants
+• Jeans
+• Sneakers
+• Accessories
+• Additional categories as inventory evolves
+Primary audience:
+Men approximately 18–30, streetwear and casual-fashion customers, college students, sneaker culture, trend-conscious shoppers, plus an undefined broader international audience.
+Brand personality:
+• Dark / edgy
+• Minimal / premium
+• Streetwear-oriented
+• Confident
+• Editorial rather than corporate
+• Functional rather than decorative
+
+# 3. CORE DESIGN DIRECTION
+Design the site as a refined Neo-Brutalist + Fashion Editorial commerce experience.
+Brutalism intensity: approximately 4–5/10. It should have personality and strong visual structure without becoming experimental to the point of harming usability.
+Important: Do NOT simply recreate the supplied reference screenshot. Evolve its visual language into a more polished POSTFORM identity.
+Design principles:
+• Warm milky white background rather than harsh pure white.
+• Strong black borders are a defining visual feature.
+• Use rectangular/structured components.
+• Corners should be sharp or use only very small radius values.
+• High contrast and strong hierarchy.
+• Large, confident typography.
+• Combine modern fashion/editorial typography with monospace/technical UI typography.
+• Use black as the dominant structural color.
+• Use yellow and purple as controlled accent colors.
+• Product photography should be visually dominant.
+• Use generous whitespace while maintaining a dense, intentional grid.
+• Avoid generic SaaS aesthetics.
+• Avoid rounded “app card” design.
+• Avoid excessive shadows.
+• Avoid gradients.
+• Avoid glassmorphism.
+• Avoid excessive animation.
+• Avoid unnecessary decorative effects.
+The site should communicate: “This is a cool, curated streetwear store that looks expensive and different.”
+
+# 4. COLOR SYSTEM
+Establish a reusable design-token system.
+Base:
+• Background: warm milky white / off-white.
+• Primary text and structural borders: near-black/black.
+• Secondary text: muted dark gray.
+• Accent 1: energetic yellow, primarily for important CTAs and highlights.
+• Accent 2: controlled purple, primarily for links, secondary states and small highlights.
+Do not flood the interface with yellow or purple. Accents should guide attention.
+All colors must be centralized as design tokens/CSS variables so the brand can be adjusted later without rewriting components.
+
+# 5. TYPOGRAPHY
+Use two complementary typography roles:
+1. Editorial/display typography:
+• Strong, bold, fashion-oriented.
+• Used for hero headings, major section headings and important product names.
+• Should feel contemporary and premium.
+2. Technical/utility typography:
+• Monospace or technical-looking font.
+• Used for navigation details, metadata, labels, prices where appropriate, buttons, stock information, order information and small UI elements.
+Do not use excessive font families. Prefer a compact, intentional typography system with a clear hierarchy.
+Typography must remain highly readable on mobile.
+
+# 6. GLOBAL UI LANGUAGE
+Use a strong visual system across the entire application:
+• Black 2–3px-ish borders where appropriate, with a consistent token.
+• Hard/controlled rectangular geometry.
+• Clear separation between content zones.
+• Minimal border radius.
+• Strong hover/focus states.
+• Buttons should feel physical and tactile.
+• Primary CTA buttons may use yellow with black text and a strong black border.
+• Secondary buttons may be white/off-white with black border.
+• Purple may be used for links, small states or selected/active UI.
+• Avoid “floating glass” UI.
+• Avoid excessive drop shadows.
+• Use subtle depth through borders, offsets or controlled transforms instead of modern soft UI.
+Micro-interactions should be purposeful:
+• Buttons can shift 1–3px on press.
+• Product cards can make a subtle image movement on hover.
+• Links can use small underline/offset effects.
+• Cart quantity changes should feel immediate.
+• No long transitions.
+• No scroll-jacking.
+• No excessive parallax.
+• Respect prefers-reduced-motion.
+
+# 7. SITE ARCHITECTURE / ROUTES
+Implement a clear application structure. Suggested routes:
+/
+  Homepage
+/shop
+  All products / catalogue
+/shop/[category]
+  Category listing
+/product/[slug]
+  Product detail
+/cart
+  Shopping cart
+/checkout
+  Customer details, address, order summary and payment flow
+/profile
+  Local customer profile and saved addresses
+/wishlist
+  Local wishlist
+/about
+  Brand information
+/returns
+  Return & Refund policy
+/shipping
+  Shipping information
+/admin
+  Protected administration area
+/admin/products
+  Product management
+/admin/products/new
+  Create product
+/admin/products/[id]/edit
+  Edit product
+/admin/settings
+  Basic store settings if needed
+
+# 8. HOMEPAGE EXPERIENCE
+Do NOT create a generic “New Arrivals” storefront if it does not fit the brand. The user specifically does not want a dedicated New Drop section.
+Recommended homepage composition:
+1. Header/navigation.
+2. Hero section combining:
+   • Large editorial typography.
+   • Strong product/fashion imagery.
+   • Brutalist grid structure.
+   • Clear SHOP CTA.
+3. Featured/curated products.
+4. Shop by category.
+5. Editorial brand statement / visual manifesto.
+6. Additional curated product collection or visual lookbook-style area.
+7. Minimal footer.
+The hero should combine the requested concepts of bold typography + product imagery and a structured product-grid/editorial feel.
+The homepage must be visually impressive without becoming crowded.
+
+# 9. HEADER / NAVIGATION
+Desktop header should be inspired by the reference's structured navigation but redesigned for POSTFORM.
+Suggested content:
+• Hamburger/menu or compact menu control.
+• MEN
+• WOMEN (if relevant to available stock; otherwise avoid empty navigation)
+• SNEAKERS
+• Centered POSTFORM wordmark.
+• Search field.
+• Location/delivery icon or shipping information entry point if useful.
+• Profile icon.
+• Wishlist icon.
+• Cart icon with item count.
+Do not force categories into the header if there are no products. Navigation should remain logical.
+Mobile header must be treated as a dedicated mobile experience, not merely a shrunken desktop header.
+
+# 10. SHOP / CATALOGUE
+Create a clean product discovery experience.
+Features:
+• Product grid.
+• Category navigation.
+• Search.
+• Filtering.
+• Sorting.
+• Product availability states.
+• Responsive layouts.
+Suggested filters:
+• Category
+• Brand
+• Size
+• Color
+• Price
+• Condition
+Suggested sorting:
+• Newest
+• Price: Low → High
+• Price: High → Low
+• A → Z
+Search should cover:
+• Product name
+• Brand
+• Category
+• Tags
+On mobile, use a compact FILTER / SORT control that opens a clean bottom sheet or full-width panel.
+
+# 11. PRODUCT CARDS
+Product cards should feel editorial and premium while remaining simple.
+Recommended content:
+• Product image
+• Brand, if available
+• Product name
+• Price
+• Condition or small badge where useful
+• Availability state when relevant
+• Wishlist action
+Do not overload cards with metadata.
+Use consistent image aspect ratios where possible, but allow the admin to upload product-specific imagery without distortion.
+Hover behavior:
+• Subtle image scale/position change.
+• Small information movement or border state.
+• No dramatic animation.
+
+# 12. PRODUCT DETAIL PAGE
+This is one of the most important pages and should closely follow the strengths of the supplied reference while becoming more refined.
+Recommended desktop structure:
+• Breadcrumbs.
+• Large editorial product image gallery.
+• Product information column.
+• Product title.
+• Category/subtitle.
+• Price.
+• Original/MRP price if applicable.
+• Condition.
+• Size selector.
+• Size chart.
+• Color selector when applicable.
+• Quantity selector.
+• Add to Cart.
+• Buy Now.
+• Wishlist.
+• Share.
+• Product details.
+• Delivery information.
+• Related/curated products.
+Image gallery:
+• Desktop: large editorial gallery, preferably a multi-image composition or large image sequence.
+• Mobile: full-width swipeable gallery.
+• Clicking an image opens a fullscreen/lightbox viewer.
+• Do not crop product photography aggressively.
+• Preserve image quality and loading performance.
+The screenshot is a reference for information hierarchy, not an instruction to copy exact dimensions.
+
+# 13. PRODUCT VARIANTS & STOCK
+Only show variants that are actually available.
+The preferred inventory model is variant-aware stock, especially for apparel sizes.
+Example:
+Product: Oversized Tee
+S: 0
+M: 2
+L: 3
+XL: 2
+If a size has zero stock, it should be visibly unavailable and not selectable.
+Support optional:
+• Size
+• Color
+• Other variant attributes only when actually required.
+Do not display meaningless selectors for products that have no such variants.
+
+# 14. PRODUCT CONDITION
+Because POSTFORM is a reseller/curated-stock business, every product should support a condition field.
+Suggested values:
+• NEW
+• LIKE NEW
+• EXCELLENT
+• USED
+• VINTAGE
+• OTHER
+The UI should communicate condition clearly but tastefully.
+Never claim “AUTHENTICITY VERIFIED” unless the business actually verifies authenticity for that product.
+
+# 15. PRODUCT DATA MODEL
+The admin product form should support, at minimum:
+• Product name (required)
+• Slug
+• Category (required)
+• Brand (optional)
+• Price (required)
+• Original/MRP price (optional)
+• Condition
+• Description
+• Material/fabric (optional)
+• Available sizes
+• Available colors
+• Variant-specific stock
+• Product images
+• Optional image URLs
+• Size chart (optional)
+• Tags
+• Featured flag
+• Availability/active status
+• Created/updated timestamps
+Design the data model so additional categories, attributes and inventory can be introduced later without a rewrite.
+
+# 16. CART
+Cart must be lightweight and intuitive.
+Each cart item should show:
+• Product image
+• Product name
+• Variant
+• Size
+• Color
+• Quantity
+• Unit price
+• Line total
+• Remove control
+Allow quantity changes where inventory permits.
+Show:
+• Subtotal
+• Shipping information/charge when finalized
+• Total
+Persist the cart in localStorage so a returning visitor on the same browser does not immediately lose their cart.
+Do not require an account to use the cart.
+
+# 17. CUSTOMER PROFILE — LOCAL ONLY
+No customer account/database is required at this stage.
+Instead, create an optional local profile stored in the browser.
+Profile fields:
+Personal Information
+• Name
+• Email
+• Phone
+Saved Addresses
+• Home
+• Work
+• Other / custom
+• Add Address
+• Edit Address
+• Delete Address
+• Set Default Address
+Do NOT implement order history or server-side customer accounts at this stage.
+Profile data should be stored locally and clearly treated as device/browser-specific.
+Provide a simple way for users to edit or clear locally stored information.
+
+# 18. WISHLIST — LOCAL ONLY
+Wishlist is also localStorage-based.
+Users can:
+• Add/remove products.
+• View wishlist.
+• Move from wishlist to product page/cart where appropriate.
+No server-side wishlist is required.
+If a product becomes unavailable, display its state appropriately rather than pretending it can be purchased.
+
+# 19. CHECKOUT FLOW
+The core business flow should remain extremely simple:
+BUY NOW
+→ Select size/color if applicable
+→ Quantity
+→ Customer information
+→ Delivery address
+→ Order summary
+→ Payment
+→ Payment confirmation
+→ Generate order email
+→ Open default email application
+→ Customer presses Send
+Cart flow:
+ADD TO CART
+→ Cart
+→ Checkout
+→ Customer information
+→ Delivery address
+→ Order summary
+→ Payment
+→ Generate order email
+→ Open default email application
+→ Customer presses Send
+Do not force account creation.
+The checkout UI should feel like part of POSTFORM—not like a generic payment SaaS page.
+
+# 20. CUSTOMER INFORMATION
+Checkout should collect:
+• Full name
+• Email
+• Phone
+International delivery address:
+• Country
+• Address Line 1
+• Address Line 2 (optional)
+• City
+• State/Region/Province (optional depending on country)
+• Postal/ZIP code
+Also:
+• Customer note / special delivery note
+Use country-aware address labels where practical.
+
+# 21. ORDER IDENTIFIER
+Orders should receive a human-readable temporary order identifier.
+Preferred style:
+POSTFORM-4827
+Generate a short unique 3–4 digit component with sufficient collision protection for the intended small-store volume. If necessary, combine timestamp entropy or another internal uniqueness mechanism while displaying only a clean customer-facing identifier.
+Do not expose unnecessary internal IDs to customers.
+
+# 22. ORDER EMAIL
+All generated order emails should be addressed to:
+postformproducts@haren.uk
+Suggested subject:
+POSTFORM Order #4827 — New Order
+The email must contain:
+POSTFORM
+NEW ORDER
+Order number
+Date/time
+CUSTOMER
+• Name
+• Email
+• Phone
+DELIVERY ADDRESS
+• Country
+• Address Line 1
+• Address Line 2
+• City
+• State/Region
+• Postal/ZIP Code
+ORDER ITEMS
+For each item:
+• Product name
+• Brand if applicable
+• Variant
+• Size
+• Color
+• Quantity
+• Unit price
+• Line total
+ORDER TOTAL
+CUSTOMER NOTE
+The email should be generated as a properly encoded mailto: URL so the user's default email application can open with recipient, subject and body prefilled.
+Important: the system must not assume that opening a mailto URL means the email has actually been sent. Clearly communicate that the customer must review and press Send in their email application.
+
+# 23. PAYMENT
+Current intended payment methods:
+• PayPal
+• Visa / prepaid card payment
+The final implementation must use a legitimate payment-provider integration rather than collecting raw card details in the POSTFORM application.
+Do NOT build custom card-processing logic.
+Do NOT store card numbers, CVVs or sensitive payment credentials.
+The architecture should be prepared for PayPal and card payments, with exact provider configuration supplied through environment variables/secrets.
+Preferred flow:
+Checkout → Payment provider → successful payment → order confirmation → generated order email.
+If the selected provider cannot support the exact Visa/PayPal flow directly, use the provider-supported hosted/secure checkout method.
+
+# 24. SHIPPING
+Shipping pricing is currently undecided.
+Current business policy states that initial shipping is free.
+Until a final shipping-pricing rule is supplied, implement shipping as a configurable store setting rather than hard-coding assumptions.
+The checkout should be able to display:
+• Free Shipping
+or
+• Configured shipping fee
+Design the data model so shipping rules can be changed later without redesigning checkout.
+
+# 25. RETURN & REFUND POLICY
+Use the following policy as the official current content:
+# Return & Refund
+## 1. Return Policy
+We take pride in our verified stock. Returns are only accepted if the product received is defected or significantly different from the description.
+Requirement: You must provide a clear, unedited video of the unboxing process showing the defect. Returns requested without video proof will be rejected.
+## 2. Shipping Charges
+We do not charge for shipping on initial orders (Free Shipping). Furthermore, if a return is approved due to a defect, Postform will cover the return shipping costs.
+## 3. Refund Process
+Once your return is received and inspected (verified against your unboxing video), we will initiate a refund to your original method of payment (Visa or PayPal). Please allow 5-7 business days for the transaction to process.
+## 4. How to Initiate
+To start a return, email us at postformproducts@haren.uk with your order details and the attached unboxing video.
+Display this policy clearly through the footer and relevant checkout/product links.
+
+# 26. ADMIN PANEL
+Build a protected, simple admin panel for product and inventory management.
+The admin is NOT an order-management CRM. The business intentionally receives orders by email.
+Admin sections:
+• Dashboard
+• Products
+• Add Product
+• Edit Product
+• Inventory
+• Settings
+Primary capabilities:
+• Create products
+• Read/list products
+• Update products
+• Delete products
+• Upload/manage product images
+• Set prices
+• Set condition
+• Set categories
+• Set available variants
+• Set stock
+• Mark product active/inactive
+• Feature/unfeature products
+• Manage descriptions and metadata
+The admin UI should use the same POSTFORM visual language: warm background, black borders, strong typography, yellow primary actions and restrained purple accents.
+
+# 27. ADMIN AUTHENTICATION
+The admin area must not be publicly editable.
+Use secure authentication appropriate to the selected Next.js architecture.
+Never place administrator passwords, payment secrets or API credentials directly in client-side code.
+Use environment variables for secrets.
+Protect every admin route server-side; hiding an admin link is not sufficient security.
+
+# 28. IMAGE STORAGE STRATEGY
+The desired business workflow is to keep product images close to the project rather than relying entirely on a database.
+Important deployment constraint: a Vercel deployment filesystem should not be treated as a persistent writable disk.
+Therefore, implement one of these practical approaches:
+Preferred approach:
+• Git-backed product assets/content where admin changes can commit product data/images to the repository, if the chosen deployment workflow supports it.
+Fallback:
+• Allow external image URLs as a supported image source.
+If an image-upload workflow requires persistent object storage, use an appropriate storage provider rather than pretending /public is a persistent writable database.
+The admin product form should make the image source explicit and validate URLs where URL-based images are used.
+Do not store large binary image blobs in a relational database.
+
+# 29. TECH STACK
+Use:
+• Next.js
+• TypeScript
+• Modern React
+• Responsive CSS / Tailwind CSS or another maintainable styling approach
+• Vercel deployment target
+Use the App Router unless there is a compelling architectural reason not to.
+The final implementation should be compatible with development through Z.ai or another coding agent.
+Prioritize maintainability, clean components, type safety and a small dependency footprint.
+
+# 30. DATA / BACKEND ARCHITECTURE
+Keep backend complexity intentionally low.
+Customer:
+• No required account.
+• Profile/address/cart/wishlist can be localStorage.
+Products:
+• Must have a persistent management source suitable for Vercel.
+• Prefer Git-backed content/assets or another simple persistent store.
+Payments:
+• Secure third-party payment provider.
+• Secrets only on the server.
+Orders:
+• The primary customer-facing order handoff is generated email.
+• Do not build a complex order database unless required by the payment integration or later expansion.
+The architecture must not create unnecessary admin workflows.
+
+# 31. MOBILE EXPERIENCE
+Mobile is a first-class design target and should be designed as a separate experience rather than simply shrinking desktop.
+Mobile requirements:
+• Compact POSTFORM header.
+• Hamburger navigation.
+• Cart indicator.
+• Touch-friendly controls.
+• Large swipeable product gallery.
+• Sticky or easily accessible Buy Now / Add to Cart actions where appropriate.
+• Bottom sheet for filters/sort.
+• Comfortable form inputs.
+• Strong visual hierarchy.
+• Avoid horizontal overflow.
+• Keep brutalist borders readable without consuming excessive screen width.
+• Optimize image sizes and loading.
+Test common viewport sizes and ensure keyboard/input interactions are comfortable.
+
+# 32. RESPONSIVE BREAKPOINT PHILOSOPHY
+Use content-driven responsive breakpoints rather than designing only for a few device sizes.
+Desktop:
+• Editorial multi-column layouts.
+• Large product imagery.
+• Full navigation.
+• Spacious grids.
+Tablet:
+• Reduce columns.
+• Preserve hierarchy.
+• Maintain readable type and controls.
+Mobile:
+• Single-column or carefully stacked layouts.
+• Full-width imagery.
+• Dedicated mobile navigation.
+• Sticky purchase actions where useful.
+• Filters/sort as a dedicated mobile interaction.
+Never allow a desktop layout to simply collapse into an unusable narrow version.
+
+# 33. ACCESSIBILITY
+Build the interface accessibly.
+Requirements:
+• Semantic HTML.
+• Keyboard navigation.
+• Visible focus states.
+• Proper button/link semantics.
+• Accessible form labels.
+• Alt text for product images.
+• Sufficient color contrast.
+• Do not rely on color alone for stock/validation states.
+• Accessible dialog/lightbox.
+• Accessible mobile menu.
+• Reduced-motion support.
+• Clear validation errors.
+
+# 34. PERFORMANCE
+The site should feel fast.
+Priorities:
+• Next.js image optimization where compatible with the chosen storage strategy.
+• Responsive image sizes.
+• Lazy-load below-the-fold images.
+• Avoid unnecessary JavaScript.
+• Avoid huge UI libraries unless needed.
+• Keep animations lightweight.
+• Minimize layout shift.
+• Use server components where appropriate.
+• Optimize fonts.
+• Do not load multiple large font families unnecessarily.
+
+# 35. SEO / SHARING
+Implement basic production SEO:
+• Metadata per page.
+• Product title/description metadata.
+• Open Graph metadata.
+• Twitter/X card metadata where applicable.
+• Canonical URLs where appropriate.
+• Sitemap.
+• robots.txt.
+• Product-friendly URLs/slugs.
+• Descriptive image alt text.
+Product pages should be shareable and should produce useful link previews.
+
+# 36. EMPTY / ERROR / LOADING STATES
+Design these states as part of the UI rather than leaving framework defaults.
+Examples:
+• No products found.
+• Search returns no results.
+• Cart empty.
+• Product unavailable.
+• Image failed to load.
+• Checkout validation error.
+• Payment failed/cancelled.
+• Email app cannot be opened.
+• Admin save failed.
+• Admin image upload/URL validation failed.
+Every state should retain the POSTFORM visual identity.
+
+# 37. SECURITY REQUIREMENTS
+• Never expose secrets in client-side bundles.
+• Validate admin authorization server-side.
+• Validate all product data.
+• Sanitize user-generated/customer note content before displaying or embedding where appropriate.
+• Do not accept arbitrary executable content through product fields.
+• Do not store raw payment credentials.
+• Use secure HTTP-only/session mechanisms where authentication is implemented.
+• Protect admin mutation endpoints.
+• Prevent unauthorized product CRUD.
+• Avoid trusting client-side stock values during any server-side payment/order validation.
+
+# 38. DESIGN DETAILS TO AVOID
+Absolutely avoid:
+• Gradients.
+• Glassmorphism.
+• Excessive animations.
+• Generic rounded cards.
+• Excessive pill-shaped buttons.
+• Overly soft shadows.
+• Generic blue SaaS styling.
+• Huge numbers of colors.
+• Unnecessary carousels.
+• Autoplay video unless specifically needed.
+• Overloaded product cards.
+• Long checkout forms before the customer sees what they are buying.
+• Mandatory customer accounts.
+• A complicated order-management dashboard.
+• Fake payment forms.
+
+# 39. REQUIRED CORE COMPONENTS
+Create reusable components rather than duplicating markup.
+Suggested component families:
+• Header
+• MobileHeader
+• NavigationMenu
+• SearchBar
+• ProductCard
+• ProductGrid
+• ProductGallery
+• ProductInfo
+• VariantSelector
+• SizeSelector
+• ColorSelector
+• QuantitySelector
+• AddToCartButton
+• BuyNowButton
+• WishlistButton
+• ShareButton
+• Breadcrumbs
+• FilterPanel
+• SortControl
+• CartItem
+• CartSummary
+• CheckoutForm
+• AddressForm
+• OrderSummary
+• PaymentSection
+• EmailOrderGenerator
+• ProfileForm
+• SavedAddressCard
+• WishlistGrid
+• Footer
+• Modal/Dialog
+• ImageLightbox
+• Toast/notification system
+• AdminProductTable
+• AdminProductForm
+• ImageManager
+• InventoryEditor
+
+# 40. ADMIN PRODUCT FORM UX
+Make product creation/editing fast.
+Suggested structure:
+PRODUCT BASICS
+• Name
+• Category
+• Brand
+• Condition
+• Description
+PRICING
+• Selling price
+• Original/MRP price
+VARIANTS
+• Sizes
+• Colors
+• Variant stock
+MEDIA
+• Upload/add image
+• Image URL fallback
+• Reorder images
+• Set primary image
+• Remove image
+• Alt text
+MERCHANDISING
+• Tags
+• Featured
+• Active/inactive
+PREVIEW
+• Show how the product card/product page will look
+The admin should make it difficult to accidentally publish an incomplete product.
+
+# 41. PRODUCT IMAGE REQUIREMENTS
+Admin should validate:
+• Supported image formats.
+• Reasonable file size.
+• Image dimensions/aspect ratio warnings.
+• Alt text where practical.
+The storefront should:
+• Avoid stretched images.
+• Use object-fit intelligently.
+• Preserve product details.
+• Provide a fullscreen viewer.
+• Use optimized loading.
+
+# 42. ORDER EMAIL GENERATION — IMPLEMENTATION DETAIL
+Generate a mailto: URL on the client only after the checkout data is assembled.
+Required:
+mailto recipient:
+postformproducts@haren.uk
+Subject:
+POSTFORM Order #<short-id> — New Order
+Body:
+Plain-text, readable, line-broken order information.
+URL-encode subject and body correctly.
+Because mailto URLs have practical length limitations, keep the generated email concise enough for normal carts. If the implementation reaches a safe length threshold, provide a fallback action such as “Copy Order Details” rather than silently failing.
+The confirmation screen must say something equivalent to:
+“Your order details are ready in your email app. Review them and press Send to complete the order request.”
+Never claim that an order was submitted merely because the mail client opened.
+
+# 43. BUY NOW UX
+Buy Now should be the fastest path for a single product.
+Desktop:
+• Select variant.
+• Select quantity.
+• Click Buy Now.
+• Proceed directly to checkout.
+Mobile:
+• Keep Buy Now easily reachable.
+• If a sticky bottom purchase bar is used, ensure it does not obscure important content or browser UI.
+Do not require users to visit the cart for a one-product purchase.
+
+# 44. VISUAL HIERARCHY
+Prioritize visual attention in this order:
+1. Product photography / hero imagery.
+2. Product name / key message.
+3. Price.
+4. Primary purchase action.
+5. Variant selection.
+6. Supporting product information.
+7. Secondary actions.
+Use typography, borders, spacing and controlled accent colors to establish hierarchy rather than relying on excessive animation.
+
+# 45. FOOTER
+Footer should include:
+• POSTFORM wordmark.
+• Short brand statement.
+• Shop/category links.
+• About.
+• Shipping.
+• Returns & Refund.
+• Contact email.
+• Social links when actual URLs are provided.
+• Copyright.
+• Any required payment/shipping information.
+Keep it editorial and structured rather than a giant sitemap.
+
+# 46. FINAL VISUAL QUALITY BAR
+The finished site should pass this visual test:
+If the POSTFORM logo and product photography were removed, the layout should still feel like a distinctive fashion brand rather than a generic Next.js e-commerce starter.
+The design should look:
+• Premium
+• Bold
+• Youthful
+• Streetwear-oriented
+• Editorial
+• Intentional
+• Fast
+• Simple
+The brutalist elements should create character, not chaos.
+
+# 47. DEVELOPMENT WORKFLOW FOR THE CODING AGENT
+Before coding:
+1. Inspect the repository and existing setup.
+2. Establish the architecture.
+3. Create design tokens.
+4. Build the global shell/header/footer.
+5. Build the homepage.
+6. Build catalogue/search/filter.
+7. Build product page.
+8. Build cart.
+9. Build checkout.
+10. Build local profile/address/wishlist.
+11. Implement order-email generation.
+12. Integrate secure payment provider.
+13. Build protected admin.
+14. Implement product/image persistence strategy.
+15. Add SEO/accessibility/performance.
+16. Test desktop/tablet/mobile.
+17. Fix visual inconsistencies.
+18. Run production build and resolve errors.
+Do not stop after producing a static mockup. Implement working interactions and data flow.
+
+# 48. DESIGN IMPLEMENTATION RULE
+Do not ask for permission after every small implementation decision.
+When a reasonable design detail is unspecified:
+• Prefer the established POSTFORM design language.
+• Prefer simplicity.
+• Prefer usability.
+• Prefer performance.
+• Avoid adding features that were not requested.
+• Keep optional architecture extensible.
+However, do not invent payment credentials, email credentials, domains, social links, shipping prices or business policies.
+Use environment variables/placeholders and clearly documented setup instructions.
+
+# 49. ACCEPTANCE CRITERIA
+The implementation is considered successful only when:
+UI/UX
+☐ It clearly looks like POSTFORM.
+☐ It uses the warm milky background.
+☐ Strong black borders are a defining motif.
+☐ Yellow and purple accents are used intentionally.
+☐ Typography combines editorial and technical/monospace roles.
+☐ No gradients.
+☐ No glassmorphism.
+☐ No excessive animation.
+☐ Desktop and mobile feel intentionally designed.
+Shopping
+☐ Products can be browsed.
+☐ Search works.
+☐ Filters/sorting work.
+☐ Product pages work.
+☐ Variants only show valid options.
+☐ Stock states are correct.
+☐ Cart works.
+☐ Wishlist works locally.
+☐ Profile/address information works locally.
+Checkout
+☐ Guest checkout works.
+☐ International address fields exist.
+☐ Customer note works.
+☐ Order ID is generated.
+☐ Order summary is correct.
+☐ Payment integration is securely structured.
+☐ Mailto order email is generated correctly.
+☐ The UI never falsely claims an email was sent.
+Admin
+☐ Admin is protected.
+☐ Product CRUD works.
+☐ Inventory editing works.
+☐ Image management works.
+☐ Product preview/data validation works.
+☐ Secrets are not exposed.
+Engineering
+☐ TypeScript is clean.
+☐ Production build succeeds.
+☐ Responsive behavior works.
+☐ Accessibility basics are implemented.
+☐ SEO basics are implemented.
+☐ No obvious console errors.
+☐ No unnecessary dependencies or complexity.
+
+# 50. HANDOFF / SETUP DOCUMENTATION
+Provide a concise but complete README for the project explaining:
+• Local development.
+• Environment variables.
+• Admin setup.
+• Payment provider setup.
+• Product/image persistence workflow.
+• Vercel deployment.
+• How to create/edit/delete products.
+• How the email-order workflow works.
+• How local customer profile/cart/wishlist storage works.
+• How to modify brand colors/fonts.
+• How to modify shipping settings.
+• How to update return policy content.
+Do not leave critical setup instructions hidden inside source code.
+
+# 51. IMPORTANT OPEN CONFIGURATION ITEMS
+The following business decisions are intentionally configurable rather than invented:
+• Final shipping pricing/rules beyond the current free-shipping policy.
+• Final payment provider configuration/credentials.
+• Exact PayPal/card merchant account setup.
+• Final social-media URLs.
+• Final domain.
+• Final font licensing/selection if a paid font is desired.
+• Exact inventory/size rules for individual products.
+• Whether MEN/WOMEN navigation should appear when stock is limited.
+Build sensible defaults, but make these settings easy to change.
+
+# 52. FINAL INSTRUCTION TO THE AI DEVELOPMENT AGENT
+You are not being asked to make a generic online clothing store.
+You are building POSTFORM.
+Treat the supplied visual reference as a strong design-language reference, then create a more polished, original, production-ready identity around it.
+The highest priority is UI/UX quality.
+The second priority is a simple, reliable customer journey.
+The third priority is maintainable engineering.
+Do not over-engineer the project.
+Do not replace the brutalist/editorial concept with a generic modern SaaS/e-commerce design.
+Do not add gradients, glassmorphism or excessive animation.
+Do not create unnecessary account systems or order-management dashboards.
+Make the storefront feel premium, streetwear-focused, bold and memorable.
+Make the mobile experience intentionally designed.
+Make the admin panel simple enough that a small reseller can manage products and stock without technical knowledge.
+Implement the website as a complete working Next.js application, not merely a visual prototype.
+Before declaring completion, test the full flow:
+Browse → Product → Add to Cart / Buy Now → Customer Details → Address → Payment → Order Email → Admin Product CRUD.
+If a requirement cannot be implemented exactly because of a platform/deployment limitation, choose the closest production-safe architecture, document the limitation, and do not fake functionality.

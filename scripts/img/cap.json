@@ -1,0 +1,30 @@
+{
+  "success": true,
+  "query": "plain black snapback cap",
+  "count": 3,
+  "ranked": false,
+  "captioned_count": 0,
+  "results": [
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/e02302e2562c.jpg",
+      "caption": "",
+      "source": "Merchology",
+      "original_width": "1024px",
+      "original_height": "1024px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/23a21876ddc3.jpg",
+      "caption": "",
+      "source": "Threadheads",
+      "original_width": "1000px",
+      "original_height": "1250px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/bd369dea2f71.jpg",
+      "caption": "",
+      "source": "New Era",
+      "original_width": "1445px",
+      "original_height": "1445px"
+    }
+  ]
+}

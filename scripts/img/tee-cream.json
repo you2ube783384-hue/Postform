@@ -1,0 +1,30 @@
+{
+  "success": true,
+  "query": "oversized white t-shirt fashion model",
+  "count": 3,
+  "ranked": false,
+  "captioned_count": 0,
+  "results": [
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/978ff8199089.jpg",
+      "caption": "",
+      "source": "H&M",
+      "original_width": "2160px",
+      "original_height": "3240px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/a6462d31289c.jpg",
+      "caption": "",
+      "source": "Etsy",
+      "original_width": "1540px",
+      "original_height": "1500px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/8e8df277ebf9.jpg",
+      "caption": "",
+      "source": "Wearduds",
+      "original_width": "1080px",
+      "original_height": "1440px"
+    }
+  ]
+}

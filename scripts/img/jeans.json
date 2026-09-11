@@ -1,0 +1,30 @@
+{
+  "success": true,
+  "query": "loose fit denim jeans streetwear",
+  "count": 3,
+  "ranked": false,
+  "captioned_count": 0,
+  "results": [
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/14746b24ded7.jpg",
+      "caption": "",
+      "source": "projectisr us",
+      "original_width": "2000px",
+      "original_height": "2000px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/76102979e912.jpg",
+      "caption": "",
+      "source": "Godoutfit",
+      "original_width": "1080px",
+      "original_height": "1080px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/bd7a5d59ebc9.jpg",
+      "caption": "",
+      "source": "www.getitcured.nl",
+      "original_width": "1080px",
+      "original_height": "1440px"
+    }
+  ]
+}

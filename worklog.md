@@ -132,3 +132,22 @@ Stage Summary:
 - Project live at https://github.com/you2ube783384-hue/Postform (branch: main, HEAD: 25ab786)
 - History: Initial commit → project build → legal-page snapshot (e7bf4c9, preserved) → squashed feature commit (0b24a33) → merge (f30ad28) → worklog (25ab786)
 - Sensitive files excluded: .env (untracked, .env.example provided), .mcp.json (API key), logs, node_modules
+
+---
+Task ID: vercel-db-fix
+Agent: Super Z (main)
+Task: Fix Vercel 500 errors ("Failed to connect to database ./db/custom.db") after deployment
+
+Work Log:
+- Root cause: serverless filesystem is ephemeral; local SQLite file not in bundle, no Turso env vars set on Vercel → db.ts falls back to file:./db/custom.db which doesn't exist
+- Project already wired for Turso (PrismaLibSQL adapter in src/lib/db.ts) — only hosted DB + env vars missing
+- Wrote scripts/push-to-turso.mjs: schema (IF NOT EXISTS) + data (INSERT OR REPLACE batches) migration, row-count verification, --reset flag, file: URL dry-run support
+- Tested locally against file:./db/dry-run.db: fresh run + idempotent re-run + byte-identical data verification (15/43/54/4 rows) — all passed; dry-run.db removed
+- Hardened next.config.ts with serverExternalPackages (libsql/Prisma native modules)
+- README section 9 rewritten with complete Vercel deployment guide; .env.example documents all vars (incl. ADMIN_PASSWORD/ADMIN_SESSION_SECRET which have insecure dev defaults)
+- Committed 1a3a9a1 and pushed to GitHub (c591586..1a3a9a1)
+
+Stage Summary:
+- Fix pushed to GitHub; Vercel will auto-deploy (or user redeploys)
+- REMAINING (user actions): create Turso DB + token → run db:push-turso → set 6 env vars in Vercel → redeploy
+- Offered to run the Turso migration myself if user pastes TURSO_DATABASE_URL + TURSO_AUTH_TOKEN here

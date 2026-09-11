@@ -101,10 +101,10 @@ export default function AboutPage() {
           Shop the catalogue
         </Link>
         <Link
-          href="/returns"
+          href="/refund"
           className="border-2 border-pf-black bg-pf-paper px-6 py-3.5 font-mono-tech text-xs font-bold uppercase tracking-widest text-pf-black transition-colors hover:bg-pf-sand"
         >
-          Returns & refunds
+          Return &amp; refund
         </Link>
       </div>
     </div>

@@ -1,0 +1,31 @@
+{
+  "code": 200,
+  "data": {
+    "description": "",
+    "external": {
+      "icon": {
+        "https://postform.neocities.org/favicon.jpg": {
+          "type": "image/png"
+        }
+      }
+    },
+    "html": "<html lang=\"en\"><head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>RETURN &amp; REFUND - POSTFORM</title>\n    <link rel=\"stylesheet\" href=\"assets/css/style.css\">\n<link rel=\"icon\" type=\"image/png\" href=\"favicon.jpg\">\n</head>\n<body>\n\n    <header>\n        <div>\n            <div class=\"year-stamp\">EST. 2023</div>\n            <div class=\"brand\"><a href=\"index.html\">POSTFORM</a></div>\n        </div>\n    </header>\n\n    <main class=\"text-container\">\n        <h1>Return &amp; Refund</h1>\n\n        <h2>1. Return Policy</h2>\n        <p>We take pride in our verified stock. Returns are only accepted if the product received is defected or significantly different from the description.</p>\n        <p><strong>Requirement:</strong> You must provide a clear, unedited video of the unboxing process showing the defect. Returns requested without video proof will be rejected.</p>\n\n        <h2>2. Shipping Charges</h2>\n        <p>We do not charge for shipping on initial orders (Free Shipping). Furthermore, if a return is approved due to a defect, Postform will cover the return shipping costs.</p>\n\n        <h2>3. Refund Process</h2>\n        <p>Once your return is received and inspected (verified against your unboxing video), we will initiate a refund to your original method of payment (Visa or PayPal). Please allow 5-7 business days for the transaction to process.</p>\n\n        <h2>4. How to Initiate</h2>\n        <p>To start a return, email us at <strong>postformproducts@haren.uk</strong> with your order details and the attached unboxing video.</p>\n    </main>\n\n    <footer>\n        <div class=\"footer-links\">\n            <a href=\"privacy.html\">Privacy Policy</a>\n            <a href=\"terms.html\">Terms &amp; Conditions</a>\n            <a href=\"refund.html\">Return &amp; Refund</a>\n        </div>\n        <div>© 2025 POSTFORM</div>\n    </footer>\n\n    <div class=\"cart-float\" onclick=\"toggleCart()\">CART (<span id=\"cart-count\">0</span>)</div>\n\n    <div class=\"cart-sidebar\" id=\"sidebar\">\n        <div class=\"cart-header\">\n            <span>YOUR CART</span>\n            <span class=\"close-cart\" onclick=\"toggleCart()\">×</span>\n        </div>\n        <div class=\"cart-items\" id=\"cart-list\"></div>\n        <div class=\"cart-total\">\n            <span>TOTAL:</span>\n            <span id=\"cart-total-price\">$0</span>\n        </div>\n        <button class=\"checkout-btn\" onclick=\"processOrder()\">Buy via Email</button>\n    </div>\n\n    <script src=\"assets/js/script.js\"></script>\n\n</body></html>",
+    "httpStatus": 200,
+    "httpStatusText": "OK",
+    "metadata": {
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0"
+    },
+    "title": "RETURN & REFUND - POSTFORM",
+    "url": "https://postform.neocities.org/refund.html",
+    "usage": {
+      "tokens": 665
+    }
+  },
+  "meta": {
+    "usage": {
+      "tokens": 665
+    }
+  },
+  "status": 20000
+}

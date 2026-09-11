@@ -620,7 +620,7 @@ export function CheckoutView({ settings }: { settings: StoreSettings }) {
                 POSTFORM never sees or stores your card details. Your selected method is included with
                 the order request; a secure PayPal / card payment request follows once your order is
                 reviewed.{" "}
-                <Link href="/returns" className="text-pf-purple underline underline-offset-2">
+                <Link href="/refund" className="text-pf-purple underline underline-offset-2">
                   Refund policy
                 </Link>
               </p>

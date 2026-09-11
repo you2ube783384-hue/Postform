@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import {
   Search,
-  MapPin,
+  Undo2,
   User,
   Heart,
   ShoppingBag,
@@ -195,8 +195,8 @@ export function SiteHeader() {
               <Search className="h-5 w-5" strokeWidth={2.5} />
             </button>
 
-            <IconLink href="/shipping" label="Shipping information">
-              <MapPin className="h-5 w-5" strokeWidth={2.5} />
+            <IconLink href="/refund" label="Return & refund information">
+              <Undo2 className="h-5 w-5" strokeWidth={2.5} />
             </IconLink>
             <IconLink href="/profile" label="Profile">
               <User className="h-5 w-5" strokeWidth={2.5} />
@@ -325,8 +325,9 @@ export function SiteHeader() {
                   { href: "/wishlist", label: `WISHLIST${wishQty ? ` (${wishQty})` : ""}` },
                   { href: "/profile", label: "PROFILE & ADDRESSES" },
                   { href: "/about", label: "ABOUT POSTFORM" },
-                  { href: "/shipping", label: "SHIPPING" },
-                  { href: "/returns", label: "RETURNS & REFUNDS" },
+                  { href: "/privacy", label: "PRIVACY POLICY" },
+                  { href: "/terms", label: "TERMS & CONDITIONS" },
+                  { href: "/refund", label: "RETURN & REFUND" },
                 ].map((link) => (
                   <li key={link.href}>
                     <Link

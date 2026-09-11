@@ -39,7 +39,7 @@ NEXT_PUBLIC_SITE_URL=https://your-domain.com   # used for SEO metadata/sitemap
 
 ## 2. Admin Panel
 
-- URL: **`/admin`** — everything under `/admin/*` and `/api/admin/*` is protected **server-side** by middleware (`src/middleware.ts`) using an HMAC-signed, httpOnly session cookie (7-day expiry). Hiding the footer link is never the security mechanism.
+- URL: **`/admin`** — everything under `/admin/*` and `/api/admin/*` is protected **server-side** by the proxy (`src/proxy.ts` — Next.js 16's replacement for the deprecated `middleware.ts`) using an HMAC-signed, httpOnly session cookie (7-day expiry). Hiding the footer link is never the security mechanism.
 - Login: `/admin/login` with `ADMIN_PASSWORD` from the environment.
 - **Change the password and `ADMIN_SESSION_SECRET` before deploying publicly.**
 
@@ -57,7 +57,7 @@ POSTFORM stores **image URLs, not uploads** — no writable disk is assumed (Ver
 
 ### Settings (Admin → Settings)
 
-- Shipping rules: **Free worldwide** (current business policy) or a **flat fee** — immediately reflected in checkout totals and the `/shipping` page.
+- Shipping rules: **Free worldwide** (current business policy) or a **flat fee** — immediately reflected in checkout totals.
 - Currency symbol and order-email recipient are also editable there.
 
 ---
@@ -106,7 +106,8 @@ There is **no customer account system and no server-side customer database**:
 | `/cart` | Cart with quantity controls and order summary |
 | `/checkout` | Guest checkout → order email generation |
 | `/wishlist`, `/profile` | Local-only wishlist and profile/addresses |
-| `/about`, `/shipping`, `/returns` | Brand info and policies (returns policy text is the official PRD content) |
+| `/about` | Brand info |
+| `/privacy`, `/terms`, `/refund` | Legal pages — Privacy Policy, Terms & Conditions, Return & Refund (verbatim content from postform.neocities.org) |
 | `/admin/*` | Protected product & inventory management |
 
 **Variant behaviour:** sizes with zero stock render visibly unavailable and cannot be selected; single-colour products show no meaningless colour selector; sold-out products show an overlay state.
@@ -130,7 +131,7 @@ Buttons (`src/components/pf/button.tsx`) and badges (`src/components/pf/badges.t
 ## 7. Changing Store Policies
 
 - **Shipping:** Admin → Settings (free vs flat fee + amount) — no code changes needed.
-- **Returns copy:** `src/app/(storefront)/returns/page.tsx` (currently the official policy: defect/mismatch-only returns with unboxing-video proof, free initial shipping, POSTFORM covers defect return shipping, refunds to original payment method in 5–7 business days).
+- **Legal pages** (Privacy / Terms / Return & Refund): `src/app/(storefront)/privacy|terms|refund/page.tsx` — copied verbatim from `postform.neocities.org`. To change policy wording, edit the text in those three files.
 - **Contact email:** Admin → Settings (order recipient) / footer reads it from settings.
 
 ## 8. SEO & Performance
@@ -143,7 +144,7 @@ Buttons (`src/components/pf/button.tsx`) and badges (`src/components/pf/badges.t
 
 1. Push the repository to GitHub and import it in Vercel.
 2. Set the environment variables from section 1 in Vercel project settings (never commit them).
-3. Deploy — `next.config.ts` already uses the standalone output expected by Vercel.
+3. Deploy — `next.config.ts` already uses the standalone output expected by Vercel. The admin guard is `src/proxy.ts` (Next.js 16 `proxy` convention — deploying `middleware.ts` triggers a deprecation warning on Vercel).
 4. Turso is the persistent store; product images stay on their external hosts, so no writable filesystem is needed.
 
 ---
@@ -166,7 +167,7 @@ src/
 │   ├── cart/ checkout/      # cart view, checkout flow + order email confirmation
 │   └── admin/               # admin shell, products table, product form, settings
 ├── lib/                     # db (Turso adapter), queries, types, stores, order-email, auth
-└── middleware.ts            # server-side admin protection
+└── proxy.ts                 # server-side admin protection (Next.js 16 proxy convention)
 scripts/                     # seed, migration apply, image fetchers (build tooling)
 prisma/                      # schema + generated migration SQL
 ```

@@ -55,13 +55,18 @@ export function SiteFooter({ storeEmail }: { storeEmail: string }) {
                 </Link>
               </li>
               <li>
-                <Link href="/shipping" className="text-sm text-pf-cream/90 underline-offset-4 hover:text-pf-yellow hover:underline">
-                  Shipping
+                <Link href="/privacy" className="text-sm text-pf-cream/90 underline-offset-4 hover:text-pf-yellow hover:underline">
+                  Privacy Policy
                 </Link>
               </li>
               <li>
-                <Link href="/returns" className="text-sm text-pf-cream/90 underline-offset-4 hover:text-pf-yellow hover:underline">
-                  Returns & Refunds
+                <Link href="/terms" className="text-sm text-pf-cream/90 underline-offset-4 hover:text-pf-yellow hover:underline">
+                  Terms &amp; Conditions
+                </Link>
+              </li>
+              <li>
+                <Link href="/refund" className="text-sm text-pf-cream/90 underline-offset-4 hover:text-pf-yellow hover:underline">
+                  Return &amp; Refund
                 </Link>
               </li>
               <li>

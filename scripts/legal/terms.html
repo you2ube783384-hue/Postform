@@ -1,0 +1,65 @@
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TERMS &amp; CONDITIONS - POSTFORM</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+<link rel="icon" type="image/png" href="favicon.jpg">
+</head>
+<body>
+
+    <header>
+        <div>
+            <div class="year-stamp">EST. 2023</div>
+            <div class="brand"><a href="index.html">POSTFORM</a></div>
+        </div>
+    </header>
+
+    <main class="text-container">
+        <h1>Terms &amp; Conditions</h1>
+
+        <h2>1. Brand Protection</h2>
+        <p>POSTFORM is a registered trademark. All designs, images, and verified stock tickets associated with Postform are the intellectual property of our brand.</p>
+        <p><strong>Prohibition:</strong> We do not allow anyone to claim our name, logo, or assets to sell products on third-party platforms or other websites. Any unauthorized use of the Postform identity will be met with legal action.</p>
+
+        <h2>2. Payments</h2>
+        <p>To ensure security and authenticity, we only accept payments through the following verified methods:</p>
+        <ul>
+            <li>Visa (Credit/Debit)</li>
+            <li>PayPal</li>
+        </ul>
+        <p>We do not accept cryptocurrency, cash on delivery, or unverified bank transfers.</p>
+
+        <h2>3. Product Authenticity</h2>
+        <p>All items listed are verified originals or clearly marked custom pieces. Each product comes with a digital verification ticket viewable on the product page.</p>
+
+        <h2>4. Modifications</h2>
+        <p>Postform reserves the right to modify these terms at any time. Continued use of the site constitutes acceptance of these terms.</p>
+    </main>
+
+    <footer>
+        <div class="footer-links">
+            <a href="privacy.html">Privacy Policy</a>
+            <a href="terms.html">Terms &amp; Conditions</a>
+            <a href="refund.html">Return &amp; Refund</a>
+        </div>
+        <div>© 2025 POSTFORM</div>
+    </footer>
+
+    <div class="cart-float" onclick="toggleCart()">CART (<span id="cart-count">0</span>)</div>
+
+    <div class="cart-sidebar" id="sidebar">
+        <div class="cart-header">
+            <span>YOUR CART</span>
+            <span class="close-cart" onclick="toggleCart()">×</span>
+        </div>
+        <div class="cart-items" id="cart-list"></div>
+        <div class="cart-total">
+            <span>TOTAL:</span>
+            <span id="cart-total-price">$0</span>
+        </div>
+        <button class="checkout-btn" onclick="processOrder()">Buy via Email</button>
+    </div>
+
+    <script src="assets/js/script.js"></script>
+
+</body></html>

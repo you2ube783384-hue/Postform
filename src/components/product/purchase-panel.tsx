@@ -290,7 +290,7 @@ export function PurchasePanel({ product }: { product: Product }) {
             <p className="text-sm font-bold text-pf-black">Defect returns accepted</p>
             <p className="text-xs text-pf-muted">
               Unboxing video required.{" "}
-              <a href="/returns" className="text-pf-purple underline underline-offset-2">
+              <a href="/refund" className="text-pf-purple underline underline-offset-2">
                 Policy
               </a>
             </p>

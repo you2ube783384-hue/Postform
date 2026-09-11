@@ -2,7 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { verifySessionToken, ADMIN_COOKIE } from "@/lib/auth";
 
 // Server-side protection for all admin routes — hiding links is not security.
-export async function middleware(req: NextRequest) {
+// (Next.js 16: `middleware.ts` convention is deprecated — this is the `proxy.ts` replacement.)
+export async function proxy(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
   // Login endpoint/page handle their own credentials

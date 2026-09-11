@@ -1,0 +1,31 @@
+{
+  "code": 200,
+  "data": {
+    "description": "",
+    "external": {
+      "icon": {
+        "https://postform.neocities.org/favicon.jpg": {
+          "type": "image/png"
+        }
+      }
+    },
+    "html": "<html lang=\"en\"><head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>TERMS &amp; CONDITIONS - POSTFORM</title>\n    <link rel=\"stylesheet\" href=\"assets/css/style.css\">\n<link rel=\"icon\" type=\"image/png\" href=\"favicon.jpg\">\n</head>\n<body>\n\n    <header>\n        <div>\n            <div class=\"year-stamp\">EST. 2023</div>\n            <div class=\"brand\"><a href=\"index.html\">POSTFORM</a></div>\n        </div>\n    </header>\n\n    <main class=\"text-container\">\n        <h1>Terms &amp; Conditions</h1>\n\n        <h2>1. Brand Protection</h2>\n        <p>POSTFORM is a registered trademark. All designs, images, and verified stock tickets associated with Postform are the intellectual property of our brand.</p>\n        <p><strong>Prohibition:</strong> We do not allow anyone to claim our name, logo, or assets to sell products on third-party platforms or other websites. Any unauthorized use of the Postform identity will be met with legal action.</p>\n\n        <h2>2. Payments</h2>\n        <p>To ensure security and authenticity, we only accept payments through the following verified methods:</p>\n        <ul>\n            <li>Visa (Credit/Debit)</li>\n            <li>PayPal</li>\n        </ul>\n        <p>We do not accept cryptocurrency, cash on delivery, or unverified bank transfers.</p>\n\n        <h2>3. Product Authenticity</h2>\n        <p>All items listed are verified originals or clearly marked custom pieces. Each product comes with a digital verification ticket viewable on the product page.</p>\n\n        <h2>4. Modifications</h2>\n        <p>Postform reserves the right to modify these terms at any time. Continued use of the site constitutes acceptance of these terms.</p>\n    </main>\n\n    <footer>\n        <div class=\"footer-links\">\n            <a href=\"privacy.html\">Privacy Policy</a>\n            <a href=\"terms.html\">Terms &amp; Conditions</a>\n            <a href=\"refund.html\">Return &amp; Refund</a>\n        </div>\n        <div>© 2025 POSTFORM</div>\n    </footer>\n\n    <div class=\"cart-float\" onclick=\"toggleCart()\">CART (<span id=\"cart-count\">0</span>)</div>\n\n    <div class=\"cart-sidebar\" id=\"sidebar\">\n        <div class=\"cart-header\">\n            <span>YOUR CART</span>\n            <span class=\"close-cart\" onclick=\"toggleCart()\">×</span>\n        </div>\n        <div class=\"cart-items\" id=\"cart-list\"></div>\n        <div class=\"cart-total\">\n            <span>TOTAL:</span>\n            <span id=\"cart-total-price\">$0</span>\n        </div>\n        <button class=\"checkout-btn\" onclick=\"processOrder()\">Buy via Email</button>\n    </div>\n\n    <script src=\"assets/js/script.js\"></script>\n\n</body></html>",
+    "httpStatus": 200,
+    "httpStatusText": "OK",
+    "metadata": {
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0"
+    },
+    "title": "TERMS & CONDITIONS - POSTFORM",
+    "url": "https://postform.neocities.org/terms.html",
+    "usage": {
+      "tokens": 684
+    }
+  },
+  "meta": {
+    "usage": {
+      "tokens": 684
+    }
+  },
+  "status": 20000
+}

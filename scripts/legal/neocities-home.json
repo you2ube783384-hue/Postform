@@ -1,0 +1,31 @@
+{
+  "code": 200,
+  "data": {
+    "description": "",
+    "external": {
+      "icon": {
+        "https://postform.neocities.org/favicon.jpg": {
+          "type": "image/png"
+        }
+      }
+    },
+    "html": "<html lang=\"en\"><head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>POSTFORM - Website Closed</title>\n    <link rel=\"stylesheet\" href=\"assets/css/style.css\">\n    <link rel=\"icon\" type=\"image/png\" href=\"favicon.jpg\">\n    <style>\n        /* Styles for the shutdown announcement */\n        .shutdown-notice {\n            max-width: 800px;\n            margin: 80px auto;\n            padding: 40px;\n            text-align: center;\n            background-color: #fcfcfc;\n            border: 1px solid #eaeaea;\n            border-radius: 8px;\n            font-family: sans-serif;\n        }\n        .shutdown-notice h1 {\n            font-size: 2rem;\n            margin-bottom: 20px;\n            letter-spacing: 1px;\n            color: #111;\n        }\n        .shutdown-notice p {\n            font-size: 1.1rem;\n            line-height: 1.6;\n            margin-bottom: 20px;\n            color: #444;\n        }\n        .highlight-box {\n            background-color: #f4f4f4;\n            padding: 15px;\n            border-left: 4px solid #111;\n            margin: 25px 0;\n            text-align: left;\n        }\n        .new-site-btn {\n            display: inline-block;\n            margin-top: 15px;\n            padding: 15px 30px;\n            background-color: #111;\n            color: #fff;\n            text-decoration: none;\n            font-weight: bold;\n            text-transform: uppercase;\n            border-radius: 4px;\n            transition: background 0.3s;\n        }\n        .new-site-btn:hover {\n            background-color: #444;\n        }\n    </style>\n</head>\n<body>\n\n    <header>\n        <div>\n            <div class=\"year-stamp\">EST. 2023</div>\n            <div class=\"brand\">POSTFORM</div>\n        </div>\n    </header>\n\n    <main>\n        <div class=\"shutdown-notice\">\n            <h1>THIS WEBSITE IS CLOSED &amp; UNDER CONSTRUCTION</h1>\n            \n            <p>We have officially shut down this website and are moving everything over to <strong><a href=\"https://postform.com\" style=\"color: #111;\">postform.com</a></strong>.</p>\n            \n            <p>We have stopped selling our previous collections. Moving forward, we are exclusively focusing on the most exclusive, custom-made complete apparel pieces we have ever created.</p>\n            \n            <p>A massive <strong>thank you</strong> to everyone who supported us, especially our customers from Europe and the UK! Last year we achieved 600 sales (making around 26,000), while this specific website only sold 40 products over the last 2 years. Because of this, it is time for an upgrade.</p>\n\n            <div class=\"highlight-box\">\n                <strong>Regarding Pending Orders:</strong><br>\n                If your order is currently pending, you will automatically receive your money back. Refunds are being routed to the exact same account and ID you used via <em>tracker.com</em>.\n            </div>\n\n            <p>Any person who wants to buy from us or see our complete apparel line can now find us at our new home.</p>\n\n            <a href=\"https://postform.com\" class=\"new-site-btn\">Visit Postform.com</a>\n        </div>\n    </main>\n\n    <footer>\n        <div class=\"footer-links\">\n            <a href=\"privacy.html\">Privacy Policy</a>\n            <a href=\"terms.html\">Terms &amp; Conditions</a>\n            <a href=\"refund.html\">Return &amp; Refund</a>\n        </div>\n        <div>© 2025 POSTFORM</div>\n    </footer>\n\n    <!-- JS script removed as shopping features are no longer needed -->\n\n</body></html>",
+    "httpStatus": 200,
+    "httpStatusText": "OK",
+    "metadata": {
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0"
+    },
+    "title": "POSTFORM - Website Closed",
+    "url": "https://postform.neocities.org/",
+    "usage": {
+      "tokens": 858
+    }
+  },
+  "meta": {
+    "usage": {
+      "tokens": 858
+    }
+  },
+  "status": 20000
+}

@@ -1,0 +1,31 @@
+{
+  "code": 200,
+  "data": {
+    "description": "",
+    "external": {
+      "icon": {
+        "https://postform.neocities.org/favicon.jpg": {
+          "type": "image/png"
+        }
+      }
+    },
+    "html": "<html lang=\"en\"><head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>PRIVACY POLICY - POSTFORM</title>\n    <link rel=\"stylesheet\" href=\"assets/css/style.css\">\n<link rel=\"icon\" type=\"image/png\" href=\"favicon.jpg\">\n</head>\n<body>\n\n    <header>\n        <div>\n            <div class=\"year-stamp\">EST. 2023</div>\n            <div class=\"brand\"><a href=\"index.html\">POSTFORM</a></div>\n        </div>\n    </header>\n\n    <main class=\"text-container\">\n        <h1>Privacy Policy</h1>\n\n        <h2>1. Data Collection</h2>\n        <p>Postform is privacy-focused. We do not use tracking cookies, analytics software, or third-party pixels on this website. You can browse our catalogue completely anonymously.</p>\n\n        <h2>2. Information We Receive</h2>\n        <p>We only collect data when you voluntarily provide it to process an order. This occurs exclusively when you send us an email to finalize a purchase. The only data we receive is:</p>\n        <ul>\n            <li>Your Name</li>\n            <li>Shipping Address</li>\n            <li>Billing Details provided for the transaction</li>\n        </ul>\n\n        <h2>3. Data Usage &amp; Selling</h2>\n        <p><strong>We do not sell your data.</strong> The information you provide via email is used strictly for shipping your products and verifying the transaction. We do not build marketing profiles or share your details with ad networks.</p>\n\n        <h2>4. Contact</h2>\n        <p>For any privacy concerns, please contact us directly at: postformproducts@haren.uk</p>\n    </main>\n\n    <footer>\n        <div class=\"footer-links\">\n            <a href=\"privacy.html\">Privacy Policy</a>\n            <a href=\"terms.html\">Terms &amp; Conditions</a>\n            <a href=\"refund.html\">Return &amp; Refund</a>\n        </div>\n        <div>© 2025 POSTFORM</div>\n    </footer>\n\n    <!-- Cart UI included for consistency -->\n    <div class=\"cart-float\" onclick=\"toggleCart()\">CART (<span id=\"cart-count\">0</span>)</div>\n\n    <div class=\"cart-sidebar\" id=\"sidebar\">\n        <div class=\"cart-header\">\n            <span>YOUR CART</span>\n            <span class=\"close-cart\" onclick=\"toggleCart()\">×</span>\n        </div>\n        <div class=\"cart-items\" id=\"cart-list\"></div>\n        <div class=\"cart-total\">\n            <span>TOTAL:</span>\n            <span id=\"cart-total-price\">$0</span>\n        </div>\n        <button class=\"checkout-btn\" onclick=\"processOrder()\">Buy via Email</button>\n    </div>\n\n    <script src=\"assets/js/script.js\"></script>\n\n</body></html>",
+    "httpStatus": 200,
+    "httpStatusText": "OK",
+    "metadata": {
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0"
+    },
+    "title": "PRIVACY POLICY - POSTFORM",
+    "url": "https://postform.neocities.org/privacy.html",
+    "usage": {
+      "tokens": 660
+    }
+  },
+  "meta": {
+    "usage": {
+      "tokens": 660
+    }
+  },
+  "status": 20000
+}

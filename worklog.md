@@ -98,3 +98,22 @@ Stage Summary:
 - TestSprite portal: https://www.testsprite.com/dashboard/mcp/tests/9928ef00-f6fc-55ac-820a-34f4c871b296
 - 20 planned tests (TC031-TC050) remain for a follow-up run; recommendations documented in report section 4
 - App fixes applied along the way: .env DB wiring + local DB re-seed (14 products restored)
+
+---
+Task ID: git-publish
+Agent: Super Z (main)
+Task: Commit and push the Postform project to https://github.com/you2ube783384-hue/Postform.git
+
+Work Log:
+- Audited repo state: clean tree, no remote configured, no secrets in history (`.mcp.json` never committed, API key absent from all commits)
+- Hygiene commit: untracked local `.env` (container-specific paths), added `.env.example`, fixed `.gitignore` with `!.env.example` exception
+- Fetched origin: remote had diverged with one commit `e7bf4c9` (legal pages + storefront links) sharing ancestor `6acb3e8`
+- Verified local branch fully supersedes remote snapshot (same legal-page work, consolidated: returns/shipping removed in favor of privacy/refund/terms)
+- Squashed 4 UUID-named auto-commits (ca2ab09, 4745ced, 6ece79b, 5ad32d5) into single meaningful commit `0b24a33`
+- Merged remote snapshot with `-s ours` strategy → merge commit `f30ad28`; verified final tree byte-identical to pre-squash HEAD (empty diff)
+- Push attempt failed: no GitHub credentials in environment (no gh CLI, no ~/.git-credentials, no ~/.netrc, no env tokens) — awaiting user PAT
+
+Stage Summary:
+- Local main = f30ad28 (merge), push is a clean fast-forward onto e7bf4c9, no force needed
+- Remote `origin` configured: https://github.com/you2ube783384-hue/Postform.git
+- BLOCKED on: GitHub Personal Access Token required from user to authenticate the HTTPS push

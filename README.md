@@ -142,10 +142,40 @@ Buttons (`src/components/pf/button.tsx`) and badges (`src/components/pf/badges.t
 
 ## 9. Deployment (Vercel)
 
-1. Push the repository to GitHub and import it in Vercel.
-2. Set the environment variables from section 1 in Vercel project settings (never commit them).
-3. Deploy — `next.config.ts` already uses the standalone output expected by Vercel. The admin guard is `src/proxy.ts` (Next.js 16 `proxy` convention — deploying `middleware.ts` triggers a deprecation warning on Vercel).
-4. Turso is the persistent store; product images stay on their external hosts, so no writable filesystem is needed.
+The app stores all data in **Turso** (hosted libsql/SQLite) — a local `db/custom.db` file will **not** work on Vercel's serverless filesystem. If you see `Error: Failed to connect to database: ./db/custom.db` in the Vercel logs, the Turso env vars are missing (step 2 below).
+
+1. **Push the repository to GitHub and import it in Vercel.** `next.config.ts` already uses the standalone output expected by Vercel. The admin guard is `src/proxy.ts` (Next.js 16 `proxy` convention — deploying `middleware.ts` triggers a deprecation warning on Vercel).
+
+2. **Create a Turso database and migrate the local data** (from a machine with the repo checked out):
+
+   ```bash
+   # a) Create a free database: https://turso.tech → sign up, or:
+   #    curl or chisel CLI: turso db create postform && turso db show postform --url
+   #    then create a token: turso db tokens create postform
+
+   # b) Copy schema + all data (products, images, variants, settings):
+   TURSO_DATABASE_URL=libsql://<db>-<org>.turso.io \
+   TURSO_AUTH_TOKEN=eyJ... \
+   node scripts/push-to-turso.mjs
+   # re-runs are safe (INSERT OR REPLACE); add --reset to drop target tables first
+   ```
+
+3. **Set environment variables** in Vercel → Settings → Environment Variables (Production + Preview):
+
+   | Variable | Value |
+   |---|---|
+   | `TURSO_DATABASE_URL` | `libsql://<db>-<org>.turso.io` |
+   | `TURSO_AUTH_TOKEN` | Turso auth token |
+   | `ADMIN_PASSWORD` | strong password (**never** ship the dev default `postform-admin-2026`) |
+   | `ADMIN_SESSION_SECRET` | random long string (`openssl rand -hex 32`) |
+   | `NEXT_PUBLIC_STORE_EMAIL` | `postformproducts@haren.uk` |
+   | `NEXT_PUBLIC_SITE_URL` | `https://your-domain.com` |
+
+   `DATABASE_URL` is only used by the Prisma CLI locally — not needed on Vercel.
+
+4. **Redeploy** (Vercel → Deployments → … → Redeploy). Product images stay on their external hosts, so no writable filesystem is needed.
+
+> Note: serverless deploys share one Turso database, so admin edits (products, settings) persist across deployments and regions.
 
 ---
 

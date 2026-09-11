@@ -12,7 +12,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${base}/shop`, changeFrequency: "daily", priority: 0.9 },
     { url: `${base}/about`, changeFrequency: "monthly", priority: 0.5 },
     { url: `${base}/shipping`, changeFrequency: "monthly", priority: 0.5 },
-    { url: `${base}/returns`, changeFrequency: "monthly", priority: 0.5 },
+    { url: `${base}/privacy`, changeFrequency: "monthly", priority: 0.4 },
+    { url: `${base}/terms`, changeFrequency: "monthly", priority: 0.4 },
+    { url: `${base}/refund`, changeFrequency: "monthly", priority: 0.4 },
   ];
 
   const categoryPages: MetadataRoute.Sitemap = CATEGORIES.map((c) => ({

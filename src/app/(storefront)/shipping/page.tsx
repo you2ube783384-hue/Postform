@@ -89,8 +89,8 @@ export default async function ShippingPage() {
             Shipping policy is a configurable store setting — the current free-shipping arrangement
             reflects business policy as it stands today. If the rules change, this page and checkout
             totals update from the store&apos;s admin settings, with no price surprises at the door.{" "}
-            <Link href="/returns" className="text-pf-purple underline underline-offset-2">
-              See returns & refunds
+            <Link href="/refund" className="text-pf-purple underline underline-offset-2">
+              See return & refund policy
             </Link>{" "}
             for the defect-return shipping commitment.
           </p>
@@ -104,10 +104,10 @@ export default async function ShippingPage() {
             Shop the catalogue
           </Link>
           <Link
-            href="/returns"
+            href="/refund"
             className="border-2 border-pf-black bg-pf-paper px-6 py-3.5 font-mono-tech text-xs font-bold uppercase tracking-widest text-pf-black transition-colors hover:bg-pf-sand"
           >
-            Returns & refunds
+            Return & refund
           </Link>
         </div>
       </div>

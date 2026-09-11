@@ -60,8 +60,18 @@ export function SiteFooter({ storeEmail }: { storeEmail: string }) {
                 </Link>
               </li>
               <li>
-                <Link href="/returns" className="text-sm text-pf-cream/90 underline-offset-4 hover:text-pf-yellow hover:underline">
-                  Returns & Refunds
+                <Link href="/privacy" className="text-sm text-pf-cream/90 underline-offset-4 hover:text-pf-yellow hover:underline">
+                  Privacy Policy
+                </Link>
+              </li>
+              <li>
+                <Link href="/terms" className="text-sm text-pf-cream/90 underline-offset-4 hover:text-pf-yellow hover:underline">
+                  Terms & Conditions
+                </Link>
+              </li>
+              <li>
+                <Link href="/refund" className="text-sm text-pf-cream/90 underline-offset-4 hover:text-pf-yellow hover:underline">
+                  Return & Refund
                 </Link>
               </li>
               <li>

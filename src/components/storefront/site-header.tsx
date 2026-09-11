@@ -326,7 +326,9 @@ export function SiteHeader() {
                   { href: "/profile", label: "PROFILE & ADDRESSES" },
                   { href: "/about", label: "ABOUT POSTFORM" },
                   { href: "/shipping", label: "SHIPPING" },
-                  { href: "/returns", label: "RETURNS & REFUNDS" },
+                  { href: "/privacy", label: "PRIVACY POLICY" },
+                  { href: "/terms", label: "TERMS & CONDITIONS" },
+                  { href: "/refund", label: "RETURN & REFUND" },
                 ].map((link) => (
                   <li key={link.href}>
                     <Link

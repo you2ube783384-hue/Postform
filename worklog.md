@@ -117,3 +117,18 @@ Stage Summary:
 - Local main = f30ad28 (merge), push is a clean fast-forward onto e7bf4c9, no force needed
 - Remote `origin` configured: https://github.com/you2ube783384-hue/Postform.git
 - BLOCKED on: GitHub Personal Access Token required from user to authenticate the HTTPS push
+
+---
+Task ID: git-publish-final
+Agent: Super Z (main)
+Task: Complete the push of Postform to GitHub
+
+Work Log:
+- Fine-grained PAT lacked Contents:write (403 "Resource not accessible by personal access token" via API write test; repo access itself was verified OK)
+- User supplied classic token with repo scope → push succeeded: e7bf4c9..25ab786 main -> main (fast-forward, no force)
+- Verified: origin/main == local main (25ab786), tracking configured, 227 files published
+
+Stage Summary:
+- Project live at https://github.com/you2ube783384-hue/Postform (branch: main, HEAD: 25ab786)
+- History: Initial commit → project build → legal-page snapshot (e7bf4c9, preserved) → squashed feature commit (0b24a33) → merge (f30ad28) → worklog (25ab786)
+- Sensitive files excluded: .env (untracked, .env.example provided), .mcp.json (API key), logs, node_modules

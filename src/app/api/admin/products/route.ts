@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
+import { parseTags } from "@/lib/format";
 import type { Prisma } from "@prisma/client";
 
 // POST /api/admin/products — create a product
@@ -46,7 +47,10 @@ export async function POST(req: NextRequest) {
       include: { images: true, variants: true },
     });
 
-    return NextResponse.json({ product }, { status: 201 });
+    return NextResponse.json(
+      { product: { ...product, tags: parseTags(product.tags) } },
+      { status: 201 }
+    );
   } catch (e) {
     console.error("admin create product:", e);
     return NextResponse.json({ error: "SERVER_ERROR" }, { status: 500 });
@@ -89,6 +93,24 @@ function validateProduct(body: Record<string, unknown>): Record<string, string> 
       }
     }
   }
+  // Variants: must be an array of objects with non-negative integer stock
+  if (body.variants !== undefined && body.variants !== null) {
+    if (!Array.isArray(body.variants)) {
+      errors.variants = "INVALID";
+    } else {
+      for (const v of body.variants) {
+        if (v === null || typeof v !== "object") {
+          errors.variants = "INVALID";
+          break;
+        }
+        const stock = Number((v as Record<string, unknown>).stock);
+        if (Number.isNaN(stock) || stock < 0 || !Number.isInteger(stock)) {
+          errors.variants = "INVALID STOCK";
+          break;
+        }
+      }
+    }
+  }
   return errors;
 }
 
@@ -108,7 +130,9 @@ export async function GET() {
       include: { images: true, variants: true },
       orderBy: { updatedAt: "desc" },
     });
-    return NextResponse.json({ products });
+    return NextResponse.json({
+      products: products.map((p) => ({ ...p, tags: parseTags(p.tags) })),
+    });
   } catch {
     return NextResponse.json({ error: "SERVER_ERROR" }, { status: 500 });
   }

@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
+import { parseTags } from "@/lib/format";
 
 function isValidUrl(url: string): boolean {
   try {
@@ -22,7 +23,7 @@ export async function GET(
       include: { images: true, variants: true },
     });
     if (!product) return NextResponse.json({ error: "NOT_FOUND" }, { status: 404 });
-    return NextResponse.json({ product });
+    return NextResponse.json({ product: { ...product, tags: parseTags(product.tags) } });
   } catch {
     return NextResponse.json({ error: "SERVER_ERROR" }, { status: 500 });
   }
@@ -57,7 +58,10 @@ export async function PUT(
       return NextResponse.json({ error: "VALIDATION", details: errors }, { status: 400 });
     }
 
-    // Slug change: keep unique
+    // Slug change: reject explicit conflicts instead of silently mutating
+    // the requested slug (clients should get feedback, not a surprise slug).
+    // (POST /products still auto-uniquifies, which is the CMS-style default
+    // for creation; updates are explicit.)
     let slug = existing.slug;
     if (body.slug && body.slug !== existing.slug) {
       slug = body.slug
@@ -66,12 +70,19 @@ export async function PUT(
         .replace(/&/g, "and")
         .replace(/[^a-z0-9]+/g, "-")
         .replace(/(^-|-$)/g, "");
-      let i = 1;
-      let candidate = slug;
-      while (await db.product.findFirst({ where: { slug: candidate, id: { not: id } } })) {
-        candidate = `${slug}-${++i}`;
+      if (!slug) {
+        return NextResponse.json(
+          { error: "VALIDATION", details: { slug: "INVALID" } },
+          { status: 400 }
+        );
       }
-      slug = candidate;
+      const conflict = await db.product.findFirst({ where: { slug, id: { not: id } } });
+      if (conflict) {
+        return NextResponse.json(
+          { error: "VALIDATION", details: { slug: "DUPLICATE" } },
+          { status: 400 }
+        );
+      }
     }
 
     // Replace images and variants atomically
@@ -119,7 +130,7 @@ export async function PUT(
       where: { id },
       include: { images: true, variants: true },
     });
-    return NextResponse.json({ product });
+    return NextResponse.json({ product: { ...product, tags: parseTags(product.tags) } });
   } catch (e) {
     console.error("admin update product:", e);
     return NextResponse.json({ error: "SERVER_ERROR" }, { status: 500 });
@@ -145,7 +156,7 @@ export async function PATCH(
       data,
       include: { images: true, variants: true },
     });
-    return NextResponse.json({ product });
+    return NextResponse.json({ product: { ...product, tags: parseTags(product.tags) } });
   } catch {
     return NextResponse.json({ error: "SERVER_ERROR" }, { status: 500 });
   }

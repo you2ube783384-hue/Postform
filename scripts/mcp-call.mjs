@@ -12,7 +12,12 @@ const args = process.argv.slice(2);
 const schemaMode = args.includes("--schema");
 const timeoutIdx = args.indexOf("--timeout");
 const TIMEOUT = timeoutIdx !== -1 ? Number(args[timeoutIdx + 1]) : Number(process.env.MCP_TIMEOUT || 600000);
-const positional = args.filter((a, i) => a && i !== timeoutIdx && i !== timeoutIdx + 1 && a !== "--schema");
+const skipIdx = new Set();
+if (timeoutIdx !== -1) {
+  skipIdx.add(timeoutIdx);
+  skipIdx.add(timeoutIdx + 1);
+}
+const positional = args.filter((a, i) => a && !skipIdx.has(i) && a !== "--schema");
 const toolName = positional[0];
 const toolArgs = positional[1] ? JSON.parse(positional[1]) : {};
 

@@ -5,6 +5,22 @@ export function formatPrice(value: number, currency = "$"): string {
   return `${currency}${formatted}`;
 }
 
+/**
+ * Parse the JSON-encoded `tags` column into a real string array.
+ * SQLite stores tags as a JSON string; the admin UI already receives parsed
+ * arrays via server-side queries, so the REST API must return the same
+ * shape (array, never a serialized string).
+ */
+export function parseTags(raw: string | null | undefined): string[] {
+  if (!raw) return [];
+  try {
+    const parsed = JSON.parse(raw);
+    return Array.isArray(parsed) ? parsed.map(String) : [];
+  } catch {
+    return [];
+  }
+}
+
 interface StockCarrier {
   variants: { stock: number }[];
 }

@@ -1,41 +1,37 @@
 [
   {
     "id": "TC001",
-    "title": "Complete guest checkout from cart to email handoff",
-    "description": "This test verifies that a shopper can complete guest checkout and reach the email handoff confirmation needed to finalize the order.",
-    "category": "Product Catalogue Browsing",
+    "title": "Complete guest checkout with delivery details and order handoff",
+    "description": "A guest customer can fill contact and international delivery details, choose a payment method, add a note, and submit an order that produces confirmation and email handoff guidance.",
+    "category": "Guest Checkout via Email Handoff",
     "steps": [
       {
         "type": "action",
-        "description": "Navigate to /product/defaced-backprint-tee"
+        "description": "Navigate to /checkout"
       },
       {
         "type": "action",
-        "description": "Select an available size"
+        "description": "Fill in the customer name field"
       },
       {
         "type": "action",
-        "description": "Add the item to the cart"
+        "description": "Fill in the email field with a valid email address"
       },
       {
         "type": "action",
-        "description": "Open the cart"
+        "description": "Fill in the phone field"
       },
       {
         "type": "action",
-        "description": "Continue to checkout"
+        "description": "Fill in the delivery address fields with a complete international address"
       },
       {
         "type": "action",
-        "description": "Fill in the customer information fields with valid guest details"
+        "description": "Choose a payment method"
       },
       {
         "type": "action",
-        "description": "Fill in the delivery address fields with a valid address"
-      },
-      {
-        "type": "action",
-        "description": "Select a payment method"
+        "description": "Add an optional order note"
       },
       {
         "type": "action",
@@ -54,61 +50,124 @@
   },
   {
     "id": "TC002",
-    "title": "Guest checkout collects address and opens order email",
-    "description": "This test verifies that a shopper can complete guest checkout by entering delivery details, choosing a payment method, and generating the order email handoff.",
-    "category": "Product Discovery to Purchase",
+    "title": "Sign in to admin and reach the protected panel",
+    "description": "A store admin can sign in with valid credentials and access the protected admin dashboard.",
+    "category": "Admin Access and Product Management",
     "steps": [
       {
         "type": "action",
-        "description": "Navigate to /shop"
+        "description": "Navigate to /admin/login"
       },
       {
         "type": "action",
-        "description": "Open a product detail page"
+        "description": "Fill in the admin password with {{LOGIN_PASSWORD}}"
       },
       {
         "type": "action",
-        "description": "Choose a valid size"
-      },
-      {
-        "type": "action",
-        "description": "Add the item to the cart"
-      },
-      {
-        "type": "action",
-        "description": "Proceed to checkout"
-      },
-      {
-        "type": "action",
-        "description": "Fill in the customer information"
-      },
-      {
-        "type": "action",
-        "description": "Fill in the delivery address"
-      },
-      {
-        "type": "action",
-        "description": "Select a payment method"
-      },
-      {
-        "type": "action",
-        "description": "Submit the order"
+        "description": "Submit the admin login form"
       },
       {
         "type": "assertion",
-        "description": "Verify an order confirmation is displayed"
+        "description": "Verify the admin dashboard is displayed"
       },
       {
         "type": "assertion",
-        "description": "Verify the email handoff is prepared"
+        "description": "Verify protected admin content is accessible"
       }
     ],
     "priority": "High"
   },
   {
     "id": "TC003",
-    "title": "Select variants and add a product to cart",
-    "description": "This test verifies that a shopper can choose an available size, choose a colour when offered, adjust quantity, and add the item to the cart.",
+    "title": "Sign in to the admin area",
+    "description": "An administrator can log in and reach the protected admin dashboard.",
+    "category": "Admin Login",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /admin/login"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the admin password field with {{LOGIN_PASSWORD}}"
+      },
+      {
+        "type": "action",
+        "description": "Submit the login form"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the admin dashboard is displayed"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC004",
+    "title": "Add a product to the cart from product detail",
+    "description": "A shopper can open a product, choose a size, and add it to the cart with the item appearing in the cart afterward.",
+    "category": "Cart Management",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /product/defaced-backprint-tee"
+      },
+      {
+        "type": "action",
+        "description": "Select a size for the product"
+      },
+      {
+        "type": "action",
+        "description": "Add the product to the cart"
+      },
+      {
+        "type": "action",
+        "description": "Open the cart"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the cart contains the added item"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the cart summary is displayed"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC005",
+    "title": "Open the admin dashboard after signing in",
+    "description": "An admin can sign in and access the protected dashboard to review store metrics.",
+    "category": "Admin Dashboard and Settings",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /admin/login"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the admin password field with {{LOGIN_PASSWORD}}"
+      },
+      {
+        "type": "action",
+        "description": "Submit the login form"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the admin dashboard is displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify store metrics are visible"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC006",
+    "title": "Choose variants and add a product to the cart",
+    "description": "This verifies that a shopper can select available options, set quantity, and add a product to the cart from the product detail page.",
     "category": "Product Detail and Variant Selection",
     "steps": [
       {
@@ -133,377 +192,48 @@
       },
       {
         "type": "assertion",
-        "description": "Verify a cart confirmation is visible"
-      },
-      {
-        "type": "assertion",
         "description": "Verify the cart contains the added item"
-      }
-    ],
-    "priority": "High"
-  },
-  {
-    "id": "TC004",
-    "title": "Add a product to the cart and start checkout",
-    "description": "A shopper can choose a valid variant on a product page, add it to the cart, and proceed to checkout.",
-    "category": "Cart Management",
-    "steps": [
-      {
-        "type": "action",
-        "description": "Navigate to /product/defaced-backprint-tee"
-      },
-      {
-        "type": "action",
-        "description": "Select a valid size for the product"
-      },
-      {
-        "type": "action",
-        "description": "Add the product to the cart"
-      },
-      {
-        "type": "action",
-        "description": "Open the cart"
-      },
-      {
-        "type": "action",
-        "description": "Proceed to checkout"
       },
       {
         "type": "assertion",
-        "description": "Verify the checkout page is displayed"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify the cart item is carried into checkout"
-      }
-    ],
-    "priority": "High"
-  },
-  {
-    "id": "TC005",
-    "title": "Sign in to the admin dashboard",
-    "description": "An administrator can submit the login form with the correct password and reach the admin area.",
-    "category": "Admin Login",
-    "steps": [
-      {
-        "type": "action",
-        "description": "Navigate to /admin/login"
-      },
-      {
-        "type": "action",
-        "description": "Fill in the admin password field with {{LOGIN_PASSWORD}}"
-      },
-      {
-        "type": "action",
-        "description": "Submit the login form"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify the admin dashboard is displayed"
-      }
-    ],
-    "priority": "High"
-  },
-  {
-    "id": "TC006",
-    "title": "Guest browses from homepage into a product and begins checkout",
-    "description": "This test verifies that a shopper can browse from the homepage to a product detail page, choose options, add the item to cart, and proceed toward checkout.",
-    "category": "Product Discovery to Purchase",
-    "steps": [
-      {
-        "type": "action",
-        "description": "Navigate to /"
-      },
-      {
-        "type": "action",
-        "description": "Open a category or product from the homepage"
-      },
-      {
-        "type": "action",
-        "description": "Open a product detail page"
-      },
-      {
-        "type": "action",
-        "description": "Choose a valid size"
-      },
-      {
-        "type": "action",
-        "description": "Choose a valid color if available"
-      },
-      {
-        "type": "action",
-        "description": "Select a quantity"
-      },
-      {
-        "type": "action",
-        "description": "Add the item to the cart"
-      },
-      {
-        "type": "action",
-        "description": "Proceed to checkout"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify the checkout page is displayed"
+        "description": "Verify the selected options are reflected in the cart"
       }
     ],
     "priority": "High"
   },
   {
     "id": "TC007",
-    "title": "Admin signs in and reaches the dashboard",
-    "description": "This test verifies that an administrator can authenticate and land on the protected dashboard successfully.",
-    "category": "Admin Dashboard and Settings",
+    "title": "Update cart quantities and see totals recalculate",
+    "description": "A shopper can increase or decrease an item quantity in the cart and see the order totals update accordingly.",
+    "category": "Cart Management",
     "steps": [
       {
         "type": "action",
-        "description": "Navigate to /admin/login"
+        "description": "Navigate to /cart"
       },
       {
         "type": "action",
-        "description": "Fill in the admin password field with {{LOGIN_PASSWORD}}"
+        "description": "Increase the quantity of a cart item"
       },
       {
         "type": "action",
-        "description": "Submit the login form"
+        "description": "Decrease the quantity of the same cart item"
       },
       {
         "type": "assertion",
-        "description": "Verify the admin dashboard is displayed"
+        "description": "Verify the cart quantity controls remain available"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the order summary reflects the updated cart"
       }
     ],
     "priority": "High"
   },
   {
     "id": "TC008",
-    "title": "Proceed from cart to checkout",
-    "description": "This test verifies that a shopper can move from the cart to the checkout flow after adding an item.",
-    "category": "Product Catalogue Browsing",
-    "steps": [
-      {
-        "type": "action",
-        "description": "Navigate to /product/defaced-backprint-tee"
-      },
-      {
-        "type": "action",
-        "description": "Select an available size"
-      },
-      {
-        "type": "action",
-        "description": "Add the item to the cart"
-      },
-      {
-        "type": "action",
-        "description": "Open the cart"
-      },
-      {
-        "type": "action",
-        "description": "Continue to checkout"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify the checkout page is displayed"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify the customer information form is displayed"
-      }
-    ],
-    "priority": "High"
-  },
-  {
-    "id": "TC009",
-    "title": "Complete guest checkout and receive order confirmation",
-    "description": "A shopper can submit checkout details and see a completed order confirmation with email handoff instructions.",
-    "category": "Guest Checkout via Email Handoff",
-    "steps": [
-      {
-        "type": "action",
-        "description": "Navigate to /checkout"
-      },
-      {
-        "type": "action",
-        "description": "Fill in the customer name"
-      },
-      {
-        "type": "action",
-        "description": "Fill in the customer email"
-      },
-      {
-        "type": "action",
-        "description": "Fill in the customer phone number"
-      },
-      {
-        "type": "action",
-        "description": "Fill in the delivery address fields"
-      },
-      {
-        "type": "action",
-        "description": "Select a payment method"
-      },
-      {
-        "type": "action",
-        "description": "Add an optional customer note"
-      },
-      {
-        "type": "action",
-        "description": "Submit the order"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify an order confirmation is displayed"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify email handoff instructions are displayed"
-      }
-    ],
-    "priority": "High"
-  },
-  {
-    "id": "TC010",
-    "title": "Review cart totals before checkout",
-    "description": "This test verifies that a shopper can review cart contents and see order summary totals before continuing to checkout.",
-    "category": "Product Catalogue Browsing",
-    "steps": [
-      {
-        "type": "action",
-        "description": "Navigate to /product/defaced-backprint-tee"
-      },
-      {
-        "type": "action",
-        "description": "Select an available size"
-      },
-      {
-        "type": "action",
-        "description": "Add the item to the cart"
-      },
-      {
-        "type": "action",
-        "description": "Open the cart"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify cart items are displayed"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify the order summary is displayed"
-      }
-    ],
-    "priority": "High"
-  },
-  {
-    "id": "TC011",
-    "title": "Open admin login and reach the dashboard",
-    "description": "This test verifies that an admin can sign in through the admin login screen and reach the protected dashboard.",
-    "category": "Product Catalogue Browsing",
-    "steps": [
-      {
-        "type": "action",
-        "description": "Navigate to /admin/login"
-      },
-      {
-        "type": "action",
-        "description": "Fill in the admin password with {{LOGIN_PASSWORD}}"
-      },
-      {
-        "type": "action",
-        "description": "Submit the login form"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify the admin dashboard is displayed"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify protected admin navigation is available"
-      }
-    ],
-    "priority": "High"
-  },
-  {
-    "id": "TC012",
-    "title": "Browse the shop catalogue and open a product",
-    "description": "This test verifies that a shopper can browse the full shop catalogue, move through pagination, and open a product detail page.",
-    "category": "Product Catalogue Browsing",
-    "steps": [
-      {
-        "type": "action",
-        "description": "Navigate to /shop"
-      },
-      {
-        "type": "action",
-        "description": "Scroll to the pagination controls"
-      },
-      {
-        "type": "action",
-        "description": "Click the next page control"
-      },
-      {
-        "type": "action",
-        "description": "Click a product card"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify the paginated catalogue is displayed"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify the product detail page is displayed"
-      }
-    ],
-    "priority": "High"
-  },
-  {
-    "id": "TC013",
-    "title": "Create a new product in the admin panel",
-    "description": "This test verifies that an admin can create a new product through the admin product form and see it appear in the product list.",
-    "category": "Product Catalogue Browsing",
-    "steps": [
-      {
-        "type": "action",
-        "description": "Navigate to /admin/login"
-      },
-      {
-        "type": "action",
-        "description": "Fill in the admin password with {{LOGIN_PASSWORD}}"
-      },
-      {
-        "type": "action",
-        "description": "Submit the login form"
-      },
-      {
-        "type": "action",
-        "description": "Open the new product form"
-      },
-      {
-        "type": "action",
-        "description": "Fill in the required product basics with valid values"
-      },
-      {
-        "type": "action",
-        "description": "Fill in the pricing and inventory fields with valid values"
-      },
-      {
-        "type": "action",
-        "description": "Save the product"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify the new product appears in the product list"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify the storefront can display the new product"
-      }
-    ],
-    "priority": "High"
-  },
-  {
-    "id": "TC014",
-    "title": "Admin creates a new product",
-    "description": "This test verifies that an administrator can create a product with merchandising details and see it appear in the product list.",
+    "title": "Access admin product management after signing in",
+    "description": "An admin can sign in and open the protected product list to manage inventory.",
     "category": "Admin Product Management",
     "steps": [
       {
@@ -520,23 +250,176 @@
       },
       {
         "type": "action",
-        "description": "Open the new product form"
+        "description": "Click the link to open product management"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the product list is displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify product management actions are available"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC009",
+    "title": "Continue from cart to checkout",
+    "description": "A shopper can review their cart and proceed to the checkout flow from the cart page.",
+    "category": "Cart Management",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /cart"
       },
       {
         "type": "action",
-        "description": "Fill in the product basics"
+        "description": "Proceed to checkout"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the checkout page is displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the cart items are carried into checkout"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC010",
+    "title": "Access the admin area after signing in",
+    "description": "An administrator can sign in successfully and then open the protected admin area.",
+    "category": "Admin Login",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /admin/login"
       },
       {
         "type": "action",
-        "description": "Fill in the pricing details"
+        "description": "Fill in the admin password field with {{LOGIN_PASSWORD}}"
       },
       {
         "type": "action",
-        "description": "Fill in the variant details"
+        "description": "Submit the login form"
       },
       {
         "type": "action",
-        "description": "Fill in the media and tag details"
+        "description": "Click the link to open the admin area"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the admin area is displayed"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC011",
+    "title": "Remove an item from the cart",
+    "description": "A shopper can remove a cart item and see the cart update to reflect the removal.",
+    "category": "Cart Management",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /cart"
+      },
+      {
+        "type": "action",
+        "description": "Remove a cart item"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the cart no longer contains the removed item"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the updated cart state is displayed"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC012",
+    "title": "Create, edit, feature, hide, and delete a product in admin",
+    "description": "A store admin can create a product, update it, toggle its live status and featured state, and remove it from the catalog.",
+    "category": "Admin Access and Product Management",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /admin/login"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the admin password with {{LOGIN_PASSWORD}}"
+      },
+      {
+        "type": "action",
+        "description": "Submit the admin login form"
+      },
+      {
+        "type": "action",
+        "description": "Open product management"
+      },
+      {
+        "type": "action",
+        "description": "Create a new product"
+      },
+      {
+        "type": "action",
+        "description": "Edit the created product"
+      },
+      {
+        "type": "action",
+        "description": "Toggle the product featured and live states"
+      },
+      {
+        "type": "action",
+        "description": "Delete the product"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the product list reflects the created and removed product"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the product status controls are available"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC013",
+    "title": "Create a new product and see it in the catalog",
+    "description": "An admin can add a complete product through the create form and verify it appears in the product list.",
+    "category": "Admin Product Management",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /admin/login"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the admin password field with {{LOGIN_PASSWORD}}"
+      },
+      {
+        "type": "action",
+        "description": "Submit the login form"
+      },
+      {
+        "type": "action",
+        "description": "Click the link to create a new product"
+      },
+      {
+        "type": "action",
+        "description": "Fill in product basics and pricing with valid values"
+      },
+      {
+        "type": "action",
+        "description": "Fill in variants, media, and tags with valid values"
       },
       {
         "type": "action",
@@ -544,15 +427,19 @@
       },
       {
         "type": "assertion",
-        "description": "Verify the new product appears in the products list"
+        "description": "Verify the new product appears in the product list"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the product is available in the storefront catalog"
       }
     ],
     "priority": "High"
   },
   {
-    "id": "TC015",
-    "title": "Browse featured products from the homepage",
-    "description": "This test verifies that a shopper can discover featured products from the homepage and open a product detail page.",
+    "id": "TC014",
+    "title": "Browse featured products and open a product detail page",
+    "description": "This verifies that a shopper can start on the homepage, explore featured merchandising, and reach a product detail page from a product card.",
     "category": "Product Catalogue Browsing",
     "steps": [
       {
@@ -573,16 +460,16 @@
       },
       {
         "type": "assertion",
-        "description": "Verify product imagery and purchase details are displayed"
+        "description": "Verify product information is displayed"
       }
     ],
     "priority": "High"
   },
   {
-    "id": "TC016",
-    "title": "Guest completes checkout from search results",
-    "description": "This test verifies that a shopper can use search and catalogue controls to find an item, add it to cart, and reach checkout through the normal purchase flow.",
-    "category": "Search, Filters, Sorting and Pagination",
+    "id": "TC015",
+    "title": "Search and filter products in the shop",
+    "description": "A shopper can search and refine the catalogue to find matching products and see the filtered results update.",
+    "category": "Shop Browsing",
     "steps": [
       {
         "type": "action",
@@ -590,110 +477,32 @@
       },
       {
         "type": "action",
-        "description": "Search for a product term"
+        "description": "Enter a search term"
       },
       {
         "type": "action",
-        "description": "Open a product from the results"
+        "description": "Apply a filter"
       },
       {
         "type": "action",
-        "description": "Choose a valid size"
-      },
-      {
-        "type": "action",
-        "description": "Add the item to the cart"
-      },
-      {
-        "type": "action",
-        "description": "Proceed to checkout"
+        "description": "Change the sort order"
       },
       {
         "type": "assertion",
-        "description": "Verify the checkout page is displayed"
+        "description": "Verify the filtered product results are displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the current search results match the applied criteria"
       }
     ],
     "priority": "High"
   },
   {
-    "id": "TC017",
-    "title": "Manage products from the admin product list",
-    "description": "This test verifies that an admin can open the product table and access edit, feature, hide, and delete actions for products.",
-    "category": "Product Catalogue Browsing",
-    "steps": [
-      {
-        "type": "action",
-        "description": "Navigate to /admin/login"
-      },
-      {
-        "type": "action",
-        "description": "Fill in the admin password with {{LOGIN_PASSWORD}}"
-      },
-      {
-        "type": "action",
-        "description": "Submit the login form"
-      },
-      {
-        "type": "action",
-        "description": "Open the products section"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify the product table is displayed"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify product management actions are available"
-      }
-    ],
-    "priority": "High"
-  },
-  {
-    "id": "TC018",
-    "title": "Prefill checkout from a saved customer profile",
-    "description": "A returning customer can save profile details and see them prefilled when starting checkout.",
-    "category": "Guest Checkout via Email Handoff",
-    "steps": [
-      {
-        "type": "action",
-        "description": "Navigate to /profile"
-      },
-      {
-        "type": "action",
-        "description": "Fill in the customer name"
-      },
-      {
-        "type": "action",
-        "description": "Fill in the customer email"
-      },
-      {
-        "type": "action",
-        "description": "Fill in the customer phone number"
-      },
-      {
-        "type": "action",
-        "description": "Save the customer profile"
-      },
-      {
-        "type": "action",
-        "description": "Navigate to /checkout"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify the customer contact fields are prefilled"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify the saved address information is prefilled"
-      }
-    ],
-    "priority": "High"
-  },
-  {
-    "id": "TC019",
-    "title": "Admin updates store settings",
-    "description": "This test verifies that an administrator can change shipping, currency, and order email settings and save them successfully.",
-    "category": "Admin Dashboard and Settings",
+    "id": "TC016",
+    "title": "Edit an existing product and save changes",
+    "description": "An admin can update an existing product and confirm the revised data is shown in management views.",
+    "category": "Admin Product Management",
     "steps": [
       {
         "type": "action",
@@ -709,64 +518,89 @@
       },
       {
         "type": "action",
-        "description": "Open the store settings page"
+        "description": "Click the link to open product management"
       },
       {
         "type": "action",
-        "description": "Change the shipping configuration"
+        "description": "Open an existing product for editing"
       },
       {
         "type": "action",
-        "description": "Change the currency setting"
+        "description": "Update the product details with valid changes"
       },
       {
         "type": "action",
-        "description": "Update the order email recipient"
-      },
-      {
-        "type": "action",
-        "description": "Save the settings"
+        "description": "Save the product"
       },
       {
         "type": "assertion",
-        "description": "Verify the updated settings are displayed"
+        "description": "Verify the updated product details are displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the product list shows the saved changes"
       }
     ],
     "priority": "High"
   },
   {
-    "id": "TC020",
-    "title": "Search the shop for a specific item",
-    "description": "This test verifies that a shopper can search the shop catalogue and see filtered results that match the query.",
-    "category": "Shop Filtering, Search, Sort and Pagination",
+    "id": "TC017",
+    "title": "Browse a category listing and open a product",
+    "description": "This verifies that a shopper can move from category browsing into a product detail page through the storefront navigation.",
+    "category": "Product Catalogue Browsing",
     "steps": [
       {
         "type": "action",
-        "description": "Navigate to /shop"
+        "description": "Navigate to /shop/t-shirts"
       },
       {
         "type": "action",
-        "description": "Fill in the search field with a product keyword"
-      },
-      {
-        "type": "action",
-        "description": "Submit the search"
+        "description": "Click a product card"
       },
       {
         "type": "assertion",
-        "description": "Verify matching search results are displayed"
+        "description": "Verify the product detail page is displayed"
       },
       {
         "type": "assertion",
-        "description": "Verify unrelated products are not shown"
+        "description": "Verify product information is displayed"
       }
     ],
     "priority": "High"
   },
   {
-    "id": "TC021",
-    "title": "Edit profile details and prefill checkout",
-    "description": "A shopper can save their contact details in the local profile and see them prefilled in checkout.",
+    "id": "TC018",
+    "title": "Save a product to the wishlist from product detail",
+    "description": "A shopper can save a product for later from the product detail page and see it listed in the wishlist.",
+    "category": "Wishlist",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /product/defaced-backprint-tee"
+      },
+      {
+        "type": "action",
+        "description": "Save the product to the wishlist"
+      },
+      {
+        "type": "action",
+        "description": "Open the wishlist"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the saved product is shown in the wishlist"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the wishlist content is displayed"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC019",
+    "title": "Save profile details for checkout prefill",
+    "description": "A shopper can save local profile details and later see them prefilled in checkout.",
     "category": "Local Profile and Saved Addresses",
     "steps": [
       {
@@ -791,707 +625,19 @@
       },
       {
         "type": "action",
-        "description": "Click the checkout link"
+        "description": "Click the link to start checkout"
       },
       {
         "type": "assertion",
-        "description": "Verify the checkout form is prefilled with the saved contact details"
+        "description": "Verify the contact details are prefilled in checkout"
       }
     ],
     "priority": "High"
   },
   {
-    "id": "TC022",
-    "title": "Guest finds an item with search, filters, sort, and pagination",
-    "description": "This test verifies that a shopper can use the catalogue tools to find a specific item and reach its product detail page.",
-    "category": "Search, Filters, Sorting and Pagination",
-    "steps": [
-      {
-        "type": "action",
-        "description": "Navigate to /shop"
-      },
-      {
-        "type": "action",
-        "description": "Search for a product term"
-      },
-      {
-        "type": "action",
-        "description": "Apply a filter"
-      },
-      {
-        "type": "action",
-        "description": "Change the sort order"
-      },
-      {
-        "type": "action",
-        "description": "Move to another results page"
-      },
-      {
-        "type": "action",
-        "description": "Open a product from the results"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify the product detail page is displayed"
-      }
-    ],
-    "priority": "High"
-  },
-  {
-    "id": "TC023",
-    "title": "Update a saved local profile and see it used in checkout",
-    "description": "This test verifies that a returning customer can save a local profile, reopen checkout, and see the customer details and default address prefilled.",
-    "category": "Product Catalogue Browsing",
-    "steps": [
-      {
-        "type": "action",
-        "description": "Navigate to /profile"
-      },
-      {
-        "type": "action",
-        "description": "Create or update the customer profile with valid personal details"
-      },
-      {
-        "type": "action",
-        "description": "Save the profile"
-      },
-      {
-        "type": "action",
-        "description": "Open checkout"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify the customer details are prefilled in checkout"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify the default address is prefilled in checkout"
-      }
-    ],
-    "priority": "High"
-  },
-  {
-    "id": "TC024",
-    "title": "Update cart quantities and totals",
-    "description": "A shopper can change item quantity in the cart and see the order summary update accordingly.",
-    "category": "Cart Management",
-    "steps": [
-      {
-        "type": "action",
-        "description": "Navigate to /product/defaced-backprint-tee"
-      },
-      {
-        "type": "action",
-        "description": "Select a valid size for the product"
-      },
-      {
-        "type": "action",
-        "description": "Add the product to the cart"
-      },
-      {
-        "type": "action",
-        "description": "Open the cart"
-      },
-      {
-        "type": "action",
-        "description": "Increase the item quantity"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify the cart summary updates"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify the updated quantity is reflected in the cart"
-      }
-    ],
-    "priority": "High"
-  },
-  {
-    "id": "TC025",
-    "title": "Returning customer profile pre-fills checkout details",
-    "description": "This test verifies that a returning shopper can save profile details locally and see them prefilled on checkout.",
-    "category": "Local Profile and Checkout Prefill",
-    "steps": [
-      {
-        "type": "action",
-        "description": "Navigate to /profile"
-      },
-      {
-        "type": "action",
-        "description": "Fill in the customer profile details"
-      },
-      {
-        "type": "action",
-        "description": "Save the profile"
-      },
-      {
-        "type": "action",
-        "description": "Open the checkout page"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify the customer name and contact details are prefilled"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify the saved address is prefilled"
-      }
-    ],
-    "priority": "High"
-  },
-  {
-    "id": "TC026",
-    "title": "Add a default address and prefill checkout",
-    "description": "A shopper can add a saved address, mark it as default, and see that address prefilled in checkout.",
-    "category": "Local Profile and Saved Addresses",
-    "steps": [
-      {
-        "type": "action",
-        "description": "Navigate to /profile"
-      },
-      {
-        "type": "action",
-        "description": "Add a new address"
-      },
-      {
-        "type": "action",
-        "description": "Fill in the address fields with valid delivery details"
-      },
-      {
-        "type": "action",
-        "description": "Set the new address as the default"
-      },
-      {
-        "type": "action",
-        "description": "Save the profile"
-      },
-      {
-        "type": "action",
-        "description": "Click the checkout link"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify the default address is prefilled in checkout"
-      }
-    ],
-    "priority": "High"
-  },
-  {
-    "id": "TC027",
-    "title": "Filter the shop to narrow results",
-    "description": "This test verifies that a shopper can apply catalogue filters and see a narrowed product set.",
-    "category": "Shop Filtering, Search, Sort and Pagination",
-    "steps": [
-      {
-        "type": "action",
-        "description": "Navigate to /shop"
-      },
-      {
-        "type": "action",
-        "description": "Open the filter panel"
-      },
-      {
-        "type": "action",
-        "description": "Select a brand filter"
-      },
-      {
-        "type": "action",
-        "description": "Apply an additional filter"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify filtered results are displayed"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify the result set is narrowed"
-      }
-    ],
-    "priority": "High"
-  },
-  {
-    "id": "TC028",
-    "title": "Admin edits an existing product",
-    "description": "This test verifies that an administrator can update an existing product and see the changes reflected in the product list.",
-    "category": "Admin Product Management",
-    "steps": [
-      {
-        "type": "action",
-        "description": "Navigate to /admin/login"
-      },
-      {
-        "type": "action",
-        "description": "Fill in the admin password field with {{LOGIN_PASSWORD}}"
-      },
-      {
-        "type": "action",
-        "description": "Submit the login form"
-      },
-      {
-        "type": "action",
-        "description": "Open the products list"
-      },
-      {
-        "type": "action",
-        "description": "Open a product for editing"
-      },
-      {
-        "type": "action",
-        "description": "Update the product details"
-      },
-      {
-        "type": "action",
-        "description": "Save the changes"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify the updated product data is displayed"
-      }
-    ],
-    "priority": "High"
-  },
-  {
-    "id": "TC029",
-    "title": "Edit product merchandising in the admin panel",
-    "description": "This test verifies that an admin can update an existing product and see the changes reflected in the admin product list.",
-    "category": "Product Catalogue Browsing",
-    "steps": [
-      {
-        "type": "action",
-        "description": "Navigate to /admin/login"
-      },
-      {
-        "type": "action",
-        "description": "Fill in the admin password with {{LOGIN_PASSWORD}}"
-      },
-      {
-        "type": "action",
-        "description": "Submit the login form"
-      },
-      {
-        "type": "action",
-        "description": "Open the products section"
-      },
-      {
-        "type": "action",
-        "description": "Open a product for editing"
-      },
-      {
-        "type": "action",
-        "description": "Update the product details with valid changes"
-      },
-      {
-        "type": "action",
-        "description": "Save the product"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify the updated product appears in the product list"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify the updated details are reflected for the product"
-      }
-    ],
-    "priority": "High"
-  },
-  {
-    "id": "TC030",
-    "title": "Save a product to the wishlist",
-    "description": "A shopper can save a product locally and later review it in the wishlist.",
-    "category": "Wishlist",
-    "steps": [
-      {
-        "type": "action",
-        "description": "Navigate to /product/defaced-backprint-tee"
-      },
-      {
-        "type": "action",
-        "description": "Save the product to the wishlist"
-      },
-      {
-        "type": "action",
-        "description": "Open the wishlist"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify the saved item is displayed in the wishlist"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify the wishlist contains the product"
-      }
-    ],
-    "priority": "High"
-  },
-  {
-    "id": "TC031",
-    "title": "Customer saves an item to the wishlist and moves it to cart",
-    "description": "This test verifies that a shopper can save a product locally, revisit the wishlist, move the item into the cart, and continue shopping toward purchase.",
-    "category": "Wishlist Save Remove Move to Cart",
-    "steps": [
-      {
-        "type": "action",
-        "description": "Navigate to /shop"
-      },
-      {
-        "type": "action",
-        "description": "Open a product detail page"
-      },
-      {
-        "type": "action",
-        "description": "Save the product to the wishlist"
-      },
-      {
-        "type": "action",
-        "description": "Open the wishlist page"
-      },
-      {
-        "type": "action",
-        "description": "Move the saved item to the cart"
-      },
-      {
-        "type": "action",
-        "description": "Proceed to checkout"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify the checkout page is displayed"
-      }
-    ],
-    "priority": "High"
-  },
-  {
-    "id": "TC032",
-    "title": "Browse a category from the homepage",
-    "description": "This test verifies that a shopper can use category navigation from the homepage to open a category listing and a product detail page.",
-    "category": "Product Catalogue Browsing",
-    "steps": [
-      {
-        "type": "action",
-        "description": "Navigate to /"
-      },
-      {
-        "type": "action",
-        "description": "Click a category link"
-      },
-      {
-        "type": "action",
-        "description": "Click a product card"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify the category listing page is displayed"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify the product detail page is displayed"
-      }
-    ],
-    "priority": "High"
-  },
-  {
-    "id": "TC033",
-    "title": "Move a wishlist item to the cart",
-    "description": "This test verifies that a shopper can move a saved wishlist item into the cart and continue shopping toward checkout.",
-    "category": "Product Catalogue Browsing",
-    "steps": [
-      {
-        "type": "action",
-        "description": "Navigate to /product/defaced-backprint-tee"
-      },
-      {
-        "type": "action",
-        "description": "Save the product to the wishlist"
-      },
-      {
-        "type": "action",
-        "description": "Open the wishlist"
-      },
-      {
-        "type": "action",
-        "description": "Move the saved item to the cart"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify the cart contains the moved item"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify the wishlist no longer contains the moved item"
-      }
-    ],
-    "priority": "High"
-  },
-  {
-    "id": "TC034",
-    "title": "Admin toggles product visibility and featured state",
-    "description": "This test verifies that an administrator can feature or hide a product from the products table and see the table update.",
-    "category": "Admin Product Management",
-    "steps": [
-      {
-        "type": "action",
-        "description": "Navigate to /admin/login"
-      },
-      {
-        "type": "action",
-        "description": "Fill in the admin password field with {{LOGIN_PASSWORD}}"
-      },
-      {
-        "type": "action",
-        "description": "Submit the login form"
-      },
-      {
-        "type": "action",
-        "description": "Open the products list"
-      },
-      {
-        "type": "action",
-        "description": "Toggle the featured state for a product"
-      },
-      {
-        "type": "action",
-        "description": "Toggle the live state for a product"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify the product table reflects the updated states"
-      }
-    ],
-    "priority": "High"
-  },
-  {
-    "id": "TC035",
-    "title": "Save admin shipping, currency and order email settings",
-    "description": "This test verifies that an admin can update store settings and see the saved configuration persist in the admin panel.",
-    "category": "Product Catalogue Browsing",
-    "steps": [
-      {
-        "type": "action",
-        "description": "Navigate to /admin/login"
-      },
-      {
-        "type": "action",
-        "description": "Fill in the admin password with {{LOGIN_PASSWORD}}"
-      },
-      {
-        "type": "action",
-        "description": "Submit the login form"
-      },
-      {
-        "type": "action",
-        "description": "Open the settings section"
-      },
-      {
-        "type": "action",
-        "description": "Update the shipping, currency, and order email settings with valid values"
-      },
-      {
-        "type": "action",
-        "description": "Save the settings"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify the updated settings are displayed"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify the settings remain available after saving"
-      }
-    ],
-    "priority": "High"
-  },
-  {
-    "id": "TC036",
-    "title": "Continue from cart with a reviewed order summary",
-    "description": "A shopper can review the cart contents and continue to checkout from the cart page.",
-    "category": "Cart Management",
-    "steps": [
-      {
-        "type": "action",
-        "description": "Navigate to /product/defaced-backprint-tee"
-      },
-      {
-        "type": "action",
-        "description": "Select a valid size for the product"
-      },
-      {
-        "type": "action",
-        "description": "Add the product to the cart"
-      },
-      {
-        "type": "action",
-        "description": "Open the cart"
-      },
-      {
-        "type": "action",
-        "description": "Proceed to checkout"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify the checkout page is displayed"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify the order summary is shown in checkout"
-      }
-    ],
-    "priority": "High"
-  },
-  {
-    "id": "TC037",
-    "title": "Reject an incorrect admin password",
-    "description": "An administrator who enters the wrong password sees a login error and remains on the login page.",
-    "category": "Admin Login",
-    "steps": [
-      {
-        "type": "action",
-        "description": "Navigate to /admin/login"
-      },
-      {
-        "type": "action",
-        "description": "Fill in the admin password field with an incorrect password"
-      },
-      {
-        "type": "action",
-        "description": "Submit the login form"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify a login error message is displayed"
-      }
-    ],
-    "priority": "High"
-  },
-  {
-    "id": "TC038",
-    "title": "Change sort order and paginate shop results",
-    "description": "This test verifies that a shopper can change the sort order and move between result pages in the shop.",
-    "category": "Shop Filtering, Search, Sort and Pagination",
-    "steps": [
-      {
-        "type": "action",
-        "description": "Navigate to /shop"
-      },
-      {
-        "type": "action",
-        "description": "Change the sort order"
-      },
-      {
-        "type": "action",
-        "description": "Click the next page control"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify the product order changes"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify the next page of results is displayed"
-      }
-    ],
-    "priority": "High"
-  },
-  {
-    "id": "TC039",
-    "title": "Browse a category listing and open a product",
-    "description": "This test verifies that a shopper can browse a category listing and open a product detail page from it.",
-    "category": "Product Catalogue Browsing",
-    "steps": [
-      {
-        "type": "action",
-        "description": "Navigate to /shop/t-shirts"
-      },
-      {
-        "type": "action",
-        "description": "Click a product card"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify the category listing is displayed"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify the product detail page is displayed"
-      }
-    ],
-    "priority": "High"
-  },
-  {
-    "id": "TC040",
-    "title": "Admin deletes a product after confirmation",
-    "description": "This test verifies that an administrator can delete a product from the products list after confirming the action.",
-    "category": "Admin Product Management",
-    "steps": [
-      {
-        "type": "action",
-        "description": "Navigate to /admin/login"
-      },
-      {
-        "type": "action",
-        "description": "Fill in the admin password field with {{LOGIN_PASSWORD}}"
-      },
-      {
-        "type": "action",
-        "description": "Submit the login form"
-      },
-      {
-        "type": "action",
-        "description": "Open the products list"
-      },
-      {
-        "type": "action",
-        "description": "Delete a product"
-      },
-      {
-        "type": "action",
-        "description": "Confirm the deletion"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify the product is removed from the list"
-      }
-    ],
-    "priority": "High"
-  },
-  {
-    "id": "TC041",
-    "title": "Apply filters on a category page",
-    "description": "This test verifies that a shopper can use the category page filter engine to find matching products within a category.",
-    "category": "Shop Filtering, Search, Sort and Pagination",
-    "steps": [
-      {
-        "type": "action",
-        "description": "Navigate to /shop/shirts"
-      },
-      {
-        "type": "action",
-        "description": "Open the filter panel"
-      },
-      {
-        "type": "action",
-        "description": "Select a size filter"
-      },
-      {
-        "type": "action",
-        "description": "Apply a colour filter"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify matching category results are displayed"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify the result set is narrowed"
-      }
-    ],
-    "priority": "Medium"
-  },
-  {
-    "id": "TC042",
-    "title": "Admin reviews store metrics",
-    "description": "This test verifies that an authenticated administrator can open the dashboard and see store overview metrics.",
+    "id": "TC020",
+    "title": "Review store metrics on the dashboard",
+    "description": "An admin can open the dashboard and see the key store overview sections needed for monitoring.",
     "category": "Admin Dashboard and Settings",
     "steps": [
       {
@@ -1508,114 +654,73 @@
       },
       {
         "type": "assertion",
-        "description": "Verify store totals and stock overview are displayed"
-      }
-    ],
-    "priority": "Medium"
-  },
-  {
-    "id": "TC043",
-    "title": "Save an item to the wishlist",
-    "description": "This test verifies that a shopper can save a product locally to the wishlist from a product detail page.",
-    "category": "Product Catalogue Browsing",
-    "steps": [
-      {
-        "type": "action",
-        "description": "Navigate to /product/defaced-backprint-tee"
-      },
-      {
-        "type": "action",
-        "description": "Save the product to the wishlist"
-      },
-      {
-        "type": "action",
-        "description": "Open the wishlist"
+        "description": "Verify total sales or order summary is displayed"
       },
       {
         "type": "assertion",
-        "description": "Verify the wishlist displays the saved item"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify the saved item is available for purchase actions"
+        "description": "Verify stock warning information is visible"
       }
     ],
-    "priority": "Medium"
+    "priority": "High"
   },
   {
-    "id": "TC044",
-    "title": "Remove an item from the cart",
-    "description": "A shopper can remove a cart item and see the cart update to reflect the empty or reduced state.",
-    "category": "Cart Management",
+    "id": "TC021",
+    "title": "Search the shop for matching products",
+    "description": "This verifies that a shopper can search the catalogue and see results narrowed to matching products.",
+    "category": "Shop Filtering, Search, Sort and Pagination",
     "steps": [
       {
         "type": "action",
-        "description": "Navigate to /product/defaced-backprint-tee"
+        "description": "Navigate to /shop"
       },
       {
         "type": "action",
-        "description": "Select a valid size for the product"
+        "description": "Fill in the search field with a relevant keyword"
       },
       {
         "type": "action",
-        "description": "Add the product to the cart"
+        "description": "Submit the search"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify matching products are displayed"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC022",
+    "title": "Move a wishlist item to the cart",
+    "description": "A shopper can move a saved item from the wishlist into the cart and continue purchasing from the cart.",
+    "category": "Wishlist",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /wishlist"
+      },
+      {
+        "type": "action",
+        "description": "Move a saved item to the cart"
       },
       {
         "type": "action",
         "description": "Open the cart"
       },
       {
-        "type": "action",
-        "description": "Remove the item from the cart"
+        "type": "assertion",
+        "description": "Verify the item appears in the cart"
       },
       {
         "type": "assertion",
-        "description": "Verify the cart updates after removal"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify an empty or reduced cart state is displayed"
+        "description": "Verify the cart page is ready for checkout"
       }
     ],
-    "priority": "Medium"
+    "priority": "High"
   },
   {
-    "id": "TC045",
-    "title": "Save and review a shipping address in the local profile",
-    "description": "This test verifies that a returning customer can save a local address in their profile and see it available for checkout.",
-    "category": "Product Catalogue Browsing",
-    "steps": [
-      {
-        "type": "action",
-        "description": "Navigate to /profile"
-      },
-      {
-        "type": "action",
-        "description": "Add a new shipping address"
-      },
-      {
-        "type": "action",
-        "description": "Save the profile"
-      },
-      {
-        "type": "action",
-        "description": "Open checkout"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify the saved address is prefilled in checkout"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify the checkout can proceed with the saved profile data"
-      }
-    ],
-    "priority": "Medium"
-  },
-  {
-    "id": "TC046",
-    "title": "Edit a saved address",
-    "description": "A shopper can update an existing saved address and see the updated address list after saving.",
+    "id": "TC023",
+    "title": "Add a default address and reuse it in checkout",
+    "description": "A shopper can add a saved address, set it as default, and see it prefilled when starting checkout.",
     "category": "Local Profile and Saved Addresses",
     "steps": [
       {
@@ -1628,11 +733,427 @@
       },
       {
         "type": "action",
-        "description": "Fill in the address fields with valid delivery details"
+        "description": "Fill in the address details with a complete international shipping address"
+      },
+      {
+        "type": "action",
+        "description": "Set the address as default"
+      },
+      {
+        "type": "action",
+        "description": "Save the address"
+      },
+      {
+        "type": "action",
+        "description": "Click the link to start checkout"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the delivery address is prefilled in checkout"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC024",
+    "title": "Update shipping and currency settings",
+    "description": "An admin can change store configuration and save it so checkout-related settings are updated.",
+    "category": "Admin Dashboard and Settings",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /admin/login"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the admin password field with {{LOGIN_PASSWORD}}"
+      },
+      {
+        "type": "action",
+        "description": "Submit the login form"
+      },
+      {
+        "type": "action",
+        "description": "Click the link to open store settings"
+      },
+      {
+        "type": "action",
+        "description": "Change the shipping mode or shipping fee"
+      },
+      {
+        "type": "action",
+        "description": "Change the currency setting"
+      },
+      {
+        "type": "action",
+        "description": "Save the settings"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the updated settings are displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the storefront configuration reflects the saved values"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC025",
+    "title": "Apply shop filters to narrow results",
+    "description": "This verifies that a shopper can combine catalogue filters and see the product listing narrow to matching items.",
+    "category": "Shop Filtering, Search, Sort and Pagination",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /shop"
+      },
+      {
+        "type": "action",
+        "description": "Open the filters panel"
+      },
+      {
+        "type": "action",
+        "description": "Select a brand filter"
+      },
+      {
+        "type": "action",
+        "description": "Apply an additional product filter"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the results are narrowed to matching products"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC026",
+    "title": "Feature or hide a product from the list",
+    "description": "An admin can toggle a product's featured or live status and see the list update accordingly.",
+    "category": "Admin Product Management",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /admin/login"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the admin password field with {{LOGIN_PASSWORD}}"
+      },
+      {
+        "type": "action",
+        "description": "Submit the login form"
+      },
+      {
+        "type": "action",
+        "description": "Click the link to open product management"
+      },
+      {
+        "type": "action",
+        "description": "Toggle the featured or live status for a product"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the product status change is displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the table reflects the updated merchandising state"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC027",
+    "title": "Browse catalogue results across pages",
+    "description": "This verifies that a shopper can move through paginated shop results and continue browsing products beyond the first page.",
+    "category": "Product Catalogue Browsing",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /shop"
+      },
+      {
+        "type": "action",
+        "description": "Click the next page control"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the product grid is displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify pagination controls are available"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC028",
+    "title": "Pre-fill checkout from saved profile and address",
+    "description": "A returning customer can save profile details and an address locally, then start checkout and see those details prefilled.",
+    "category": "Guest Checkout via Email Handoff",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /profile"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the profile details"
       },
       {
         "type": "action",
         "description": "Save the profile"
+      },
+      {
+        "type": "action",
+        "description": "Add and save an address"
+      },
+      {
+        "type": "action",
+        "description": "Start checkout"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify checkout fields are prefilled from the saved profile"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the saved address is available in checkout"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC029",
+    "title": "Update the order email recipient",
+    "description": "An admin can change the order email destination and save it for guest checkout handoff.",
+    "category": "Admin Dashboard and Settings",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /admin/login"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the admin password field with {{LOGIN_PASSWORD}}"
+      },
+      {
+        "type": "action",
+        "description": "Submit the login form"
+      },
+      {
+        "type": "action",
+        "description": "Click the link to open store settings"
+      },
+      {
+        "type": "action",
+        "description": "Change the order email recipient field"
+      },
+      {
+        "type": "action",
+        "description": "Save the settings"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the updated order email setting is displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the settings page shows a saved configuration"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC030",
+    "title": "Move through shop pages and open a product",
+    "description": "A shopper can paginate through the shop catalogue and open a product detail page from the results.",
+    "category": "Shop Browsing",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /shop"
+      },
+      {
+        "type": "action",
+        "description": "Go to the next page of products"
+      },
+      {
+        "type": "action",
+        "description": "Open a product from the results"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the product detail page is displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify product details are shown"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC031",
+    "title": "Sort shop results and see the order change",
+    "description": "This verifies that a shopper can change the catalogue sort order and see products reordered accordingly.",
+    "category": "Shop Filtering, Search, Sort and Pagination",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /shop"
+      },
+      {
+        "type": "action",
+        "description": "Change the sort order"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the product order changes"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the product grid remains displayed"
+      }
+    ],
+    "priority": "Medium"
+  },
+  {
+    "id": "TC032",
+    "title": "Update admin store settings",
+    "description": "A store admin can change shipping, currency, and store email settings and see the updated values saved in the settings view.",
+    "category": "Admin Access and Product Management",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /admin/login"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the admin password with {{LOGIN_PASSWORD}}"
+      },
+      {
+        "type": "action",
+        "description": "Submit the admin login form"
+      },
+      {
+        "type": "action",
+        "description": "Open admin settings"
+      },
+      {
+        "type": "action",
+        "description": "Update the shipping settings"
+      },
+      {
+        "type": "action",
+        "description": "Update the currency setting"
+      },
+      {
+        "type": "action",
+        "description": "Update the store email setting"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the updated settings are displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the settings page confirms the changes"
+      }
+    ],
+    "priority": "Medium"
+  },
+  {
+    "id": "TC033",
+    "title": "Delete a product from management",
+    "description": "An admin can delete an existing product after confirmation and see it removed from the list.",
+    "category": "Admin Product Management",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /admin/login"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the admin password field with {{LOGIN_PASSWORD}}"
+      },
+      {
+        "type": "action",
+        "description": "Submit the login form"
+      },
+      {
+        "type": "action",
+        "description": "Click the link to open product management"
+      },
+      {
+        "type": "action",
+        "description": "Delete a product from the list"
+      },
+      {
+        "type": "action",
+        "description": "Confirm the deletion"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the product no longer appears in the list"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the list remains available for further management"
+      }
+    ],
+    "priority": "Medium"
+  },
+  {
+    "id": "TC034",
+    "title": "Remove a saved item from the wishlist",
+    "description": "A shopper can remove an item from the wishlist and see the list update accordingly.",
+    "category": "Wishlist",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /wishlist"
+      },
+      {
+        "type": "action",
+        "description": "Remove a saved item"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the wishlist no longer contains the removed item"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the wishlist update is displayed"
+      }
+    ],
+    "priority": "Medium"
+  },
+  {
+    "id": "TC035",
+    "title": "Edit a saved address from the profile page",
+    "description": "A shopper can update an existing saved address and see the address list reflect the change.",
+    "category": "Local Profile and Saved Addresses",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /profile"
+      },
+      {
+        "type": "action",
+        "description": "Add a new address"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the address details with a complete international shipping address"
+      },
+      {
+        "type": "action",
+        "description": "Save the address"
       },
       {
         "type": "action",
@@ -1640,81 +1161,48 @@
       },
       {
         "type": "action",
-        "description": "Update the address details with new valid values"
+        "description": "Update one address field with a new valid value"
       },
       {
         "type": "action",
-        "description": "Save the profile"
+        "description": "Save the changes"
       },
       {
         "type": "assertion",
-        "description": "Verify the updated saved address is shown in the address list"
+        "description": "Verify the saved address list reflects the updated address"
       }
     ],
     "priority": "Medium"
   },
   {
-    "id": "TC047",
-    "title": "Show validation when checkout contact details are missing",
-    "description": "A shopper sees validation feedback and cannot submit checkout when required contact fields are left empty.",
-    "category": "Guest Checkout via Email Handoff",
+    "id": "TC036",
+    "title": "Browse home categories into the shop catalogue",
+    "description": "A shopper can use the storefront browsing experience to reach the shop catalogue from home and continue browsing products by category.",
+    "category": "Shop Browsing",
     "steps": [
       {
         "type": "action",
-        "description": "Navigate to /checkout"
+        "description": "Navigate to /"
       },
       {
         "type": "action",
-        "description": "Submit the checkout form without filling required contact details"
+        "description": "Open a category from the storefront navigation"
       },
       {
         "type": "assertion",
-        "description": "Verify validation errors are displayed"
+        "description": "Verify the category browsing view is displayed"
       },
       {
         "type": "assertion",
-        "description": "Verify the order is not submitted"
+        "description": "Verify products for that category are shown"
       }
     ],
     "priority": "Medium"
   },
   {
-    "id": "TC048",
-    "title": "Delete a saved address",
-    "description": "A shopper can remove a saved address from their local profile and see it disappear from the address list.",
-    "category": "Local Profile and Saved Addresses",
-    "steps": [
-      {
-        "type": "action",
-        "description": "Navigate to /profile"
-      },
-      {
-        "type": "action",
-        "description": "Add a new address"
-      },
-      {
-        "type": "action",
-        "description": "Fill in the address fields with valid delivery details"
-      },
-      {
-        "type": "action",
-        "description": "Save the profile"
-      },
-      {
-        "type": "action",
-        "description": "Delete the saved address"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify the address is removed from the saved address list"
-      }
-    ],
-    "priority": "Medium"
-  },
-  {
-    "id": "TC049",
-    "title": "View product imagery in the gallery",
-    "description": "This test verifies that a shopper can inspect product imagery from the gallery before buying.",
+    "id": "TC037",
+    "title": "Open a product gallery image and close the lightbox",
+    "description": "This verifies that a shopper can inspect product imagery in the lightbox and return to the product page afterward.",
     "category": "Product Detail and Variant Selection",
     "steps": [
       {
@@ -1726,25 +1214,62 @@
         "description": "Click a product image"
       },
       {
+        "type": "assertion",
+        "description": "Verify the image lightbox is displayed"
+      },
+      {
         "type": "action",
-        "description": "Close the enlarged image view"
+        "description": "Close the image lightbox"
       },
       {
         "type": "assertion",
-        "description": "Verify the enlarged image view is displayed"
-      },
-      {
-        "type": "assertion",
-        "description": "Verify the product detail page remains accessible"
+        "description": "Verify the product detail page is visible"
       }
     ],
     "priority": "Medium"
   },
   {
-    "id": "TC050",
-    "title": "Remove an item from the wishlist",
-    "description": "A shopper can remove a saved wishlist item and see the wishlist update.",
-    "category": "Wishlist",
+    "id": "TC038",
+    "title": "Remove a saved address from the profile page",
+    "description": "A shopper can delete a saved address and no longer see it in their saved address list.",
+    "category": "Local Profile and Saved Addresses",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /profile"
+      },
+      {
+        "type": "action",
+        "description": "Add a new address"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the address details with a complete international shipping address"
+      },
+      {
+        "type": "action",
+        "description": "Save the address"
+      },
+      {
+        "type": "action",
+        "description": "Delete the saved address"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the saved address list is updated"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify an empty state is shown if no saved addresses remain"
+      }
+    ],
+    "priority": "Medium"
+  },
+  {
+    "id": "TC039",
+    "title": "Use size and colour selection on product detail",
+    "description": "A shopper can choose available variants on a product detail page and see the selected options reflected before purchase.",
+    "category": "Product Detail Experience",
     "steps": [
       {
         "type": "action",
@@ -1752,25 +1277,308 @@
       },
       {
         "type": "action",
-        "description": "Save the product to the wishlist"
+        "description": "Select a size"
       },
       {
         "type": "action",
-        "description": "Open the wishlist"
-      },
-      {
-        "type": "action",
-        "description": "Remove the saved item from the wishlist"
+        "description": "Select a colour option"
       },
       {
         "type": "assertion",
-        "description": "Verify the wishlist updates after removal"
+        "description": "Verify the selected product variants are shown as chosen"
       },
       {
         "type": "assertion",
-        "description": "Verify an empty or reduced wishlist state is displayed"
+        "description": "Verify the product remains available for purchase"
       }
     ],
     "priority": "Medium"
+  },
+  {
+    "id": "TC040",
+    "title": "Review the current configuration before making changes",
+    "description": "An admin can open settings and inspect the existing shipping, currency, and email configuration values.",
+    "category": "Admin Dashboard and Settings",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /admin/login"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the admin password field with {{LOGIN_PASSWORD}}"
+      },
+      {
+        "type": "action",
+        "description": "Submit the login form"
+      },
+      {
+        "type": "action",
+        "description": "Click the link to open store settings"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the shipping configuration is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the currency and order email configuration are visible"
+      }
+    ],
+    "priority": "Medium"
+  },
+  {
+    "id": "TC041",
+    "title": "Open the product image gallery",
+    "description": "A shopper can view product imagery from the product detail page and see the gallery content displayed for closer inspection.",
+    "category": "Product Detail Experience",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /product/defaced-backprint-tee"
+      },
+      {
+        "type": "action",
+        "description": "Open the product image gallery"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the product image gallery is displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify product images are visible"
+      }
+    ],
+    "priority": "Medium"
+  },
+  {
+    "id": "TC042",
+    "title": "View storefront legal information pages",
+    "description": "A shopper can open the store’s legal pages and read the policy content on each page.",
+    "category": "Storefront Information Pages",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /about"
+      },
+      {
+        "type": "action",
+        "description": "Open the privacy policy"
+      },
+      {
+        "type": "action",
+        "description": "Open the terms page"
+      },
+      {
+        "type": "action",
+        "description": "Open the refund policy"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the legal policy content is displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the storefront informational pages are accessible"
+      }
+    ],
+    "priority": "Medium"
+  },
+  {
+    "id": "TC043",
+    "title": "Show validation when required checkout fields are missing",
+    "description": "A guest customer sees validation feedback when trying to submit checkout with required contact details omitted.",
+    "category": "Guest Checkout via Email Handoff",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /checkout"
+      },
+      {
+        "type": "action",
+        "description": "Submit the order"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify validation errors are visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the order is not submitted"
+      }
+    ],
+    "priority": "Low"
+  },
+  {
+    "id": "TC044",
+    "title": "Clear local profile data",
+    "description": "A shopper can clear local profile data and remove stored personal details and addresses.",
+    "category": "Local Profile and Saved Addresses",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /profile"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the name field with a full name"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the email field with a valid email address"
+      },
+      {
+        "type": "action",
+        "description": "Save the profile"
+      },
+      {
+        "type": "action",
+        "description": "Clear local data"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the profile details are removed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify saved addresses are removed if any were present"
+      }
+    ],
+    "priority": "Low"
+  },
+  {
+    "id": "TC045",
+    "title": "Confirm sold-out sizes cannot be selected",
+    "description": "This verifies that a shopper cannot choose an unavailable size and can see that the option is disabled before purchase.",
+    "category": "Product Detail and Variant Selection",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /product/defaced-backprint-tee"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify a sold-out size option is disabled"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify unavailable sizing is clearly indicated"
+      }
+    ],
+    "priority": "Low"
+  },
+  {
+    "id": "TC046",
+    "title": "Reject an incorrect admin password",
+    "description": "An administrator sees an error when submitting an invalid password and remains on the login page.",
+    "category": "Admin Login",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /admin/login"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the admin password field with a wrong password"
+      },
+      {
+        "type": "action",
+        "description": "Submit the login form"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify an authentication error is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the admin dashboard is not displayed"
+      }
+    ],
+    "priority": "Low"
+  },
+  {
+    "id": "TC047",
+    "title": "Clear saved customer data and see checkout start empty",
+    "description": "A returning customer can clear local profile data and then start checkout with no prefilled customer details.",
+    "category": "Guest Checkout via Email Handoff",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /profile"
+      },
+      {
+        "type": "action",
+        "description": "Clear the saved profile and addresses"
+      },
+      {
+        "type": "action",
+        "description": "Start checkout"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify checkout customer fields are empty"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify no saved address is preselected"
+      }
+    ],
+    "priority": "Low"
+  },
+  {
+    "id": "TC048",
+    "title": "Read the privacy policy",
+    "description": "A visitor can open the privacy page and read its policy content.",
+    "category": "Legal Pages",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /privacy"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the privacy policy content is displayed"
+      }
+    ],
+    "priority": "Low"
+  },
+  {
+    "id": "TC049",
+    "title": "Read the return and refund policy",
+    "description": "A visitor can open the refund page and read its policy content.",
+    "category": "Legal Pages",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /refund"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the return and refund policy content is displayed"
+      }
+    ],
+    "priority": "Low"
+  },
+  {
+    "id": "TC050",
+    "title": "Review the empty cart state",
+    "description": "A shopper who has no items can open the cart and see an empty-state message with no checkout path available.",
+    "category": "Cart Management",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /cart"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify an empty cart message is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify checkout is not available from an empty cart"
+      }
+    ],
+    "priority": "Low"
   }
 ]

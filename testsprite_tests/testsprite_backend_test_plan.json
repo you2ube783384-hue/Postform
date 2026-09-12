@@ -1,0 +1,52 @@
+[
+  {
+    "id": "TC001",
+    "title": "post_api_admin_login_with_valid_and_invalid_passwords",
+    "description": "Test POST /api/admin/login endpoint with correct and incorrect passwords to verify successful authentication sets the pf_admin session cookie and invalid attempts return appropriate error codes."
+  },
+  {
+    "id": "TC002",
+    "title": "post_api_admin_logout_clears_session_cookie",
+    "description": "Test POST /api/admin/logout endpoint to ensure it clears the admin session cookie and returns a successful response when called with an active session."
+  },
+  {
+    "id": "TC003",
+    "title": "get_api_admin_products_requires_authentication",
+    "description": "Test GET /api/admin/products endpoint to verify it returns a list of products with images and variants when authenticated, and returns 401 UNAUTHORIZED when no valid session cookie is provided."
+  },
+  {
+    "id": "TC004",
+    "title": "post_api_admin_products_creates_product_with_validation",
+    "description": "Test POST /api/admin/products endpoint to create a new product with required fields, images, and variants, validating correct creation and error responses for missing or invalid data."
+  },
+  {
+    "id": "TC005",
+    "title": "get_api_admin_products_id_fetches_single_product",
+    "description": "Test GET /api/admin/products/[id] endpoint to fetch a single product by id, verifying successful retrieval and 404 NOT_FOUND for non-existent product ids."
+  },
+  {
+    "id": "TC006",
+    "title": "put_api_admin_products_id_updates_product_fully",
+    "description": "Test PUT /api/admin/products/[id] endpoint to fully update a product, replacing images and variants, validating required fields and unique slug, and handling 404 for missing products."
+  },
+  {
+    "id": "TC007",
+    "title": "patch_api_admin_products_id_updates_featured_and_active_flags",
+    "description": "Test PATCH /api/admin/products/[id] endpoint to partially update featured and active flags, verifying successful updates and 400 NOTHING_TO_UPDATE error when no valid fields are provided."
+  },
+  {
+    "id": "TC008",
+    "title": "delete_api_admin_products_id_deletes_product",
+    "description": "Test DELETE /api/admin/products/[id] endpoint to delete a product and cascade remove images and variants, verifying successful deletion response."
+  },
+  {
+    "id": "TC009",
+    "title": "get_api_admin_settings_reads_store_settings",
+    "description": "Test GET /api/admin/settings endpoint: unauthenticated requests must be rejected with 401 by the admin route guard (the storefront reads settings server-side via DB, not via this route); authenticated admin requests must return 200 with the full settings object (shippingMode, shippingFee, currency, storeEmail)."
+  },
+  {
+    "id": "TC010",
+    "title": "put_api_admin_settings_updates_store_settings_with_validation",
+    "description": "Test PUT /api/admin/settings endpoint to update store-wide settings, validating shipping mode, non-negative shipping fee, 3-letter currency code, and store email, and verifying error responses for invalid inputs."
+  }
+]

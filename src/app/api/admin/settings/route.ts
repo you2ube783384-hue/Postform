@@ -14,7 +14,12 @@ export async function PUT(req: NextRequest) {
     const body = await req.json();
     const entries: { key: string; value: string }[] = [];
 
-    if (body.shippingMode === "free" || body.shippingMode === "flat") {
+    // Reject invalid enum values instead of silently ignoring them,
+    // so clients get explicit feedback about bad input.
+    if (body.shippingMode !== undefined) {
+      if (body.shippingMode !== "free" && body.shippingMode !== "flat") {
+        return NextResponse.json({ error: "INVALID_SHIPPING_MODE" }, { status: 400 });
+      }
       entries.push({ key: "shipping_mode", value: body.shippingMode });
     }
     if (body.shippingFee !== undefined) {
@@ -24,8 +29,12 @@ export async function PUT(req: NextRequest) {
       }
       entries.push({ key: "shipping_fee", value: String(fee) });
     }
-    if (typeof body.currency === "string" && body.currency.trim()) {
-      entries.push({ key: "currency", value: body.currency.trim().slice(0, 3) });
+    if (body.currency !== undefined) {
+      if (typeof body.currency !== "string" || !/^[A-Za-z]{3}$/.test(body.currency.trim())) {
+        // Reject wrong-length, non-alphabetic, and empty values explicitly
+        return NextResponse.json({ error: "INVALID_CURRENCY" }, { status: 400 });
+      }
+      entries.push({ key: "currency", value: body.currency.trim().toUpperCase() });
     }
     if (typeof body.storeEmail === "string" && body.storeEmail.trim()) {
       entries.push({ key: "store_email", value: body.storeEmail.trim() });

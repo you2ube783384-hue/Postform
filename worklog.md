@@ -151,3 +151,28 @@ Stage Summary:
 - Fix pushed to GitHub; Vercel will auto-deploy (or user redeploys)
 - REMAINING (user actions): create Turso DB + token → run db:push-turso → set 6 env vars in Vercel → redeploy
 - Offered to run the Turso migration myself if user pastes TURSO_DATABASE_URL + TURSO_AUTH_TOKEN here
+
+---
+Task ID: mobile-ux-and-full-testing
+Agent: Super Z (main)
+Task: Reset Turso DB, implement mobile app-like UX per master prompt, run TestSprite backend + frontend tests
+
+Work Log:
+- Reset Turso DB (libsql://postform-butterslide...) with --reset: fresh schema + 116 rows (15 products), verified by direct queries
+- Audited mobile UX gaps (Explore agent): bottom nav, horizontal categories, safe-area, persistent search, skeletons, error states missing
+- Implemented app-like mobile/tablet experience (commit f588e14):
+  MobileBottomNav (5 tabs, cart badge, safe-area, 68px targets), persistent mobile search bar, horizontal category strip, buy bar above nav, viewportFit cover, no-scrollbar utility, toaster top-center, touch targets >=44px (cart stepper/remove, wishlist heart, sort select, filter close), skeleton loading routes (shop/product), storefront error.tsx with RETRY, safe-area on filter sheet + drawer, fixed dead xs: breakpoint
+- Fixed mcp-call.mjs arg-parsing bug (timeoutIdx=-1 filtered out tool name); created scripts/start-prod-server.sh (double-fork + setsid + dual-stack IPv6) — sandbox kills backgrounded processes, foreground/double-fork survives
+- TestSprite BACKEND cycle (10 API tests): run1 20% → diagnosed Secure-cookie-over-HTTP-tunnel (reproduced: session 401, manual cookie 200), malformed-body vs wrong-password ambiguity, silent validation gaps
+- App fixes applied: protocol-aware cookie Secure flag (login+logout), 400 BAD_REQUEST for malformed login body, 400 INVALID_SHIPPING_MODE/INVALID_CURRENCY (incl. empty), tags returned as real JSON array in all product API responses, negative/non-integer variant stock rejected 400, PUT duplicate slug rejected 400 DUPLICATE (POST still auto-uniquifies)
+- Final backend result: 10/10 PASSED (100%) → testsprite_tests/testsprite-mcp-test-report.md
+- TestSprite FRONTEND cycle (12-test priority batch of 50-test plan): 11 passed + 1 BLOCKED (TC006: no multi-colour product in catalogue — colour picker correctly hidden for single-colour items per spec §14; test-data limitation) → testsprite_tests/testsprite-frontend-test-report.md
+- Cleaned test-artifact products (automated-test-tee, qa-test-tee-2026, test-tee-001, test-product-*-2, heavyweight-boxy-tee dupe, merch-test-tee) from local + Turso DBs → both now clean 14-product catalogues
+- Restored dev server on :3000 (double-fork)
+
+Stage Summary:
+- Backend API: 10/10 passed after hardening (auth, validation, contract fixes)
+- Frontend: 11/12 passed; new mobile UX validated (search, categories, bottom nav, buy bar, filters, checkout handoff)
+- Credits: 150 → 74.5 (backend runs + frontend generation/batch)
+- Remaining for follow-up: 38 frontend tests (TC003/5/8-10/12/13/16/19/20/23-30/31-50), multi-colour product for variant test
+- Turso DB live and matching local; Vercel deploy needs env vars (README §9)

@@ -65,7 +65,10 @@ export function StickyBuyBar({ product }: { product: Product }) {
   return (
     <div
       className="fixed inset-x-0 bottom-0 z-40 border-t-2 border-pf-black bg-pf-cream sm:hidden"
-      style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
+      style={{
+        // Sit directly above the persistent bottom navigation (spec §16)
+        bottom: "calc(var(--pf-bnav-h, 68px) + env(safe-area-inset-bottom))",
+      }}
     >
       {/* Inline size picker (appears when product has sizes) */}
       {hasSizes && !soldOut && (
@@ -103,7 +106,7 @@ export function StickyBuyBar({ product }: { product: Product }) {
           className="flex h-12 items-center gap-2 border-2 border-pf-black bg-pf-yellow px-4 font-mono-tech text-xs font-bold uppercase tracking-wider text-pf-black disabled:opacity-40"
         >
           <ShoppingBag className="h-4 w-4" strokeWidth={2.5} />
-          <span className="hidden xs:inline">Add</span>
+          <span className="hidden min-[380px]:inline">Add</span>
         </button>
         <button
           type="button"

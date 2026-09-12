@@ -1,0 +1,722 @@
+     1→"use client";
+     2→
+     3→import React from "react";
+     4→import Image from "next/image";
+     5→import Link from "next/link";
+     6→import { toast } from "sonner";
+     7→import { Mail, Copy, Check, ArrowLeft, ShieldCheck } from "lucide-react";
+     8→import type { StoreSettings, SavedAddress } from "@/lib/types";
+     9→import { formatPrice } from "@/lib/format";
+    10→import { useCart, useProfile, cartSubtotal, useHydrated } from "@/lib/store";
+    11→import { buildOrderEmailBody, buildMailtoUrl, formatOrderDate, type OrderData } from "@/lib/order-email";
+    12→import { COUNTRIES, ADDRESS_LABELS } from "@/lib/countries";
+    13→import { cn } from "@/lib/utils";
+    14→import { PFButton } from "@/components/pf/button";
+    15→
+    16→interface FormState {
+    17→  name: string;
+    18→  email: string;
+    19→  phone: string;
+    20→  country: string;
+    21→  line1: string;
+    22→  line2: string;
+    23→  city: string;
+    24→  state: string;
+    25→  postalCode: string;
+    26→  paymentMethod: string;
+    27→  note: string;
+    28→  saveAddress: boolean;
+    29→  addressLabel: string;
+    30→}
+    31→
+    32→const emptyForm: FormState = {
+    33→  name: "",
+    34→  email: "",
+    35→  phone: "",
+    36→  country: "",
+    37→  line1: "",
+    38→  line2: "",
+    39→  city: "",
+    40→  state: "",
+    41→  postalCode: "",
+    42→  paymentMethod: "paypal",
+    43→  note: "",
+    44→  saveAddress: false,
+    45→  addressLabel: "Home",
+    46→};
+    47→
+    48→function Field({
+    49→  label,
+    50→  error,
+    51→  children,
+    52→  hint,
+    53→  required,
+    54→}: {
+    55→  label: string;
+    56→  error?: string;
+    57→  children: React.ReactNode;
+    58→  hint?: string;
+    59→  required?: boolean;
+    60→}) {
+    61→  return (
+    62→    <label className="block">
+    63→      <span className="mb-1 flex items-baseline justify-between font-mono-tech text-[10px] font-bold uppercase tracking-[0.2em] text-pf-black">
+    64→        <span>
+    65→          {label}
+    66→          {required && <span className="text-pf-red"> *</span>}
+    67→        </span>
+    68→        {hint && <span className="font-normal text-pf-muted">{hint}</span>}
+    69→      </span>
+    70→      {children}
+    71→      {error && (
+    72→        <span role="alert" className="mt-1 flex items-center gap-1 font-mono-tech text-[10px] font-bold uppercase tracking-widest text-pf-red">
+    73→          × {error}
+    74→        </span>
+    75→      )}
+    76→    </label>
+    77→  );
+    78→}
+    79→
+    80→const inputClass =
+    81→  "h-11 w-full border-2 border-pf-black bg-pf-paper px-3 text-sm text-pf-black outline-none transition-colors placeholder:text-pf-muted/60 focus:bg-white";
+    82→
+    83→export function CheckoutView({ settings }: { settings: StoreSettings }) {
+    84→  const hydrated = useHydrated();
+    85→  const items = useCart((s) => s.items);
+    86→  const clearCart = useCart((s) => s.clear);
+    87→  const profile = useProfile((s) => s.profile);
+    88→  const addAddress = useProfile((s) => s.addAddress);
+    89→  const setPersonal = useProfile((s) => s.setPersonal);
+    90→
+    91→  const [form, setForm] = React.useState<FormState>(emptyForm);
+    92→  const [errors, setErrors] = React.useState<Partial<Record<keyof FormState, string>>>({});
+    93→  const [confirmation, setConfirmation] = React.useState<OrderData | null>(null);
+    94→  const [mailtoUrl, setMailtoUrl] = React.useState("");
+    95→  const [emailTooLong, setEmailTooLong] = React.useState(false);
+    96→  const [copied, setCopied] = React.useState(false);
+    97→
+    98→  // Prefill from local profile
+    99→  React.useEffect(() => {
+   100→    if (!hydrated) return;
+   101→    const def = profile.addresses.find((a) => a.isDefault) ?? profile.addresses[0];
+   102→    setForm((f) => ({
+   103→      ...f,
+   104→      name: f.name || profile.name,
+   105→      email: f.email || profile.email,
+   106→      phone: f.phone || profile.phone,
+   107→      country: def?.country ?? f.country,
+   108→      line1: def?.line1 ?? f.line1,
+   109→      line2: def?.line2 ?? f.line2,
+   110→      city: def?.city ?? f.city,
+   111→      state: def?.state ?? f.state,
+   112→      postalCode: def?.postalCode ?? f.postalCode,
+   113→    }));
+   114→  }, [hydrated, profile]);
+   115→
+   116→  const subtotal = cartSubtotal(items);
+   117→  const shipping = settings.shippingMode === "flat" ? settings.shippingFee : 0;
+   118→  const total = subtotal + shipping;
+   119→
+   120→  function set<K extends keyof FormState>(key: K, value: FormState[K]) {
+   121→    setForm((f) => ({ ...f, [key]: value }));
+   122→    setErrors((e) => ({ ...e, [key]: undefined }));
+   123→  }
+   124→
+   125→  function validate(): boolean {
+   126→    const e: Partial<Record<keyof FormState, string>> = {};
+   127→    if (!form.name.trim()) e.name = "REQUIRED";
+   128→    if (!form.email.trim()) e.email = "REQUIRED";
+   129→    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim())) e.email = "INVALID EMAIL";
+   130→    if (!form.phone.trim()) e.phone = "REQUIRED";
+   131→    if (!form.country) e.country = "REQUIRED";
+   132→    if (!form.line1.trim()) e.line1 = "REQUIRED";
+   133→    if (!form.city.trim()) e.city = "REQUIRED";
+   134→    if (!form.postalCode.trim()) e.postalCode = "REQUIRED";
+   135→    setErrors(e);
+   136→    if (Object.keys(e).length > 0) {
+   137→      toast.error("CHECK THE FORM", { description: "Some required fields are missing or invalid." });
+   138→      return false;
+   139→    }
+   140→    return true;
+   141→  }
+   142→
+   143→  function applySavedAddress(a: SavedAddress) {
+   144→    setForm((f) => ({
+   145→      ...f,
+   146→      country: a.country,
+   147→      line1: a.line1,
+   148→      line2: a.line2,
+   149→      city: a.city,
+   150→      state: a.state ?? "",
+   151→      postalCode: a.postalCode,
+   152→    }));
+   153→    toast.success(`ADDRESS LOADED — ${a.label.toUpperCase()}`);
+   154→  }
+   155→
+   156→  function handleSubmit(e: React.FormEvent) {
+   157→    e.preventDefault();
+   158→    if (items.length === 0) return;
+   159→    if (!validate()) return;
+   160→
+   161→    const orderId = `POSTFORM-${Math.floor(1000 + Math.random() * 9000)}`;
+   162→    const address: SavedAddress = {
+   163→      id: `order-${Date.now()}`,
+   164→      label: form.addressLabel,
+   165→      country: form.country,
+   166→      line1: form.line1.trim(),
+   167→      line2: form.line2.trim() || null,
+   168→      city: form.city.trim(),
+   169→      state: form.state.trim() || null,
+   170→      postalCode: form.postalCode.trim(),
+   171→      isDefault: false,
+   172→    };
+   173→
+   174→    const order: OrderData = {
+   175→      orderId,
+   176→      date: formatOrderDate(),
+   177→      customer: {
+   178→        name: form.name.trim(),
+   179→        email: form.email.trim(),
+   180→        phone: form.phone.trim(),
+   181→      },
+   182→      address,
+   183→      items,
+   184→      subtotal,
+   185→      shipping,
+   186→      total,
+   187→      paymentMethod: form.paymentMethod === "paypal" ? "PayPal" : "Visa / Prepaid Card",
+   188→      note: form.note,
+   189→    };
+   190→
+   191→    // Save to local profile (optional convenience)
+   192→    setPersonal({ name: order.customer.name, email: order.customer.email, phone: order.customer.phone });
+   193→    if (form.saveAddress) {
+   194→      addAddress({ ...address, id: `addr-${Date.now()}`, label: form.addressLabel });
+   195→    }
+   196→
+   197→    const body = buildOrderEmailBody(order, settings);
+   198→    const email = buildMailtoUrl(body, orderId, settings.storeEmail);
+   199→
+   200→    setConfirmation(order);
+   201→    setMailtoUrl(email.mailtoUrl);
+   202→    setEmailTooLong(email.tooLong);
+   203→    setCopied(false);
+   204→    clearCart();
+   205→
+   206→    // Open the default email application with the prefilled order
+   207→    // (programmatic anchor — mailto: navigation without mutating window.location)
+   208→    const anchor = document.createElement("a");
+   209→    anchor.href = email.mailtoUrl;
+   210→    anchor.click();
+   211→
+   212→    toast.success(`ORDER ${orderId} PREPARED`, {
+   213→      description: "Your email app should have opened — press Send to complete the order request.",
+   214→    });
+   215→  }
+   216→
+   217→  async function copyOrderDetails() {
+   218→    if (!confirmation) return;
+   219→    const body = buildOrderEmailBody(confirmation, settings);
+   220→    try {
+   221→      await navigator.clipboard.writeText(
+   222→        `To: ${settings.storeEmail}\nSubject: POSTFORM Order #${confirmation.orderId.split("-")[1]} — New Order\n\n${body}`
+   223→      );
+   224→      setCopied(true);
+   225→      toast.success("ORDER DETAILS COPIED", {
+   226→        description: `Paste into an email to ${settings.storeEmail} and send.`,
+   227→      });
+   228→    } catch {
+   229→      toast.error("COPY FAILED", { description: "Your browser blocked clipboard access." });
+   230→    }
+   231→  }
+   232→
+   233→  // ---------- Loading ----------
+   234→  if (!hydrated) {
+   235→    return (
+   236→      <div className="mx-auto max-w-[1600px] px-4 py-16 sm:px-8 lg:px-12">
+   237→        <div className="animate-pulse space-y-4">
+   238→          <div className="h-10 w-72 bg-pf-sand" />
+   239→          <div className="h-96 border-2 border-pf-black/10 bg-pf-sand" />
+   240→        </div>
+   241→      </div>
+   242→    );
+   243→  }
+   244→
+   245→  // ---------- Confirmation ----------
+   246→  if (confirmation) {
+   247→    return (
+   248→      <div className="mx-auto max-w-3xl px-4 py-12 sm:px-8">
+   249→        <div className="border-2 border-pf-black bg-pf-paper">
+   250→          <div className="border-b-2 border-pf-black bg-pf-black px-6 py-8 text-center">
+   251→            <p className="font-mono-tech text-[10px] font-bold uppercase tracking-[0.3em] text-pf-yellow">
+   252→              ORDER PREPARED — AWAITING YOUR SEND
+   253→            </p>
+   254→            <p className="mt-3 font-display text-4xl uppercase text-pf-cream sm:text-5xl">
+   255→              {confirmation.orderId}
+   256→            </p>
+   257→            <p className="mt-2 font-mono-tech text-xs text-pf-cream/60">{confirmation.date}</p>
+   258→          </div>
+   259→
+   260→          <div className="space-y-6 px-6 py-8 sm:px-8">
+   261→            <div className="flex gap-4 border-2 border-pf-black bg-pf-yellow-soft/40 p-4">
+   262→              <Mail className="h-8 w-8 shrink-0 text-pf-black" strokeWidth={2} />
+   263→              <div>
+   264→                <p className="text-sm font-bold leading-relaxed text-pf-black">
+   265→                  Your order details are ready in your email app. Review them and press{" "}
+   266→                  <span className="bg-pf-yellow px-1 font-mono-tech uppercase">Send</span> to complete the
+   267→                  order request.
+   268→                </p>
+   269→                <p className="mt-2 text-xs leading-relaxed text-pf-muted">
+   270→                  The email is prefilled for {settings.storeEmail}. POSTFORM has not received anything
+   271→                  until you press Send. Nothing has been charged at this point.
+   272→                </p>
+   273→              </div>
+   274→            </div>
+   275→
+   276→            {emailTooLong && (
+   277→              <p className="border-2 border-pf-red bg-pf-red/5 p-3 font-mono-tech text-[11px] font-bold uppercase tracking-wider text-pf-red">
+   278→                ⚠ This order is large — some email apps may truncate prefilled text. Use “Copy order
+   279→                details” below if anything looks cut off.
+   280→              </p>
+   281→            )}
+   282→
+   283→            <div className="grid gap-3 sm:grid-cols-2">
+   284→              <PFButton
+   285→                variant="dark"
+   286→                size="lg"
+   287→                onClick={() => {
+   288→                  const anchor = document.createElement("a");
+   289→                  anchor.href = mailtoUrl;
+   290→                  anchor.click();
+   291→                }}
+   292→              >
+   293→                <Mail className="h-5 w-5" /> Open email app again
+   294→              </PFButton>
+   295→              <PFButton variant="outline" size="lg" onClick={copyOrderDetails}>
+   296→                {copied ? <Check className="h-5 w-5 text-pf-purple" /> : <Copy className="h-5 w-5" />}
+   297→                {copied ? "Copied to clipboard" : "Copy order details"}
+   298→              </PFButton>
+   299→            </div>
+   300→
+   301→            <div className="border-2 border-pf-black bg-pf-paper p-4">
+   302→              <p className="font-mono-tech text-[10px] font-bold uppercase tracking-[0.25em] text-pf-muted">
+   303→                ORDER RECAP
+   304→              </p>
+   305→              <ul className="mt-3 space-y-2">
+   306→                {confirmation.items.map((item) => (
+   307→                  <li key={item.key} className="flex items-baseline justify-between gap-3 text-sm">
+   308→                    <span className="text-pf-ink">
+   309→                      {item.qty}× {item.name}
+   310→                      {item.size ? ` — ${item.size}` : ""}
+   311→                    </span>
+   312→                    <span className="font-mono-tech font-bold">
+   313→                      {formatPrice(item.price * item.qty, settings.currency)}
+   314→                    </span>
+   315→                  </li>
+   316→                ))}
+   317→              </ul>
+   318→              <div className="mt-3 border-t-2 border-pf-black pt-3 font-mono-tech">
+   319→                <div className="flex justify-between text-sm">
+   320→                  <span className="text-pf-muted">SHIPPING</span>
+   321→                  <span className="font-bold">
+   322→                    {confirmation.shipping === 0 ? "FREE" : formatPrice(confirmation.shipping, settings.currency)}
+   323→                  </span>
+   324→                </div>
+   325→                <div className="mt-1 flex justify-between text-base font-bold">
+   326→                  <span>TOTAL — {confirmation.paymentMethod.toUpperCase()}</span>
+   327→                  <span>{formatPrice(confirmation.total, settings.currency)}</span>
+   328→                </div>
+   329→              </div>
+   330→            </div>
+   331→
+   332→            <div className="flex flex-col gap-3 sm:flex-row">
+   333→              <Link
+   334→                href="/shop"
+   335→                className="flex h-12 flex-1 items-center justify-center gap-2 border-2 border-pf-black bg-pf-paper font-mono-tech text-xs font-bold uppercase tracking-widest text-pf-black transition-colors hover:bg-pf-sand"
+   336→              >
+   337→                <ArrowLeft className="h-4 w-4" /> Back to the shop
+   338→              </Link>
+   339→              <Link
+   340→                href="/"
+   341→                className="flex h-12 flex-1 items-center justify-center border-2 border-pf-black bg-pf-yellow font-mono-tech text-xs font-bold uppercase tracking-widest text-pf-black transition-transform pf-press hover:-translate-x-[2px] hover:-translate-y-[2px]"
+   342→              >
+   343→                HOME
+   344→              </Link>
+   345→            </div>
+   346→          </div>
+   347→        </div>
+   348→      </div>
+   349→    );
+   350→  }
+   351→
+   352→  // ---------- Empty cart ----------
+   353→  if (items.length === 0) {
+   354→    return (
+   355→      <div className="mx-auto max-w-[1600px] px-4 py-16 sm:px-8 lg:px-12">
+   356→        <h1 className="font-display text-4xl uppercase text-pf-black">Checkout</h1>
+   357→        <div className="mt-10 flex flex-col items-center gap-5 border-2 border-dashed border-pf-black/30 px-6 py-20 text-center">
+   358→          <p className="font-display text-2xl uppercase text-pf-black">Nothing to check out</p>
+   359→          <p className="max-w-sm text-sm text-pf-muted">
+   360→            Your cart is empty. Add something from the rack first — then come back.
+   361→          </p>
+   362→          <Link
+   363→            href="/shop"
+   364→            className="border-2 border-pf-black bg-pf-yellow px-8 py-3.5 font-mono-tech text-xs font-bold uppercase tracking-widest text-pf-black"
+   365→          >
+   366→            Shop the catalogue
+   367→          </Link>
+   368→        </div>
+   369→      </div>
+   370→    );
+   371→  }
+   372→
+   373→  // ---------- Checkout form ----------
+   374→  const saved = profile.addresses ?? [];
+   375→
+   376→  return (
+   377→    <div className="mx-auto max-w-[1600px] px-4 py-8 sm:px-8 lg:px-12">
+   378→      <div className="flex flex-wrap items-end justify-between gap-3 border-b-2 border-pf-black pb-4">
+   379→        <div>
+   380→          <p className="font-mono-tech text-[10px] font-bold uppercase tracking-[0.3em] text-pf-purple">
+   381→            GUEST CHECKOUT — NO ACCOUNT NEEDED
+   382→          </p>
+   383→          <h1 className="font-display text-4xl uppercase leading-none text-pf-black sm:text-5xl">Checkout</h1>
+   384→        </div>
+   385→        <Link
+   386→          href="/cart"
+   387→          className="font-mono-tech text-[11px] font-bold uppercase tracking-widest text-pf-purple underline-offset-4 hover:underline"
+   388→        >
+   389→          ← BACK TO CART
+   390→        </Link>
+   391→      </div>
+   392→
+   393→      <form onSubmit={handleSubmit} noValidate className="mt-6 grid gap-8 lg:grid-cols-[1fr_380px]">
+   394→        <div className="space-y-6">
+   395→          {/* 01 CUSTOMER */}
+   396→          <section className="border-2 border-pf-black bg-pf-paper" aria-labelledby="sec-customer">
+   397→            <div className="flex items-center justify-between border-b-2 border-pf-black px-5 py-3">
+   398→              <h2 id="sec-customer" className="font-mono-tech text-xs font-bold uppercase tracking-[0.25em]">
+   399→                <span className="mr-2 text-pf-purple">01</span> CUSTOMER
+   400→              </h2>
+   401→              <span className="font-mono-tech text-[10px] uppercase tracking-widest text-pf-muted">
+   402→                ALL FIELDS REQUIRED
+   403→              </span>
+   404→            </div>
+   405→            <div className="grid gap-4 px-5 py-5 sm:grid-cols-2">
+   406→              <Field label="FULL NAME" required error={errors.name}>
+   407→                <input
+   408→                  type="text"
+   409→                  autoComplete="name"
+   410→                  value={form.name}
+   411→                  onChange={(e) => set("name", e.target.value)}
+   412→                  className={inputClass}
+   413→                  placeholder="JANE DOE"
+   414→                />
+   415→              </Field>
+   416→              <Field label="PHONE" required error={errors.phone}>
+   417→                <input
+   418→                  type="tel"
+   419→                  autoComplete="tel"
+   420→                  value={form.phone}
+   421→                  onChange={(e) => set("phone", e.target.value)}
+   422→                  className={inputClass}
+   423→                  placeholder="+44 7700 900000"
+   424→                />
+   425→              </Field>
+   426→              <div className="sm:col-span-2">
+   427→                <Field label="EMAIL" required error={errors.email}>
+   428→                  <input
+   429→                    type="email"
+   430→                    autoComplete="email"
+   431→                    value={form.email}
+   432→                    onChange={(e) => set("email", e.target.value)}
+   433→                    className={inputClass}
+   434→                    placeholder="YOU@EXAMPLE.COM"
+   435→                  />
+   436→                </Field>
+   437→              </div>
+   438→            </div>
+   439→          </section>
+   440→
+   441→          {/* 02 DELIVERY ADDRESS */}
+   442→          <section className="border-2 border-pf-black bg-pf-paper" aria-labelledby="sec-address">
+   443→            <div className="flex items-center justify-between border-b-2 border-pf-black px-5 py-3">
+   444→              <h2 id="sec-address" className="font-mono-tech text-xs font-bold uppercase tracking-[0.25em]">
+   445→                <span className="mr-2 text-pf-purple">02</span> DELIVERY ADDRESS
+   446→              </h2>
+   447→              <span className="font-mono-tech text-[10px] uppercase tracking-widest text-pf-muted">
+   448→                INTERNATIONAL — WORLDWIDE
+   449→              </span>
+   450→            </div>
+   451→
+   452→            {saved.length > 0 && (
+   453→              <div className="flex flex-wrap gap-2 border-b border-pf-black/15 px-5 py-3">
+   454→                <span className="w-full font-mono-tech text-[10px] font-bold uppercase tracking-widest text-pf-muted">
+   455→                  SAVED ADDRESSES (THIS DEVICE)
+   456→                </span>
+   457→                {saved.map((a) => (
+   458→                  <button
+   459→                    key={a.id}
+   460→                    type="button"
+   461→                    onClick={() => applySavedAddress(a)}
+   462→                    className="border-2 border-pf-black bg-pf-cream px-3 py-1.5 font-mono-tech text-[11px] font-bold uppercase tracking-wider transition-colors hover:bg-pf-yellow"
+   463→                  >
+   464→                    {a.label}: {a.city}, {a.country}
+   465→                  </button>
+   466→                ))}
+   467→              </div>
+   468→            )}
+   469→
+   470→            <div className="grid gap-4 px-5 py-5 sm:grid-cols-2">
+   471→              <div className="sm:col-span-2">
+   472→                <Field label="COUNTRY" required error={errors.country}>
+   473→                  <select
+   474→                    value={form.country}
+   475→                    onChange={(e) => set("country", e.target.value)}
+   476→                    className={cn(inputClass, "cursor-pointer")}
+   477→                  >
+   478→                    <option value="">— SELECT COUNTRY —</option>
+   479→                    {COUNTRIES.map((c) => (
+   480→                      <option key={c} value={c}>
+   481→                        {c}
+   482→                      </option>
+   483→                    ))}
+   484→                  </select>
+   485→                </Field>
+   486→              </div>
+   487→              <div className="sm:col-span-2">
+   488→                <Field label="ADDRESS LINE 1" required error={errors.line1}>
+   489→                  <input
+   490→                    type="text"
+   491→                    autoComplete="address-line1"
+   492→                    value={form.line1}
+   493→                    onChange={(e) => set("line1", e.target.value)}
+   494→                    className={inputClass}
+   495→                    placeholder="STREET AND NUMBER"
+   496→                  />
+   497→                </Field>
+   498→              </div>
+   499→              <div className="sm:col-span-2">
+   500→                <Field label="ADDRESS LINE 2" hint="OPTIONAL">
+   501→                  <input
+   502→                    type="text"
+   503→                    autoComplete="address-line2"
+   504→                    value={form.line2}
+   505→                    onChange={(e) => set("line2", e.target.value)}
+   506→                    className={inputClass}
+   507→                    placeholder="APARTMENT, SUITE, UNIT…"
+   508→                  />
+   509→                </Field>
+   510→              </div>
+   511→              <Field label="CITY" required error={errors.city}>
+   512→                <input
+   513→                  type="text"
+   514→                  autoComplete="address-level2"
+   515→                  value={form.city}
+   516→                  onChange={(e) => set("city", e.target.value)}
+   517→                  className={inputClass}
+   518→                  placeholder="CITY"
+   519→                />
+   520→              </Field>
+   521→              <Field label="STATE / REGION / PROVINCE" hint="OPTIONAL">
+   522→                <input
+   523→                  type="text"
+   524→                  autoComplete="address-level1"
+   525→                  value={form.state}
+   526→                  onChange={(e) => set("state", e.target.value)}
+   527→                  className={inputClass}
+   528→                  placeholder="REGION"
+   529→                />
+   530→              </Field>
+   531→              <Field label="POSTAL / ZIP CODE" required error={errors.postalCode}>
+   532→                <input
+   533→                  type="text"
+   534→                  autoComplete="postal-code"
+   535→                  value={form.postalCode}
+   536→                  onChange={(e) => set("postalCode", e.target.value)}
+   537→                  className={inputClass}
+   538→                  placeholder="POSTCODE"
+   539→                />
+   540→              </Field>
+   541→
+   542→              {/* Save address */}
+   543→              <div className="flex flex-wrap items-center gap-3 sm:col-span-2">
+   544→                <label className="flex cursor-pointer items-center gap-2 text-xs text-pf-ink">
+   545→                  <input
+   546→                    type="checkbox"
+   547→                    checked={form.saveAddress}
+   548→                    onChange={(e) => set("saveAddress", e.target.checked)}
+   549→                    className="h-4 w-4 accent-[#6c4cf1]"
+   550→                  />
+   551→                  Save this address to this device (profile)
+   552→                </label>
+   553→                {form.saveAddress && (
+   554→                  <select
+   555→                    value={form.addressLabel}
+   556→                    onChange={(e) => set("addressLabel", e.target.value)}
+   557→                    aria-label="Address label"
+   558→                    className="h-8 cursor-pointer border-2 border-pf-black bg-pf-paper px-2 font-mono-tech text-[11px] font-bold uppercase"
+   559→                  >
+   560→                    {ADDRESS_LABELS.map((l) => (
+   561→                      <option key={l} value={l}>
+   562→                        {l}
+   563→                      </option>
+   564→                    ))}
+   565→                  </select>
+   566→                )}
+   567→              </div>
+   568→            </div>
+   569→          </section>
+   570→
+   571→          {/* 03 PAYMENT */}
+   572→          <section className="border-2 border-pf-black bg-pf-paper" aria-labelledby="sec-payment">
+   573→            <div className="flex items-center justify-between border-b-2 border-pf-black px-5 py-3">
+   574→              <h2 id="sec-payment" className="font-mono-tech text-xs font-bold uppercase tracking-[0.25em]">
+   575→                <span className="mr-2 text-pf-purple">03</span> PAYMENT METHOD
+   576→              </h2>
+   577→              <span className="flex items-center gap-1 font-mono-tech text-[10px] uppercase tracking-widest text-pf-muted">
+   578→                <ShieldCheck className="h-3.5 w-3.5" /> SECURE PROVIDER
+   579→              </span>
+   580→            </div>
+   581→            <div className="space-y-3 px-5 py-5">
+   582→              <div className="grid gap-3 sm:grid-cols-2" role="radiogroup" aria-label="Payment method">
+   583→                {[
+   584→                  {
+   585→                    value: "paypal",
+   586→                    title: "PayPal",
+   587→                    desc: "Pay with your PayPal balance or linked account.",
+   588→                  },
+   589→                  {
+   590→                    value: "card",
+   591→                    title: "Visa / Prepaid Card",
+   592→                    desc: "Card payment via our secure payment provider.",
+   593→                  },
+   594→                ].map((opt) => (
+   595→                  <label
+   596→                    key={opt.value}
+   597→                    className={cn(
+   598→                      "flex cursor-pointer items-start gap-3 border-2 p-4 transition-colors",
+   599→                      form.paymentMethod === opt.value
+   600→                        ? "border-pf-black bg-pf-yellow-soft/50"
+   601→                        : "border-pf-black/30 bg-pf-cream hover:border-pf-black"
+   602→                    )}
+   603→                  >
+   604→                    <input
+   605→                      type="radio"
+   606→                      name="payment"
+   607→                      value={opt.value}
+   608→                      checked={form.paymentMethod === opt.value}
+   609→                      onChange={() => set("paymentMethod", opt.value)}
+   610→                      className="mt-1 h-4 w-4 accent-[#141310]"
+   611→                    />
+   612→                    <span>
+   613→                      <span className="block text-sm font-bold text-pf-black">{opt.title}</span>
+   614→                      <span className="mt-0.5 block text-xs leading-relaxed text-pf-muted">{opt.desc}</span>
+   615→                    </span>
+   616→                  </label>
+   617→                ))}
+   618→              </div>
+   619→              <p className="border-2 border-pf-black/20 bg-pf-cream p-3 text-xs leading-relaxed text-pf-muted">
+   620→                POSTFORM never sees or stores your card details. Your selected method is included with
+   621→                the order request; a secure PayPal / card payment request follows once your order is
+   622→                reviewed.{" "}
+   623→                <Link href="/refund" className="text-pf-purple underline underline-offset-2">
+   624→                  Refund policy
+   625→                </Link>
+   626→              </p>
+   627→            </div>
+   628→          </section>
+   629→
+   630→          {/* 04 NOTE */}
+   631→          <section className="border-2 border-pf-black bg-pf-paper" aria-labelledby="sec-note">
+   632→            <div className="border-b-2 border-pf-black px-5 py-3">
+   633→              <h2 id="sec-note" className="font-mono-tech text-xs font-bold uppercase tracking-[0.25em]">
+   634→                <span className="mr-2 text-pf-purple">04</span> CUSTOMER NOTE
+   635→                <span className="ml-2 font-normal text-pf-muted">— OPTIONAL</span>
+   636→              </h2>
+   637→            </div>
+   638→            <div className="px-5 py-5">
+   639→              <textarea
+   640→                value={form.note}
+   641→                onChange={(e) => set("note", e.target.value)}
+   642→                rows={3}
+   643→                maxLength={500}
+   644→                placeholder="Special delivery notes, size questions, anything we should know…"
+   645→                aria-label="Customer note"
+   646→                className="w-full border-2 border-pf-black bg-pf-paper p-3 text-sm outline-none placeholder:text-pf-muted/60 focus:bg-white"
+   647→              />
+   648→              <p className="mt-1 text-right font-mono-tech text-[10px] text-pf-muted">{form.note.length}/500</p>
+   649→            </div>
+   650→          </section>
+   651→        </div>
+   652→
+   653→        {/* ORDER SUMMARY — always visible */}
+   654→        <aside className="lg:sticky lg:top-[136px] lg:self-start" aria-label="Order summary">
+   655→          <div className="border-2 border-pf-black bg-pf-black text-pf-cream">
+   656→            <div className="border-b-2 border-pf-cream/20 px-5 py-4">
+   657→              <p className="font-mono-tech text-[10px] font-bold uppercase tracking-[0.3em] text-pf-yellow">
+   658→                YOUR ORDER — {items.length} ITEM{items.length === 1 ? "" : "S"}
+   659→              </p>
+   660→            </div>
+   661→            <ul className="max-h-72 divide-y divide-pf-cream/10 overflow-y-auto px-5 py-4">
+   662→              {items.map((item) => (
+   663→                <li key={item.key} className="flex gap-3 py-3 first:pt-0 last:pb-0">
+   664→                  <div className="relative h-16 w-14 shrink-0 overflow-hidden border border-pf-cream/30 bg-pf-ink">
+   665→                    {item.image && (
+   666→                      <Image src={item.image} alt={item.name} fill sizes="56px" className="object-cover" />
+   667→                    )}
+   668→                  </div>
+   669→                  <div className="min-w-0 flex-1">
+   670→                    <p className="truncate text-xs font-bold text-pf-cream">{item.name}</p>
+   671→                    <p className="font-mono-tech text-[10px] uppercase tracking-wider text-pf-cream/50">
+   672→                      {item.size ? `SZ ${item.size}` : ""}
+   673→                      {item.size && item.color ? " / " : ""}
+   674→                      {item.color ?? ""} — ×{item.qty}
+   675→                    </p>
+   676→                  </div>
+   677→                  <p className="font-mono-tech text-xs font-bold text-pf-yellow">
+   678→                    {formatPrice(item.price * item.qty, settings.currency)}
+   679→                  </p>
+   680→                </li>
+   681→              ))}
+   682→            </ul>
+   683→            <div className="space-y-2 border-t-2 border-pf-cream/20 px-5 py-4 font-mono-tech text-sm">
+   684→              <div className="flex justify-between">
+   685→                <span className="text-pf-cream/70">SUBTOTAL</span>
+   686→                <span className="font-bold">{formatPrice(subtotal, settings.currency)}</span>
+   687→              </div>
+   688→              <div className="flex justify-between">
+   689→                <span className="text-pf-cream/70">SHIPPING</span>
+   690→                <span className="font-bold text-pf-yellow">
+   691→                  {shipping === 0 ? "FREE — WORLDWIDE" : formatPrice(shipping, settings.currency)}
+   692→                </span>
+   693→              </div>
+   694→              <div className="flex items-baseline justify-between border-t border-pf-cream/20 pt-3">
+   695→                <span className="uppercase tracking-widest">TOTAL</span>
+   696→                <span className="text-xl font-bold text-pf-yellow">
+   697→                  {formatPrice(total, settings.currency)}
+   698→                </span>
+   699→              </div>
+   700→            </div>
+   701→            <div className="space-y-3 p-4">
+   702→              <PFButton
+   703→                type="submit"
+   704→                variant="primary"
+   705→                size="lg"
+   706→                block
+   707→                className="h-14 text-sm"
+   708→                style={{ boxShadow: "4px 4px 0 0 #fbf8f1" }}
+   709→              >
+   710→                <Mail className="h-5 w-5" strokeWidth={2.5} /> Generate order email
+   711→              </PFButton>
+   712→              <p className="text-center font-mono-tech text-[10px] leading-relaxed uppercase tracking-widest text-pf-cream/50">
+   713→                OPENS YOUR EMAIL APP WITH EVERYTHING PREFILLED — YOU PRESS SEND
+   714→              </p>
+   715→            </div>
+   716→          </div>
+   717→        </aside>
+   718→      </form>
+   719→    </div>
+   720→  );
+   721→}
+   722→

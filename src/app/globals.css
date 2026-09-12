@@ -96,6 +96,11 @@
 }
 
 @layer base {
+  /* Mobile bottom navigation height — used by fixed bars & page padding */
+  :root {
+    --pf-bnav-h: 68px;
+  }
+
   * {
     @apply border-border outline-ring/50;
   }
@@ -140,6 +145,25 @@
 }
 
 @layer components {
+  /* Hide scrollbars on horizontal scrollers (categories, galleries) */
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Mobile bottom-nav clearance for page content (phones + tablets) */
+  .pf-page-bottom {
+    padding-bottom: calc(var(--pf-bnav-h) + env(safe-area-inset-bottom));
+  }
+  @media (min-width: 1024px) {
+    .pf-page-bottom {
+      padding-bottom: 0;
+    }
+  }
+
   /* Display typography — editorial fashion voice */
   .font-display {
     font-family: var(--font-archivo-black), var(--font-archivo), sans-serif;

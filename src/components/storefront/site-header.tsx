@@ -22,18 +22,23 @@ function IconLink({
   label,
   children,
   badge,
+  className,
 }: {
   href: string;
   label: string;
   children: React.ReactNode;
   badge?: number;
+  className?: string;
 }) {
   return (
     <Link
       href={href}
       aria-label={label}
       title={label}
-      className="relative flex h-10 w-10 items-center justify-center border-2 border-transparent text-pf-black transition-colors hover:border-pf-black hover:bg-pf-yellow"
+      className={cn(
+        "relative flex h-10 w-10 items-center justify-center border-2 border-transparent text-pf-black transition-colors hover:border-pf-black hover:bg-pf-yellow",
+        className
+      )}
     >
       {children}
       {badge !== undefined && badge > 0 && (
@@ -61,7 +66,6 @@ export function SiteHeader() {
 
   React.useEffect(() => {
     setMenuOpen(false);
-    setSearchOpen(false);
   }, [pathname]);
 
   React.useEffect(() => {
@@ -87,8 +91,8 @@ export function SiteHeader() {
 
   return (
     <header className="sticky top-0 z-50 bg-pf-cream">
-      {/* Ticker strip */}
-      <div className="border-b-2 border-pf-black bg-pf-black text-pf-cream overflow-hidden">
+      {/* Ticker strip — desktop/tablet only (mobile header stays compact) */}
+      <div className="hidden border-b-2 border-pf-black bg-pf-black text-pf-cream overflow-hidden sm:block">
         <div className="flex whitespace-nowrap py-1.5 font-mono-tech text-[10px] tracking-[0.2em] uppercase pf-marquee">
           {[0, 1].map((dup) => (
             <div key={dup} className="flex shrink-0" aria-hidden={dup === 1}>
@@ -143,7 +147,7 @@ export function SiteHeader() {
 
           {/* Right — actions */}
           <div className="flex items-center justify-end gap-1 px-3 py-3 sm:gap-1.5 sm:px-5">
-            {/* Search */}
+            {/* Desktop inline search */}
             <div className="hidden items-center sm:flex">
               {searchOpen ? (
                 <form
@@ -186,19 +190,17 @@ export function SiteHeader() {
                 </button>
               )}
             </div>
-            <button
-              type="button"
-              onClick={() => setSearchOpen(!searchOpen)}
-              aria-label="Search"
-              className="flex h-10 w-10 items-center justify-center border-2 border-transparent text-pf-black transition-colors hover:border-pf-black hover:bg-pf-yellow sm:hidden"
-            >
-              <Search className="h-5 w-5" strokeWidth={2.5} />
-            </button>
 
-            <IconLink href="/refund" label="Return & refund information">
+            {/* Refund & profile — desktop/tablet only (mobile: profile lives in
+                the bottom nav, refund in the drawer) */}
+            <IconLink
+              href="/refund"
+              label="Return & refund information"
+              className="hidden sm:flex"
+            >
               <Undo2 className="h-5 w-5" strokeWidth={2.5} />
             </IconLink>
-            <IconLink href="/profile" label="Profile">
+            <IconLink href="/profile" label="Profile" className="hidden sm:flex">
               <User className="h-5 w-5" strokeWidth={2.5} />
             </IconLink>
             <IconLink href="/wishlist" label="Wishlist" badge={wishQty}>
@@ -210,30 +212,73 @@ export function SiteHeader() {
           </div>
         </div>
 
-        {/* Mobile search row */}
-        {searchOpen && (
-          <div className="border-t-2 border-pf-black bg-pf-paper px-3 py-2 sm:hidden">
-            <form onSubmit={submitSearch} className="flex border-2 border-pf-black">
-              <input
-                type="search"
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                placeholder="SEARCH PRODUCTS…"
-                aria-label="Search products"
-                className="h-11 flex-1 bg-transparent px-3 font-mono-tech text-xs uppercase tracking-wider outline-none placeholder:text-pf-muted"
-                autoFocus
-              />
+        {/* Persistent mobile search — always visible on phones (spec §5) */}
+        <div className="border-t-2 border-pf-black bg-pf-paper px-3 py-2 sm:hidden">
+          <form onSubmit={submitSearch} className="flex border-2 border-pf-black">
+            <input
+              type="search"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="SEARCH PRODUCTS…"
+              aria-label="Search products"
+              className="h-11 flex-1 bg-transparent px-3 font-mono-tech text-xs uppercase tracking-wider outline-none placeholder:text-pf-muted"
+              enterKeyHint="search"
+            />
+            {query && (
               <button
-                type="submit"
-                aria-label="Submit search"
-                className="flex h-11 w-12 items-center justify-center border-l-2 border-pf-black bg-pf-yellow"
+                type="button"
+                onClick={() => setQuery("")}
+                aria-label="Clear search"
+                className="flex h-11 w-11 items-center justify-center border-l-2 border-pf-black bg-pf-paper text-pf-black"
               >
-                <Search className="h-4 w-4" strokeWidth={2.5} />
+                <X className="h-4 w-4" strokeWidth={2.5} />
               </button>
-            </form>
-          </div>
-        )}
+            )}
+            <button
+              type="submit"
+              aria-label="Submit search"
+              className="flex h-11 w-12 items-center justify-center border-l-2 border-pf-black bg-pf-yellow"
+            >
+              <Search className="h-4 w-4" strokeWidth={2.5} />
+            </button>
+          </form>
+        </div>
       </div>
+
+      {/* Category strip — mobile/tablet: horizontal scroll (spec §6) */}
+      <nav
+        aria-label="Product categories"
+        className="border-b-2 border-pf-black bg-pf-paper lg:hidden"
+      >
+        <div className="no-scrollbar flex items-stretch gap-0 overflow-x-auto">
+          <Link
+            href="/shop"
+            className={cn(
+              "flex shrink-0 items-center border-r-2 border-pf-black px-4 py-2.5 font-mono-tech text-[11px] font-bold tracking-[0.15em] uppercase transition-colors",
+              pathname === "/shop" || pathname.startsWith("/shop?")
+                ? "bg-pf-black text-pf-yellow"
+                : "text-pf-black active:bg-pf-yellow"
+            )}
+          >
+            SHOP ALL
+          </Link>
+          {CATEGORIES.map((cat) => (
+            <Link
+              key={cat.slug}
+              href={`/shop/${cat.slug}`}
+              aria-current={isActiveCategory(cat.slug) ? "page" : undefined}
+              className={cn(
+                "flex shrink-0 items-center whitespace-nowrap border-r-2 border-pf-black px-4 py-2.5 font-mono-tech text-[11px] font-bold tracking-[0.15em] uppercase transition-colors",
+                isActiveCategory(cat.slug)
+                  ? "bg-pf-black text-pf-yellow"
+                  : "text-pf-black active:bg-pf-yellow"
+              )}
+            >
+              {cat.short}
+            </Link>
+          ))}
+        </div>
+      </nav>
 
       {/* Category strip — desktop */}
       <nav aria-label="Product categories" className="hidden border-b-2 border-pf-black bg-pf-paper lg:block">
@@ -341,7 +386,10 @@ export function SiteHeader() {
               </ul>
             </nav>
 
-            <div className="border-t-2 border-pf-black bg-pf-paper px-4 py-3 font-mono-tech text-[10px] tracking-[0.15em] text-pf-muted uppercase">
+            <div
+              className="border-t-2 border-pf-black bg-pf-paper px-4 py-3 font-mono-tech text-[10px] tracking-[0.15em] text-pf-muted uppercase"
+              style={{ paddingBottom: "calc(0.75rem + env(safe-area-inset-bottom))" }}
+            >
               FREE INTL SHIPPING — WORLDWIDE
             </div>
           </div>

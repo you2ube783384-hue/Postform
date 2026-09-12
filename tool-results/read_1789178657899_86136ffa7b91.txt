@@ -1,0 +1,1277 @@
+     1→# POSTFORM — Mobile App-Like E-Commerce Experience
+     2→## Master Prompt for AI Web Development Agents
+     3→
+     4→> **Goal:** Build POSTFORM so the desktop experience remains a premium, conventional fashion e-commerce website, while mobile and tablet deliberately feel like a polished native shopping app.
+     5→>
+     6→> **Non-negotiable principle:** Do not simply shrink the desktop UI. Share the same data, business logic, and design system, but create a dedicated mobile/tablet interaction model.
+     7→
+     8→---
+     9→
+    10→## 1. Project Context
+    11→
+    12→POSTFORM is a streetwear-focused resale business selling whatever verified fashion inventory is acquired, including:
+    13→
+    14→- T-shirts
+    15→- Oversized T-shirts
+    16→- Shirts
+    17→- Hoodies
+    18→- Pants
+    19→- Jeans
+    20→- Sneakers
+    21→- Accessories
+    22→- Other fashion products
+    23→
+    24→The visual direction is:
+    25→
+    26→**Streetwear + Editorial Fashion + Neo-Brutalism + Premium Minimalism**
+    27→
+    28→The result must feel distinctive and brand-led, not like a generic marketplace.
+    29→
+    30→---
+    31→
+    32→## 2. Responsive Experience
+    33→
+    34→### Desktop / PC
+    35→
+    36→Use a conventional premium fashion e-commerce layout:
+    37→
+    38→- Full desktop header/navigation
+    39→- Product grids
+    40→- Editorial sections
+    41→- Desktop search
+    42→- Sidebar filters where useful
+    43→- Normal scrolling
+    44→- Spacious compositions
+    45→- Product imagery as the main visual focus
+    46→- No persistent mobile-style bottom navigation
+    47→
+    48→### Mobile / Tablet
+    49→
+    50→Create a deliberately app-like shopping experience:
+    51→
+    52→- Sticky top navigation
+    53→- Sticky bottom navigation
+    54→- Thumb-friendly controls
+    55→- Horizontal category navigation
+    56→- Bottom-sheet filters
+    57→- Swipeable product galleries
+    58→- Sticky purchase controls
+    59→- Compact checkout
+    60→- Touch-first interactions
+    61→- Safe-area support
+    62→
+    63→The mobile version must feel intentionally designed for touch.
+    64→
+    65→---
+    66→
+    67→## 3. Core Mobile UX Goal
+    68→
+    69→The target feeling is:
+    70→
+    71→> **“A premium streetwear website that behaves like a really good mobile shopping app.”**
+    72→
+    73→It must NOT feel like:
+    74→
+    75→> “A generic shopping app with POSTFORM branding.”
+    76→
+    77→Prioritize:
+    78→
+    79→- Speed
+    80→- Clarity
+    81→- Tactile interaction
+    82→- One-hand usability
+    83→- Fashion-focused presentation
+    84→- Low-friction shopping
+    85→- Strong visual hierarchy
+    86→
+    87→Avoid unnecessary animation.
+    88→
+    89→---
+    90→
+    91→## 4. Sticky Mobile Header
+    92→
+    93→Implement a persistent mobile header.
+    94→
+    95→Concept:
+    96→
+    97→```text
+    98→┌─────────────────────────────────┐
+    99→│ ☰    POSTFORM       ♡    🛒     │
+   100→│                                 │
+   101→│ 🔍  Search products...          │
+   102→└─────────────────────────────────┘
+   103→```
+   104→
+   105→Treat this as a structural reference, not a literal design.
+   106→
+   107→Requirements:
+   108→
+   109→- Remain accessible while scrolling
+   110→- Use sticky/fixed positioning appropriately
+   111→- Do not consume excessive vertical space
+   112→- Make search immediately accessible
+   113→- Provide wishlist access
+   114→- Provide cart access
+   115→- Show a cart item-count badge
+   116→- Provide mobile menu access
+   117→- Support safe-area insets
+   118→- Maintain strong contrast
+   119→
+   120→A subtle compact-on-scroll behavior is acceptable, but avoid dramatic animation.
+   121→
+   122→---
+   123→
+   124→## 5. Mobile Search
+   125→
+   126→Search should be prominent and easy to reach.
+   127→
+   128→Example:
+   129→
+   130→```text
+   131→┌─────────────────────────────────┐
+   132→│ 🔍 Search products...            │
+   133→└─────────────────────────────────┘
+   134→```
+   135→
+   136→Support:
+   137→
+   138→- Product names
+   139→- Categories
+   140→- Relevant attributes
+   141→- Fast filtering
+   142→- Empty states
+   143→- Clear search action
+   144→- Mobile keyboard behavior
+   145→
+   146→Keep search lightweight and immediate.
+   147→
+   148→---
+   149→
+   150→## 6. Horizontal Category Navigation
+   151→
+   152→Below the header/search area, add horizontally scrollable categories.
+   153→
+   154→Example:
+   155→
+   156→```text
+   157→MEN   WOMEN   T-SHIRTS   HOODIES   JEANS   SNEAKERS →
+   158→```
+   159→
+   160→Requirements:
+   161→
+   162→- Swipe horizontally
+   163→- Hide the scrollbar visually
+   164→- Use comfortable touch targets
+   165→- Show an obvious active state
+   166→- Never force categories to wrap
+   167→- Keep labels readable
+   168→- Preserve POSTFORM typography
+   169→
+   170→Possible categories:
+   171→
+   172→- Men
+   173→- Women
+   174→- T-Shirts
+   175→- Oversized
+   176→- Shirts
+   177→- Hoodies
+   178→- Pants
+   179→- Jeans
+   180→- Sneakers
+   181→- Accessories
+   182→
+   183→Generate categories dynamically where practical.
+   184→
+   185→---
+   186→
+   187→## 7. Sticky Mobile Bottom Navigation
+   188→
+   189→This is a core requirement.
+   190→
+   191→On mobile and appropriate tablet layouts, create persistent bottom navigation.
+   192→
+   193→Concept:
+   194→
+   195→```text
+   196→┌──────────────────────────────────────┐
+   197→│                                      │
+   198→│             PAGE CONTENT             │
+   199→│                                      │
+   200→├──────────────────────────────────────┤
+   201→│ Home  Explore  Categories  Account  Cart │
+   202→└──────────────────────────────────────┘
+   203→```
+   204→
+   205→Recommended destinations:
+   206→
+   207→1. Home
+   208→2. Explore / Shop
+   209→3. Categories
+   210→4. Account
+   211→5. Cart
+   212→
+   213→If Wishlist is more useful than Account in the final information architecture, make that decision intelligently without overcrowding the navigation.
+   214→
+   215→Requirements:
+   216→
+   217→- Fixed/sticky to bottom
+   218→- Remains visible while scrolling
+   219→- Clear active state
+   220→- Large touch targets
+   221→- Cart quantity badge
+   222→- Safe-area support
+   223→- Must not cover content
+   224→
+   225→Use safe-area handling where appropriate:
+   226→
+   227→```css
+   228→padding-bottom: env(safe-area-inset-bottom);
+   229→```
+   230→
+   231→---
+   232→
+   233→## 8. Content Safe Area
+   234→
+   235→Because bottom navigation persists, all relevant pages must include enough bottom spacing for content to scroll completely above it.
+   236→
+   237→Account for:
+   238→
+   239→- Bottom navigation height
+   240→- Device safe-area inset
+   241→- Sticky purchase controls
+   242→- Mobile browser behavior
+   243→
+   244→Never hide important content underneath fixed navigation.
+   245→
+   246→---
+   247→
+   248→## 9. Mobile Product Grid
+   249→
+   250→Do not simply shrink the desktop grid.
+   251→
+   252→Use a deliberate mobile product grid, normally a two-column layout where appropriate:
+   253→
+   254→```text
+   255→┌──────────────┬──────────────┐
+   256→│   PRODUCT    │   PRODUCT    │
+   257→├──────────────┼──────────────┤
+   258→│ Product Name │ Product Name │
+   259→│ ₹1,599       │ ₹1,899       │
+   260→├──────────────┼──────────────┤
+   261→│   PRODUCT    │   PRODUCT    │
+   262→└──────────────┴──────────────┘
+   263→```
+   264→
+   265→Product cards should prioritize:
+   266→
+   267→- Product image
+   268→- Product name
+   269→- Price
+   270→- Availability
+   271→- Important variant information
+   272→- Wishlist control
+   273→
+   274→Keep product imagery visually dominant.
+   275→
+   276→---
+   277→
+   278→## 10. Product Card Interaction
+   279→
+   280→Product cards must be easy to tap.
+   281→
+   282→- Tapping the card opens the product.
+   283→- Wishlist has its own clear touch target.
+   284→- Do not rely on hover.
+   285→- Avoid tiny controls.
+   286→- Avoid unnecessary quick-action clutter.
+   287→
+   288→---
+   289→
+   290→## 11. Mobile Filter and Sort
+   291→
+   292→Do not use a permanent desktop sidebar on mobile.
+   293→
+   294→Use a compact control:
+   295→
+   296→```text
+   297→┌───────────────────────────────┐
+   298→│ FILTER                 SORT ↕ │
+   299→└───────────────────────────────┘
+   300→```
+   301→
+   302→Filter should open a bottom sheet or full-screen mobile panel:
+   303→
+   304→```text
+   305→┌─────────────────────────────────┐
+   306→│ Filters                     ✕   │
+   307→├─────────────────────────────────┤
+   308→│ Category                    ›   │
+   309→│ Size                        ›   │
+   310→│ Color                       ›   │
+   311→│ Price                       ›   │
+   312→│ Condition                   ›   │
+   313→├─────────────────────────────────┤
+   314→│          APPLY FILTERS          │
+   315→└─────────────────────────────────┘
+   316→```
+   317→
+   318→Requirements:
+   319→
+   320→- Touch-first controls
+   321→- Clear selected states
+   322→- Clear-all capability
+   323→- Prominent Apply button
+   324→- No tiny controls
+   325→- Preserve state correctly
+   326→- Prevent accidental dismissal
+   327→
+   328→---
+   329→
+   330→## 12. Mobile Product Page
+   331→
+   332→Do not simply stack the desktop product columns.
+   333→
+   334→Use a dedicated mobile composition:
+   335→
+   336→```text
+   337→←                         ♡
+   338→
+   339→┌─────────────────────────────┐
+   340→│       PRODUCT IMAGE         │
+   341→└─────────────────────────────┘
+   342→
+   343→● ○ ○ ○
+   344→
+   345→PRODUCT NAME
+   346→
+   347→₹1,599
+   348→
+   349→Condition / availability
+   350→
+   351→Select Size
+   352→[ S ] [ M ] [ L ] [ XL ]
+   353→
+   354→Select Color
+   355→[ ● ] [ ● ]
+   356→
+   357→Quantity
+   358→[ − ] 1 [ + ]
+   359→```
+   360→
+   361→Prioritize:
+   362→
+   363→1. Product imagery
+   364→2. Product name
+   365→3. Price
+   366→4. Availability/condition
+   367→5. Variants
+   368→6. Quantity
+   369→7. Purchase actions
+   370→8. Description
+   371→9. Size chart
+   372→10. Delivery information
+   373→11. Additional details
+   374→
+   375→---
+   376→
+   377→## 13. Swipeable Product Gallery
+   378→
+   379→Fashion product photography is critical.
+   380→
+   381→Implement:
+   382→
+   383→- Swipeable gallery
+   384→- Touch gestures
+   385→- Image indicators
+   386→- Full-screen viewer
+   387→- High-quality images
+   388→- Correct aspect ratios
+   389→- Lazy loading where appropriate
+   390→- Accessible alt text
+   391→
+   392→Do not unnecessarily crop product photography.
+   393→
+   394→---
+   395→
+   396→## 14. Variant Selection
+   397→
+   398→Only display/select variants that are actually available.
+   399→
+   400→Support:
+   401→
+   402→- Size
+   403→- Color
+   404→- Stock status
+   405→- Selected state
+   406→- Unavailable state
+   407→
+   408→Unavailable combinations must never be purchasable.
+   409→
+   410→Provide an easily accessible Size Chart.
+   411→
+   412→---
+   413→
+   414→## 15. Quantity
+   415→
+   416→Use:
+   417→
+   418→```text
+   419→−    1    +
+   420→```
+   421→
+   422→Rules:
+   423→
+   424→- Minimum = 1
+   425→- Maximum respects available stock
+   426→- No invalid quantities
+   427→- Price updates immediately
+   428→- Works consistently in product page and cart
+   429→
+   430→---
+   431→
+   432→## 16. Sticky Mobile Purchase Bar
+   433→
+   434→On product pages, provide a sticky purchase area:
+   435→
+   436→```text
+   437→┌────────────────────────────────────┐
+   438→│ ₹1,599    ADD TO CART    BUY NOW  │
+   439→└────────────────────────────────────┘
+   440→```
+   441→
+   442→The customer should not need to scroll back to purchase.
+   443→
+   444→### Important
+   445→
+   446→Do not simply stack a large purchase bar above a large global bottom navigation.
+   447→
+   448→Avoid consuming too much screen height.
+   449→
+   450→Choose an intelligent solution, such as:
+   451→
+   452→- Compact purchase bar
+   453→- Purchase bar integrated with navigation
+   454→- Temporarily adapting navigation
+   455→- Positioning purchase controls directly above navigation
+   456→
+   457→The final implementation must remain comfortable on small screens.
+   458→
+   459→---
+   460→
+   461→## 17. Mobile Cart
+   462→
+   463→The cart should feel like a dedicated shopping-app screen.
+   464→
+   465→Example:
+   466→
+   467→```text
+   468→MY CART
+   469→
+   470→┌──────────────────────────────┐
+   471→│ [IMAGE] Oversized T-Shirt    │
+   472→│         Black / M            │
+   473→│         ₹1,599               │
+   474→│         − 1 +          🗑    │
+   475→└──────────────────────────────┘
+   476→
+   477→Subtotal              ₹1,599
+   478→Shipping              FREE
+   479→───────────────────────────────
+   480→Total                 ₹1,599
+   481→
+   482→[        CHECKOUT        ]
+   483→```
+   484→
+   485→Support:
+   486→
+   487→- Product image
+   488→- Product name
+   489→- Variant
+   490→- Size
+   491→- Color
+   492→- Quantity
+   493→- Remove
+   494→- Price
+   495→- Subtotal
+   496→- Shipping
+   497→- Total
+   498→- Empty-cart state
+   499→
+   500→---
+   501→
+   502→## 18. Mobile Checkout
+   503→
+   504→Make checkout extremely simple.
+   505→
+   506→Structure:
+   507→
+   508→```text
+   509→CONTACT
+   510→Name
+   511→Email
+   512→Phone
+   513→
+   514→DELIVERY ADDRESS
+   515→Country
+   516→Address
+   517→City
+   518→State
+   519→Postal Code
+   520→
+   521→ORDER SUMMARY
+   522→...
+   523→
+   524→PAYMENT
+   525→PayPal
+   526→Visa / Card
+   527→
+   528→CUSTOMER NOTE
+   529→...
+   530→
+   531→[ PLACE ORDER ]
+   532→```
+   533→
+   534→Inputs must be:
+   535→
+   536→- Large
+   537→- Clearly labelled
+   538→- Keyboard-friendly
+   539→- Validated
+   540→- Accessible
+   541→
+   542→Customers should be able to complete checkout comfortably on a phone.
+   543→
+   544→---
+   545→
+   546→## 19. Customer Profile
+   547→
+   548→A complex customer-account system is not required initially.
+   549→
+   550→If profile functionality is included, use a lightweight approach such as local browser storage where appropriate, while keeping the architecture extensible.
+   551→
+   552→Potential structure:
+   553→
+   554→```text
+   555→PROFILE
+   556→├── Personal Information
+   557→│   ├── Name
+   558→│   ├── Email
+   559→│   └── Phone
+   560→│
+   561→└── Saved Addresses
+   562→    ├── Home
+   563→    ├── Work
+   564→    └── Add Address
+   565→```
+   566→
+   567→Do not introduce unnecessary authentication complexity.
+   568→
+   569→---
+   570→
+   571→## 20. Touch Targets
+   572→
+   573→Aim for approximately:
+   574→
+   575→**44 × 44 px or larger**
+   576→
+   577→for interactive controls wherever practical.
+   578→
+   579→Avoid:
+   580→
+   581→- Tiny icons
+   582→- Tiny links
+   583→- Closely packed controls
+   584→- Hover-only functionality
+   585→- Small form controls
+   586→
+   587→The experience should be comfortable with a thumb.
+   588→
+   589→---
+   590→
+   591→## 21. App-Like Interaction Patterns
+   592→
+   593→Use proven mobile commerce patterns:
+   594→
+   595→- Sticky header
+   596→- Sticky bottom navigation
+   597→- Horizontal category scrolling
+   598→- Bottom-sheet filters
+   599→- Swipeable galleries
+   600→- Full-screen product image viewer
+   601→- Sticky purchase controls
+   602→- Touch-friendly selectors
+   603→- Compact checkout
+   604→- Clear loading states
+   605→- Clear empty states
+   606→- Clear error states
+   607→
+   608→Use these as interaction patterns, not as a reason to clone another company's visual design.
+   609→
+   610→---
+   611→
+   612→## 22. POSTFORM Visual Identity
+   613→
+   614→The mobile app-like behavior must remain unmistakably POSTFORM.
+   615→
+   616→### Background
+   617→
+   618→Warm milky-white / soft off-white.
+   619→
+   620→### Borders
+   621→
+   622→Strong black structural borders.
+   623→
+   624→### Typography
+   625→
+   626→Bold, editorial, highly legible typography.
+   627→
+   628→Use a technical/monospace influence selectively for labels, metadata, navigation, prices, or UI elements without harming readability.
+   629→
+   630→### Accent colors
+   631→
+   632→Controlled:
+   633→
+   634→- Yellow
+   635→- Purple
+   636→
+   637→Yellow can be used for strong CTAs.
+   638→
+   639→Purple should be a supporting accent.
+   640→
+   641→Do not flood the interface with color.
+   642→
+   643→### Geometry
+   644→
+   645→Use:
+   646→
+   647→- Strong rectangular structures
+   648→- Controlled rounding
+   649→- Bold borders
+   650→- Confident spacing
+   651→- Editorial composition
+   652→
+   653→Brutalist intensity should remain around **4–5/10**.
+   654→
+   655→It should feel refined, not intentionally ugly.
+   656→
+   657→---
+   658→
+   659→## 23. Strictly Avoid
+   660→
+   661→Do NOT use:
+   662→
+   663→- Gradients
+   664→- Glassmorphism
+   665→- Excessive blur
+   666→- Excessive shadows
+   667→- Excessive rounded cards
+   668→- Excessive animation
+   669→- Unnecessary 3D effects
+   670→- Heavy parallax
+   671→- Generic SaaS styling
+   672→- Generic marketplace aesthetics
+   673→- Overly soft pastel UI
+   674→- Neumorphism
+   675→- Tiny mobile controls
+   676→
+   677→POSTFORM should feel confident, editorial, structured and premium.
+   678→
+   679→---
+   680→
+   681→## 24. Animation Rules
+   682→
+   683→Motion must be restrained.
+   684→
+   685→Good uses:
+   686→
+   687→- Navigation transitions
+   688→- Sheet opening/closing
+   689→- Image transitions
+   690→- Button feedback
+   691→- Cart quantity feedback
+   692→- Small state changes
+   693→
+   694→Avoid:
+   695→
+   696→- Bouncing everything
+   697→- Constant floating animations
+   698→- Long transitions
+   699→- Heavy parallax
+   700→- Excessive scroll-triggered animation
+   701→- Decorative motion that slows shopping
+   702→
+   703→Speed and usability come first.
+   704→
+   705→---
+   706→
+   707→## 25. Responsive Breakpoint Strategy
+   708→
+   709→Do not simply use:
+   710→
+   711→```css
+   712→@media (max-width: 768px)
+   713→```
+   714→
+   715→to shrink desktop components.
+   716→
+   717→Create deliberate experiences for:
+   718→
+   719→### Large Desktop
+   720→Full editorial experience.
+   721→
+   722→### Desktop
+   723→Normal website navigation and product browsing.
+   724→
+   725→### Tablet
+   726→Touch-friendly hybrid.
+   727→
+   728→### Mobile
+   729→Dedicated app-like experience.
+   730→
+   731→Portrait tablets may use the mobile navigation system.
+   732→
+   733→Large landscape tablets can transition toward desktop behavior.
+   734→
+   735→Choose breakpoints based on usable layout width and interaction requirements, not only device names.
+   736→
+   737→---
+   738→
+   739→## 26. Component Architecture
+   740→
+   741→Do not force radically different experiences into one component using hundreds of conditional CSS rules.
+   742→
+   743→Share:
+   744→
+   745→- Product data
+   746→- Cart logic
+   747→- Wishlist logic
+   748→- Search logic
+   749→- Filter logic
+   750→- Checkout logic
+   751→- Validation
+   752→- API/data access
+   753→- State management
+   754→
+   755→But allow presentation to differ.
+   756→
+   757→Conceptual components:
+   758→
+   759→```text
+   760→DesktopHeader
+   761→MobileHeader
+   762→
+   763→DesktopNavigation
+   764→MobileBottomNavigation
+   765→
+   766→DesktopFilterSidebar
+   767→MobileFilterSheet
+   768→
+   769→DesktopProductLayout
+   770→MobileProductLayout
+   771→
+   772→DesktopCartLayout
+   773→MobileCartLayout
+   774→
+   775→DesktopCheckoutLayout
+   776→MobileCheckoutLayout
+   777→```
+   778→
+   779→These are conceptual names only. Use the cleanest architecture for the actual project.
+   780→
+   781→---
+   782→
+   783→## 27. Performance
+   784→
+   785→Mobile speed is critical.
+   786→
+   787→Use:
+   788→
+   789→- Responsive images
+   790→- Modern image formats
+   791→- Lazy loading where appropriate
+   792→- Explicit image dimensions
+   793→- Code splitting
+   794→- Efficient rendering
+   795→- Minimal unnecessary JavaScript
+   796→- Optimized fonts
+   797→- Minimal dependencies
+   798→- Optimized assets
+   799→
+   800→Avoid unnecessarily large client-side bundles.
+   801→
+   802→---
+   803→
+   804→## 28. Accessibility
+   805→
+   806→The mobile experience must remain a proper accessible website.
+   807→
+   808→Implement:
+   809→
+   810→- Semantic HTML
+   811→- Keyboard navigation on desktop
+   812→- Visible focus states
+   813→- Accessible labels
+   814→- ARIA only where appropriate
+   815→- Good contrast
+   816→- Screen-reader-friendly navigation
+   817→- Accessible form errors
+   818→- Accessible dialogs/sheets
+   819→- Focus management
+   820→- Reduced-motion support
+   821→
+   822→Do not sacrifice accessibility for visual minimalism.
+   823→
+   824→---
+   825→
+   826→## 29. Mobile Menu
+   827→
+   828→The hamburger button should open a dedicated mobile navigation interface.
+   829→
+   830→Possible structure:
+   831→
+   832→```text
+   833→POSTFORM
+   834→
+   835→SHOP
+   836→Men
+   837→Women
+   838→T-Shirts
+   839→Oversized
+   840→Shirts
+   841→Hoodies
+   842→Pants
+   843→Jeans
+   844→Sneakers
+   845→Accessories
+   846→
+   847→HELP
+   848→Shipping
+   849→Returns & Refund
+   850→Contact
+   851→```
+   852→
+   853→The final structure should reflect the actual site architecture.
+   854→
+   855→The menu must be fast to open and easy to close.
+   856→
+   857→---
+   858→
+   859→## 30. Loading States
+   860→
+   861→Do not show blank screens while data loads.
+   862→
+   863→Use lightweight POSTFORM-style states:
+   864→
+   865→- Skeleton product cards
+   866→- Minimal loading indicators
+   867→- Image placeholders
+   868→
+   869→Do not use flashy loaders.
+   870→
+   871→---
+   872→
+   873→## 31. Empty States
+   874→
+   875→Create intentional empty states.
+   876→
+   877→### Empty cart
+   878→
+   879→```text
+   880→YOUR CART IS EMPTY
+   881→
+   882→Find something worth wearing.
+   883→
+   884→[ SHOP PRODUCTS ]
+   885→```
+   886→
+   887→### Empty wishlist
+   888→
+   889→```text
+   890→NOTHING SAVED YET
+   891→
+   892→Save products you want to come back to.
+   893→
+   894→[ EXPLORE PRODUCTS ]
+   895→```
+   896→
+   897→### No search results
+   898→
+   899→```text
+   900→NO MATCHES
+   901→
+   902→Try another search or browse categories.
+   903→```
+   904→
+   905→Keep copy concise and brand-appropriate.
+   906→
+   907→---
+   908→
+   909→## 32. Error States
+   910→
+   911→Customer-facing errors must be understandable.
+   912→
+   913→Avoid exposing technical messages as the primary UX.
+   914→
+   915→Prefer:
+   916→
+   917→```text
+   918→Something went wrong.
+   919→
+   920→Please try again.
+   921→
+   922→[ RETRY ]
+   923→```
+   924→
+   925→---
+   926→
+   927→## 33. Shopping Flow
+   928→
+   929→Keep the main flow extremely short:
+   930→
+   931→```text
+   932→HOME
+   933→  ↓
+   934→SEARCH / CATEGORY
+   935→  ↓
+   936→PRODUCT
+   937→  ↓
+   938→ADD TO CART / BUY NOW
+   939→  ↓
+   940→CART
+   941→  ↓
+   942→CHECKOUT
+   943→  ↓
+   944→PAYMENT
+   945→  ↓
+   946→ORDER CONFIRMATION
+   947→```
+   948→
+   949→Do not force account creation.
+   950→
+   951→Guest shopping should remain possible.
+   952→
+   953→---
+   954→
+   955→## 34. Order Email Workflow
+   956→
+   957→POSTFORM uses an email-based order workflow rather than requiring a complex customer-facing order-management system.
+   958→
+   959→Orders should contain:
+   960→
+   961→```text
+   962→ORDER #TEMP-ID
+   963→
+   964→CUSTOMER
+   965→Name
+   966→Phone
+   967→Email
+   968→
+   969→DELIVERY ADDRESS
+   970→International address
+   971→
+   972→PRODUCTS
+   973→Product name
+   974→Variant
+   975→Size
+   976→Color
+   977→Quantity
+   978→Price
+   979→
+   980→ORDER TOTAL
+   981→₹XXXX
+   982→
+   983→CUSTOMER NOTE
+   984→...
+   985→```
+   986→
+   987→Destination:
+   988→
+   989→**postformproducts@haren.uk**
+   990→
+   991→Generate a human-readable unique temporary order identifier where practical.
+   992→
+   993→Do not expose unnecessary personal information in URLs or client-side logs.
+   994→
+   995→---
+   996→
+   997→## 35. Payment
+   998→
+   999→Initial payment methods:
+  1000→
+  1001→- PayPal
+  1002→- Visa / prepaid card
+  1003→
+  1004→Use secure, supported payment-provider flows.
+  1005→
+  1006→Never store raw card details in the application.
+  1007→
+  1008→The mobile checkout should make payment selection clear and trustworthy.
+  1009→
+  1010→---
+  1011→
+  1012→## 36. Shipping
+  1013→
+  1014→Shipping rules are not finalized.
+  1015→
+  1016→Therefore:
+  1017→
+  1018→- Do not hard-code complex shipping calculations.
+  1019→- Keep shipping logic configurable.
+  1020→- Clearly display shipping information once final rules are known.
+  1021→
+  1022→The current business policy indicates free initial shipping, but this should remain configurable.
+  1023→
+  1024→---
+  1025→
+  1026→## 37. Returns and Refunds
+  1027→
+  1028→Current policy:
+  1029→
+  1030→### Return Policy
+  1031→
+  1032→Returns are accepted only if the received product is defective or significantly different from the description.
+  1033→
+  1034→The customer must provide a clear, unedited unboxing video showing the defect.
+  1035→
+  1036→Returns without video proof may be rejected according to the stated policy.
+  1037→
+  1038→### Shipping Charges
+  1039→
+  1040→Initial orders have free shipping.
+  1041→
+  1042→If an approved return is due to a defect, POSTFORM covers return shipping.
+  1043→
+  1044→### Refund Process
+  1045→
+  1046→After the approved return is received and inspected, POSTFORM initiates a refund to the original payment method.
+  1047→
+  1048→Expected processing time:
+  1049→
+  1050→**5–7 business days**
+  1051→
+  1052→### How to Initiate
+  1053→
+  1054→Customers should email:
+  1055→
+  1056→**postformproducts@haren.uk**
+  1057→
+  1058→with:
+  1059→
+  1060→- Order details
+  1061→- Unboxing video
+  1062→
+  1063→Present this policy clearly without making the page visually heavy.
+  1064→
+  1065→---
+  1066→
+  1067→## 38. Mobile Navigation Final Rule
+  1068→
+  1069→The bottom navigation should always answer:
+  1070→
+  1071→> **“Where can I go next?”**
+  1072→
+  1073→without forcing the customer to scroll to the top.
+  1074→
+  1075→It must not dominate the screen.
+  1076→
+  1077→Use:
+  1078→
+  1079→- Clear icons
+  1080→- Short labels
+  1081→- Active state
+  1082→- Cart badge
+  1083→- Consistent spacing
+  1084→
+  1085→Avoid excessive icon decoration.
+  1086→
+  1087→---
+  1088→
+  1089→## 39. Testing Requirements
+  1090→
+  1091→Test on:
+  1092→
+  1093→- Small mobile phones
+  1094→- Standard smartphones
+  1095→- Large smartphones
+  1096→- Portrait tablets
+  1097→- Landscape tablets
+  1098→- Desktop monitors
+  1099→- Large desktop screens
+  1100→
+  1101→Pay special attention to:
+  1102→
+  1103→- Sticky header overlap
+  1104→- Bottom navigation overlap
+  1105→- Sticky purchase bar overlap
+  1106→- Keyboard behavior
+  1107→- Safe-area behavior
+  1108→- Horizontal scrolling
+  1109→- Product image sizing
+  1110→- Checkout usability
+  1111→- Cart badge
+  1112→- Long product names
+  1113→- Long international addresses
+  1114→- Large quantities
+  1115→- Out-of-stock states
+  1116→
+  1117→---
+  1118→
+  1119→## 40. One-Thumb Test
+  1120→
+  1121→Before considering the mobile experience complete, verify that a user can comfortably:
+  1122→
+  1123→- Open navigation
+  1124→- Search
+  1125→- Browse categories
+  1126→- Filter
+  1127→- Open a product
+  1128→- Swipe images
+  1129→- Select size
+  1130→- Select color
+  1131→- Change quantity
+  1132→- Add to cart
+  1133→- Open cart
+  1134→- Checkout
+  1135→- Enter an international address
+  1136→- Add a note
+  1137→- Pay
+  1138→
+  1139→If any action feels difficult, redesign the interaction rather than merely shrinking controls.
+  1140→
+  1141→---
+  1142→
+  1143→## 41. Desktop vs Mobile Final Feeling
+  1144→
+  1145→### Desktop
+  1146→
+  1147→> **“I am browsing a premium independent streetwear store.”**
+  1148→
+  1149→Characteristics:
+  1150→
+  1151→- Editorial
+  1152→- Spacious
+  1153→- Bold
+  1154→- Structured
+  1155→- Fashion-focused
+  1156→- Conventional website navigation
+  1157→
+  1158→### Mobile
+  1159→
+  1160→> **“I am using a beautifully designed shopping app.”**
+  1161→
+  1162→Characteristics:
+  1163→
+  1164→- Persistent navigation
+  1165→- Touch-first interaction
+  1166→- Sticky controls
+  1167→- Swipeable content
+  1168→- Bottom sheets
+  1169→- Fast product discovery
+  1170→- Compact checkout
+  1171→- One-hand usability
+  1172→
+  1173→---
+  1174→
+  1175→## 42. Non-Negotiable Principle
+  1176→
+  1177→Do not clone another e-commerce app.
+  1178→
+  1179→Borrow successful **interaction patterns**, not another brand's identity.
+  1180→
+  1181→POSTFORM must remain visually original.
+  1182→
+  1183→The final result should combine:
+  1184→
+  1185→> **POSTFORM's Neo-Brutalist streetwear identity**
+  1186→>
+  1187→> with
+  1188→>
+  1189→> **the convenience and usability of a modern mobile commerce application.**
+  1190→
+  1191→---
+  1192→
+  1193→## 43. Implementation Instructions for the AI Coding Agent
+  1194→
+  1195→Before coding:
+  1196→
+  1197→1. Inspect the existing project architecture.
+  1198→2. Inspect the existing design system.
+  1199→3. Identify reusable product/cart/checkout logic.
+  1200→4. Identify components that need separate mobile presentation.
+  1201→5. Establish responsive breakpoints based on usability.
+  1202→6. Plan sticky header behavior.
+  1203→7. Plan sticky bottom navigation.
+  1204→8. Plan safe-area handling.
+  1205→9. Plan the relationship between bottom navigation and sticky purchase controls.
+  1206→10. Plan mobile filter behavior.
+  1207→11. Plan swipeable product gallery behavior.
+  1208→12. Plan mobile checkout flow.
+  1209→
+  1210→Then implement the system cleanly.
+  1211→
+  1212→Do not introduce unnecessary dependencies.
+  1213→
+  1214→Do not rewrite working business logic just to change the UI.
+  1215→
+  1216→Do not break desktop behavior while implementing mobile UX.
+  1217→
+  1218→---
+  1219→
+  1220→# 44. Final Acceptance Criteria
+  1221→
+  1222→The implementation is complete only when:
+  1223→
+  1224→- Desktop remains a polished conventional e-commerce website.
+  1225→- Mobile feels intentionally designed as a shopping application.
+  1226→- Tablet receives an appropriate touch-first experience.
+  1227→- Mobile has persistent top navigation.
+  1228→- Mobile has persistent bottom navigation.
+  1229→- Search is easy to access.
+  1230→- Categories scroll horizontally.
+  1231→- Product browsing is touch-friendly.
+  1232→- Filters use a mobile-friendly sheet/panel.
+  1233→- Product galleries support swipe interaction.
+  1234→- Purchase controls remain easily accessible.
+  1235→- Cart works completely on mobile.
+  1236→- Checkout is comfortable on mobile.
+  1237→- International addresses are supported.
+  1238→- Payment options are clearly presented.
+  1239→- Navigation never covers important content.
+  1240→- Safe-area insets are respected.
+  1241→- Touch targets are sufficiently large.
+  1242→- Desktop and mobile share business logic without requiring identical layouts.
+  1243→- No gradients are used.
+  1244→- No glassmorphism is used.
+  1245→- No excessive animation is used.
+  1246→- POSTFORM's Neo-Brutalist/editorial identity remains obvious.
+  1247→- The final experience feels fast, premium and deliberate.
+  1248→
+  1249→---
+  1250→
+  1251→# 45. Final Creative Direction
+  1252→
+  1253→The final product should feel like:
+  1254→
+  1255→**A fashion editorial website on desktop.**
+  1256→
+  1257→**A premium streetwear shopping app on mobile.**
+  1258→
+  1259→Use:
+  1260→
+  1261→- Strong typography
+  1262→- Black structural borders
+  1263→- Warm milky-white surfaces
+  1264→- Controlled yellow and purple accents
+  1265→- High-quality product imagery
+  1266→- Confident spacing
+  1267→- Restrained Neo-Brutalist structure
+  1268→- Excellent touch interactions
+  1269→
+  1270→The UI should never overpower the products.
+  1271→
+  1272→The shopping journey should be obvious.
+  1273→
+  1274→The result should require no instructions for a normal customer to understand.
+  1275→
+  1276→**Design for confidence. Design for touch. Design for conversion. Keep POSTFORM unmistakably POSTFORM.**
+  1277→

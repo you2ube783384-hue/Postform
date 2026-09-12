@@ -348,7 +348,8 @@ export function ShopToolbar({
         <button
           type="button"
           onClick={onOpenMobileFilters}
-          className="flex items-center gap-2 border-2 border-pf-cream/40 px-3 py-1.5 font-mono-tech text-[11px] font-bold uppercase tracking-widest text-pf-cream transition-colors hover:border-pf-yellow hover:text-pf-yellow lg:hidden"
+          aria-label="Open filters"
+          className="flex items-center gap-2 border-2 border-pf-cream/40 px-3 py-2 font-mono-tech text-[11px] font-bold uppercase tracking-widest text-pf-cream transition-colors hover:border-pf-yellow hover:text-pf-yellow lg:hidden"
         >
           <SlidersHorizontal className="h-3.5 w-3.5" /> Filters
         </button>
@@ -365,7 +366,7 @@ export function ShopToolbar({
           id="sort"
           value={sort}
           onChange={(e) => setSort(e.target.value)}
-          className="h-8 cursor-pointer border-2 border-pf-cream/40 bg-pf-black px-2 font-mono-tech text-[11px] font-bold uppercase tracking-wider text-pf-cream outline-none hover:border-pf-yellow [&>option]:bg-pf-black [&>option]:text-pf-cream"
+          className="h-10 cursor-pointer border-2 border-pf-cream/40 bg-pf-black px-2 font-mono-tech text-[11px] font-bold uppercase tracking-wider text-pf-cream outline-none hover:border-pf-yellow [&>option]:bg-pf-black [&>option]:text-pf-cream"
         >
           <option value="newest">NEWEST</option>
           <option value="price-asc">PRICE: LOW — HIGH</option>
@@ -402,14 +403,14 @@ export function MobileFilterSheet({
         className={`absolute inset-x-0 bottom-0 max-h-[82vh] overflow-hidden border-t-2 border-pf-black bg-pf-paper transition-transform duration-200 ${
           open ? "translate-y-0" : "translate-y-full"
         }`}
-        style={{ willChange: "transform" }}
+        style={{ willChange: "transform", paddingBottom: "env(safe-area-inset-bottom)" }}
       >
         <div className="flex h-[82vh] max-h-[82vh] flex-col">
           <button
             type="button"
             onClick={onClose}
             aria-label="Close filters"
-            className="absolute right-3 top-3 z-10 flex h-9 w-9 items-center justify-center border-2 border-pf-black bg-pf-paper transition-colors hover:bg-pf-yellow"
+            className="absolute right-3 top-3 z-10 flex h-11 w-11 items-center justify-center border-2 border-pf-black bg-pf-paper transition-colors hover:bg-pf-yellow"
           >
             <X className="h-4 w-4" strokeWidth={2.5} />
           </button>

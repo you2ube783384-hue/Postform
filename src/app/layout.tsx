@@ -63,6 +63,8 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
+  // Enables env(safe-area-inset-*) for notched phones (bottom nav, buy bar)
+  viewportFit: "cover",
 };
 
 export default function RootLayout({
@@ -76,7 +78,8 @@ export default function RootLayout({
         className={`${archivo.variable} ${archivoBlack.variable} ${spaceMono.variable} antialiased bg-background text-foreground min-h-screen flex flex-col`}
       >
         {children}
-        <Toaster position="bottom-right" />
+        {/* top-center keeps toasts clear of the mobile bottom nav & sticky buy bar */}
+        <Toaster position="top-center" offset={"8px"} />
       </body>
     </html>
   );

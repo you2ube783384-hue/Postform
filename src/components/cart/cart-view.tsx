@@ -121,7 +121,7 @@ export function CartView({ settings }: { settings: StoreSettings }) {
                         toast.success("REMOVED", { description: item.name });
                       }}
                       aria-label={`Remove ${item.name} from cart`}
-                      className="flex h-9 w-9 shrink-0 items-center justify-center border-2 border-pf-black bg-pf-paper text-pf-black transition-colors hover:bg-pf-red hover:text-white"
+                      className="flex h-11 w-11 shrink-0 items-center justify-center border-2 border-pf-black bg-pf-paper text-pf-black transition-colors hover:bg-pf-red hover:text-white"
                     >
                       <Trash2 className="h-4 w-4" strokeWidth={2.5} />
                     </button>
@@ -134,7 +134,7 @@ export function CartView({ settings }: { settings: StoreSettings }) {
                         onClick={() => setQty(item.key, item.qty - 1)}
                         disabled={item.qty <= 1}
                         aria-label="Decrease quantity"
-                        className="w-9 border-r-2 border-pf-black bg-pf-paper font-mono-tech font-bold transition-colors hover:bg-pf-yellow disabled:opacity-30"
+                        className="w-11 border-r-2 border-pf-black bg-pf-paper font-mono-tech font-bold transition-colors hover:bg-pf-yellow disabled:opacity-30"
                       >
                         <Minus className="mx-auto h-3.5 w-3.5" strokeWidth={3} />
                       </button>
@@ -146,7 +146,7 @@ export function CartView({ settings }: { settings: StoreSettings }) {
                         onClick={() => setQty(item.key, item.qty + 1)}
                         disabled={item.qty >= item.maxStock}
                         aria-label="Increase quantity"
-                        className="w-9 border-l-2 border-pf-black bg-pf-paper font-mono-tech font-bold transition-colors hover:bg-pf-yellow disabled:opacity-30"
+                        className="w-11 border-l-2 border-pf-black bg-pf-paper font-mono-tech font-bold transition-colors hover:bg-pf-yellow disabled:opacity-30"
                       >
                         <Plus className="mx-auto h-3.5 w-3.5" strokeWidth={3} />
                       </button>

@@ -27,7 +27,7 @@ const pfButtonVariants = cva(
         danger: "bg-pf-red text-white hover:shadow-[3px_3px_0_0_#141310]",
       },
       size: {
-        sm: "h-8 px-3 text-[11px]",
+        sm: "h-9 px-3 text-[11px]",
         md: "h-11 px-5 text-xs",
         lg: "h-14 px-8 text-sm",
         xl: "h-16 px-10 text-base",

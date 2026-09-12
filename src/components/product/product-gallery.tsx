@@ -47,7 +47,7 @@ export function ProductGallery({ product }: { product: Product }) {
       <div className="relative lg:hidden">
         <div
           ref={scrollRef}
-          className="flex snap-x snap-mandatory overflow-x-auto border-2 border-pf-black bg-pf-sand scrollbar-none"
+          className="flex snap-x snap-mandatory overflow-x-auto border-2 border-pf-black bg-pf-sand no-scrollbar"
           style={{ scrollbarWidth: "none" }}
           onScroll={(e) => {
             const el = e.currentTarget;

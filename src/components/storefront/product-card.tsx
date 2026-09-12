@@ -96,7 +96,7 @@ export function ProductCard({ product, priority = false }: { product: Product; p
           aria-label={inWishlist ? "Remove from wishlist" : "Add to wishlist"}
           aria-pressed={inWishlist}
           className={cn(
-            "absolute right-2 top-2 flex h-9 w-9 items-center justify-center border-2 border-pf-black transition-colors",
+            "absolute right-2 top-2 flex h-11 w-11 items-center justify-center border-2 border-pf-black transition-colors",
             inWishlist ? "bg-pf-purple text-white" : "bg-pf-paper text-pf-black hover:bg-pf-yellow"
           )}
         >

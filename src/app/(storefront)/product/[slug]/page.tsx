@@ -48,7 +48,7 @@ export default async function ProductPage({
   const related = await getRelatedProducts(product, 4);
 
   return (
-    <div className="mx-auto max-w-[1600px] px-4 py-8 pb-28 sm:px-8 sm:pb-12 lg:px-12">
+    <div className="mx-auto max-w-[1600px] px-4 py-8 pb-60 sm:px-8 sm:pb-12 lg:px-12">
       <Breadcrumbs
         items={[
           { label: "SHOP", href: "/shop" },

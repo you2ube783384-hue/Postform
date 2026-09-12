@@ -5,7 +5,7 @@ import { CATEGORIES } from "@/lib/types";
 export const dynamic = "force-dynamic";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const base = process.env.NEXT_PUBLIC_SITE_URL ?? "https://postform.example.com";
+  const base = process.env.NEXT_PUBLIC_SITE_URL ?? "https://postform-eight.vercel.app";
 
   const staticPages: MetadataRoute.Sitemap = [
     { url: base, changeFrequency: "daily", priority: 1 },

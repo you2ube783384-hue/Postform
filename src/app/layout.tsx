@@ -24,7 +24,7 @@ const spaceMono = Space_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://postform.example.com"),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://postform-eight.vercel.app"),
   title: {
     default: "POSTFORM — Curated Streetwear Resale",
     template: "%s — POSTFORM",

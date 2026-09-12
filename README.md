@@ -142,38 +142,30 @@ Buttons (`src/components/pf/button.tsx`) and badges (`src/components/pf/badges.t
 
 ## 9. Deployment (Vercel)
 
-The app stores all data in **Turso** (hosted libsql/SQLite) — a local `db/custom.db` file will **not** work on Vercel's serverless filesystem. If you see `Error: Failed to connect to database: ./db/custom.db` in the Vercel logs, the Turso env vars are missing (step 2 below).
+The app stores all data in **Turso** (hosted libsql/SQLite) — a local `db/custom.db` file will **not** work on Vercel's serverless filesystem.
 
-1. **Push the repository to GitHub and import it in Vercel.** `next.config.ts` already uses the standalone output expected by Vercel. The admin guard is `src/proxy.ts` (Next.js 16 `proxy` convention — deploying `middleware.ts` triggers a deprecation warning on Vercel).
+**Zero-config:** the production Turso database URL and auth token are baked into `src/lib/db.ts` as fallback defaults, so a plain "Import Git Repository → Deploy" on Vercel works out of the box with **no environment variables required**. All optional env vars below simply override the baked-in defaults.
 
-2. **Create a Turso database and migrate the local data** (from a machine with the repo checked out):
+1. **Push the repository to GitHub and import it in Vercel.** `next.config.ts` already uses the standalone output expected by Vercel and marks the libsql/Prisma native packages as server-external. The admin guard is `src/proxy.ts` (Next.js 16 `proxy` convention — deploying `middleware.ts` triggers a deprecation warning on Vercel).
 
-   ```bash
-   # a) Create a free database: https://turso.tech → sign up, or:
-   #    curl or chisel CLI: turso db create postform && turso db show postform --url
-   #    then create a token: turso db tokens create postform
+2. **(Already done for this deployment)** The Turso database was created and populated via `scripts/push-to-turso.mjs` (schema + 14 products, images, variants, settings; re-runs are safe with `INSERT OR REPLACE`, `--reset` drops target tables first).
 
-   # b) Copy schema + all data (products, images, variants, settings):
-   TURSO_DATABASE_URL=libsql://<db>-<org>.turso.io \
-   TURSO_AUTH_TOKEN=eyJ... \
-   node scripts/push-to-turso.mjs
-   # re-runs are safe (INSERT OR REPLACE); add --reset to drop target tables first
-   ```
-
-3. **Set environment variables** in Vercel → Settings → Environment Variables (Production + Preview):
+3. **Optional — override defaults** in Vercel → Settings → Environment Variables (Production + Preview). Recommended before real production traffic:
 
    | Variable | Value |
    |---|---|
-   | `TURSO_DATABASE_URL` | `libsql://<db>-<org>.turso.io` |
-   | `TURSO_AUTH_TOKEN` | Turso auth token |
+   | `TURSO_DATABASE_URL` | your Turso URL (e.g. after rotating the DB) |
+   | `TURSO_AUTH_TOKEN` | a fresh Turso auth token (see security note below) |
    | `ADMIN_PASSWORD` | strong password (**never** ship the dev default `postform-admin-2026`) |
    | `ADMIN_SESSION_SECRET` | random long string (`openssl rand -hex 32`) |
-   | `NEXT_PUBLIC_STORE_EMAIL` | `postformproducts@haren.uk` |
-   | `NEXT_PUBLIC_SITE_URL` | `https://your-domain.com` |
+   | `NEXT_PUBLIC_STORE_EMAIL` | order email (default: `postformproducts@haren.uk`) |
+   | `NEXT_PUBLIC_SITE_URL` | `https://your-domain.com` (default: the Vercel app URL) |
 
    `DATABASE_URL` is only used by the Prisma CLI locally — not needed on Vercel.
 
-4. **Redeploy** (Vercel → Deployments → … → Redeploy). Product images stay on their external hosts, so no writable filesystem is needed.
+4. **Deploy / Redeploy** (a push to `main` auto-deploys). Product images stay on their external hosts, so no writable filesystem is needed.
+
+> **Security note:** the baked-in Turso token lives in a public repository, so anyone can read *this catalogue database*. That is fine for a demo store (checkout is a mailto handoff — no payments or personal data are stored), but for real use: create a fresh token in the Turso dashboard, set `TURSO_DATABASE_URL` + `TURSO_AUTH_TOKEN` as Vercel env vars, and (optionally) revoke the old token. Env vars always take precedence over the baked-in defaults.
 
 > Note: serverless deploys share one Turso database, so admin edits (products, settings) persist across deployments and regions.
 

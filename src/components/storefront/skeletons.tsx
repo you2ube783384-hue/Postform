@@ -2,7 +2,7 @@ import React from "react";
 
 /**
  * POSTFORM-style skeleton states (spec §30): lightweight, brutalist,
- * no flashy loaders — simple pulse blocks on the sand/paper palette.
+ * no flashy loaders - simple pulse blocks on the sand/paper palette.
  */
 
 export function ProductCardSkeleton() {

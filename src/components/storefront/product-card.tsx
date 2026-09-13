@@ -52,7 +52,7 @@ export function ProductCard({ product, priority = false }: { product: Product; p
   }
 
   return (
-    <article className="group relative flex flex-col border-2 border-pf-black bg-pf-paper transition-shadow hover:pf-hard-shadow-sm">
+    <article className="group relative flex w-full flex-col border-2 border-pf-black bg-pf-paper transition-[box-shadow,transform] duration-200 hover:-translate-x-[2px] hover:-translate-y-[2px] hover:pf-hard-shadow-sm active:translate-x-0 active:translate-y-0">
       {/* Image */}
       <Link
         href={`/product/${product.slug}`}
@@ -89,7 +89,7 @@ export function ProductCard({ product, priority = false }: { product: Product; p
           <ConditionBadge condition={product.condition} />
         </div>
 
-        {/* Wishlist */}
+        {/* Wishlist - color lock: yellow accent on active, never purple */}
         <button
           type="button"
           onClick={handleWishlist}
@@ -97,7 +97,7 @@ export function ProductCard({ product, priority = false }: { product: Product; p
           aria-pressed={inWishlist}
           className={cn(
             "absolute right-2 top-2 flex h-11 w-11 items-center justify-center border-2 border-pf-black transition-colors",
-            inWishlist ? "bg-pf-purple text-white" : "bg-pf-paper text-pf-black hover:bg-pf-yellow"
+            inWishlist ? "bg-pf-black text-pf-yellow" : "bg-pf-paper text-pf-black hover:bg-pf-yellow"
           )}
         >
           <Heart className="h-4 w-4" strokeWidth={2.5} fill={inWishlist ? "currentColor" : "none"} />

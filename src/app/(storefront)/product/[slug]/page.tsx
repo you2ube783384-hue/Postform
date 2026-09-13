@@ -17,21 +17,21 @@ export async function generateMetadata({
   const { slug } = await params;
   const product = await getProductBySlug(slug);
   if (!product) return { title: "Product Not Found" };
-  const title = `${product.brand ? product.brand + " — " : ""}${product.name}`;
+  const title = `${product.brand ? product.brand + " - " : ""}${product.name}`;
   return {
     title,
     description:
       product.description?.slice(0, 160) ??
-      `${product.name} — ${product.condition} condition. Curated resale by POSTFORM.`,
+      `${product.name}, ${product.condition} condition. Curated resale by POSTFORM.`,
     openGraph: {
-      title: `${title} — POSTFORM`,
+      title: `${title} - POSTFORM`,
       description: product.description?.slice(0, 200) ?? undefined,
       images: product.images[0]?.url ? [{ url: product.images[0].url }] : undefined,
       type: "website",
     },
     twitter: {
       card: product.images[0]?.url ? "summary_large_image" : "summary",
-      title: `${title} — POSTFORM`,
+      title: `${title} - POSTFORM`,
     },
   };
 }
@@ -65,7 +65,7 @@ export default async function ProductPage({
         <div className="flex flex-col gap-5">
           <div>
             {product.brand && (
-              <p className="font-mono-tech text-xs font-bold uppercase tracking-[0.25em] text-pf-purple">
+              <p className="font-mono-tech text-xs font-bold uppercase tracking-[0.25em] text-pf-muted">
                 {product.brand}
               </p>
             )}
@@ -73,7 +73,7 @@ export default async function ProductPage({
               {product.name}
             </h1>
             <p className="mt-2 font-mono-tech text-[11px] uppercase tracking-[0.2em] text-pf-muted">
-              {product.category} — RESALE STOCK — {product.material ?? "MATERIAL UNSPECIFIED"}
+              {product.category} / RESALE STOCK / {product.material ?? "MATERIAL UNSPECIFIED"}
             </p>
           </div>
 
@@ -94,7 +94,7 @@ export default async function ProductPage({
               </div>
               <div className="contents">
                 <dt className="font-mono-tech text-[10px] uppercase tracking-widest text-pf-muted">Material</dt>
-                <dd className="font-bold text-pf-black">{product.material ?? "—"}</dd>
+                <dd className="font-bold text-pf-black">{product.material ?? "-"}</dd>
               </div>
               <div className="contents">
                 <dt className="font-mono-tech text-[10px] uppercase tracking-widest text-pf-muted">Category</dt>

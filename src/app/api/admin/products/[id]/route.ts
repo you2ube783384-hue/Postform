@@ -29,7 +29,7 @@ export async function GET(
   }
 }
 
-// PUT /api/admin/products/[id] — full update (replaces images + variants)
+// PUT /api/admin/products/[id] - full update (replaces images + variants)
 export async function PUT(
   req: NextRequest,
   { params }: { params: Promise<{ id: string }> }
@@ -137,7 +137,7 @@ export async function PUT(
   }
 }
 
-// PATCH /api/admin/products/[id] — quick toggles (featured/active)
+// PATCH /api/admin/products/[id] - quick toggles (featured/active)
 export async function PATCH(
   req: NextRequest,
   { params }: { params: Promise<{ id: string }> }

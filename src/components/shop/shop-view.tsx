@@ -55,11 +55,11 @@ export async function ShopView({
         />
         <div className="mt-3 flex flex-wrap items-end justify-between gap-3 border-b-2 border-pf-black pb-4">
           <div>
-            <p className="font-mono-tech text-[10px] font-bold uppercase tracking-[0.3em] text-pf-purple">{kicker}</p>
+            <p className="font-mono-tech text-[10px] font-bold uppercase tracking-[0.3em] text-pf-muted">{kicker}</p>
             <h1 className="font-display text-4xl uppercase leading-none text-pf-black sm:text-5xl">{title}</h1>
           </div>
           <p className="font-mono-tech text-[11px] uppercase tracking-[0.2em] text-pf-muted">
-            STOCK ROTATES — MISS IT, LOSE IT
+            STOCK ROTATES. MISS IT, LOSE IT.
           </p>
         </div>
       </div>
@@ -69,7 +69,7 @@ export async function ShopView({
         <div className="mb-4 flex items-center gap-2">
           <span className="flex items-center gap-2 border-2 border-pf-black bg-pf-purple-soft px-3 py-1.5 font-mono-tech text-xs font-bold uppercase tracking-wider text-pf-black">
             SEARCH: “{filters.q}”
-            <Link href={basePath} aria-label="Clear search" className="text-pf-purple hover:text-pf-black">
+            <Link href={basePath} aria-label="Clear search" className="text-pf-black hover:text-pf-black">
               <X className="h-4 w-4" strokeWidth={2.5} />
             </Link>
           </span>
@@ -120,7 +120,7 @@ export async function ShopView({
             <SearchX className="h-10 w-10 text-pf-muted" strokeWidth={2} />
             <p className="font-display text-2xl uppercase text-pf-black">Nothing matched</p>
             <p className="max-w-sm text-sm text-pf-muted">
-              No products match the current filters. Clear them or try a different search — stock rotates constantly.
+              No products match the current filters. Clear them or try a different search. Stock rotates constantly.
             </p>
             <Link
               href={basePath}

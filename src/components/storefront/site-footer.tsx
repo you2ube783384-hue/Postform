@@ -13,7 +13,7 @@ export function SiteFooter({ storeEmail }: { storeEmail: string }) {
             </p>
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-pf-cream/70">
               A curated-stock fashion store. We acquire available clothing,
-              footwear and accessories — new, used, vintage — and resell them
+              footwear and accessories (new, used, vintage) and resell them
               worldwide. Nothing stays forever.
             </p>
             <p className="mt-4 font-mono-tech text-[11px] uppercase tracking-[0.2em] text-pf-yellow">
@@ -72,7 +72,7 @@ export function SiteFooter({ storeEmail }: { storeEmail: string }) {
               <li>
                 <a
                   href={`mailto:${storeEmail}`}
-                  className="text-sm text-pf-purple-soft underline-offset-4 hover:text-pf-yellow hover:underline"
+                  className="text-sm text-pf-yellow underline-offset-4 hover:text-pf-yellow hover:underline"
                 >
                   {storeEmail}
                 </a>
@@ -88,7 +88,7 @@ export function SiteFooter({ storeEmail }: { storeEmail: string }) {
 
         {/* Bottom bar */}
         <div className="flex flex-col gap-2 px-5 py-4 font-mono-tech text-[10px] uppercase tracking-[0.2em] text-pf-cream/50 md:flex-row md:items-center md:justify-between md:px-10">
-          <span>© {new Date().getFullYear()} POSTFORM — ALL RIGHTS RESERVED</span>
+          <span>© {new Date().getFullYear()} POSTFORM. ALL RIGHTS RESERVED.</span>
           <span className="flex items-center gap-4">
             <span>PAYPAL / VISA / PREPAID ACCEPTED</span>
             <span className="text-pf-yellow" aria-hidden>

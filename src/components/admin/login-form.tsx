@@ -44,7 +44,7 @@ export function AdminLogin() {
               POSTFORM<span className="text-pf-yellow">▮</span>
             </p>
             <p className="mt-1 font-mono-tech text-[10px] uppercase tracking-[0.3em] text-pf-yellow">
-              RESTRICTED — ADMIN AREA
+              RESTRICTED / ADMIN AREA
             </p>
           </div>
 
@@ -81,7 +81,7 @@ export function AdminLogin() {
         </div>
 
         <p className="mt-4 text-center font-mono-tech text-[10px] uppercase tracking-widest text-pf-muted">
-          <a href="/" className="text-pf-purple underline underline-offset-4">
+          <a href="/" className="text-pf-black underline underline-offset-4">
             ← BACK TO STORE
           </a>
         </p>

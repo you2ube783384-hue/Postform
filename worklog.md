@@ -198,3 +198,28 @@ Stage Summary:
 - https://postform-eight.vercel.app is fully functional: storefront reads/writes Turso, admin panel works with dev password
 - Deployment requires ZERO Vercel configuration; env vars are now optional overrides
 - Remaining user options: set ADMIN_PASSWORD/ADMIN_SESSION_SECRET env vars + rotate Turso token before real production traffic (documented in README section 9)
+
+---
+Task ID: taste-skill-redesign
+Agent: Super Z (main)
+Task: Install the Taste Skill (tasteskill.dev) and redesign the whole website with it
+
+Work Log:
+- Installed taste-skill v2 (design-taste-frontend) from github.com/Leonxlnx/taste-skill into skills/design-taste-frontend/SKILL.md (npx installer hung on interactive prompt; cloned repo directly per docs fallback)
+- Read the full 1206-line SKILL.md: brief inference, dials, locks (color/shape/theme), anti-slop bans (em-dash zero-tolerance, eyebrow budget, hero discipline), redesign protocol (audit-first, preserve IA/nav/URLs), canonical motion skeletons, Section 14 pre-flight checklist
+- Declared design read: redesign-overhaul of a streetwear resale storefront, brutalist poster/editorial language, existing brand system (Archivo Black, sharp corners, hard shadows, cream+yellow+black); brand insists on light mode; dials 8/6/4
+- Audited existing site and catalogued 10 violations: ~35 em-dashes in visible copy, pill overlaid on hero image, section-numbering eyebrows (FILE: 001, INDEX / 00), eyebrow on every section, 3-line headline + 30-word subtext, decorative purple dot + purple as second accent, 4 duplicate shop-CTA labels, split-header manifesto, broken hover:pf-hard-shadow utilities (custom @layer classes get no variants in Tailwind v4), motion claimed but static
+- globals.css: converted hard-shadow family to @utility (hover:/active: variants now actually work, fixing silent no-op hovers sitewide), added pf-rise/pf-wipe entry keyframes gated behind prefers-reduced-motion
+- Homepage recomposition: hero discipline (1 eyebrow, 2-line headline, 15-word subtext, 1 primary + 1 secondary CTA, no image pill, entry stagger), collage rows now flex to the type-block height so the hero fits the initial viewport with CTAs above the fold (was 1373px, now 546px at 1440x900), stats strip kept, Curated Rack grid, category section rebuilt as editorial typographic index with hover-invert rows, manifesto restructured from banned split-header to stacked editorial composition, fresh arrivals rebuilt as horizontal scroll-snap rail (ProductRail) - 6 distinct layout families
+- New components: reveal.tsx (framer-motion whileInView per skill Section 5.C canonical skeleton, useReducedMotion), ProductRail; SectionHeading de-eyebrowed (kicker prop removed)
+- Color Consistency Lock enforced: pf-yellow is the only accent; all decorative purple (kickers, links, icons, wishlist button, step numbers) normalized to black/muted/yellow; purple survives only as the functional :focus-visible ring
+- Global em-dash purge: 134 string replacements across 40 files via scripts/emdash-purge.py + scripts/taste-skill-pass2.py; DB content normalized too (11 sizeCharts + 4 descriptions in both Turso and local DB, ' — ' -> ' / ' charts / '. ' prose)
+- Fixed silent bug: hover:bg-pf-soft-yellow (invalid class) -> hover:bg-pf-yellow-soft
+- ProductCard: w-full (fixes rail card width collapse), hover lift + hard shadow (feedback motion), wishlist active state black/yellow
+- Verification: lint clean; production build passes; DOM-measured all pages 200 with zero em-dashes and no horizontal overflow; agent-browser desktop + iPhone 14 checks (hero 546px desktop / CTA visible, rail cards uniform 300px, 0 broken images, 0 overflowing titles); VLM review: shop + product pages PASS, homepage issues were transient lazy-load states and intentional scroll affordances
+- Pre-Flight Check (Section 14): 1 true eyebrow (budget 2), 1 marquee (header ticker), zero em-dashes, no scroll listeners, consistent CTA labels, 6 layout families, motion motivated + reduced-motion gated
+
+Stage Summary:
+- Taste Skill installed and fully applied: de-slopped copy, tightened hero, color/shape/theme locks enforced, real motion layer, layout variety, and two latent CSS bugs fixed (hover utilities, rail widths)
+- All routes, nav labels, URLs, forms and checkout flow preserved (redesign-preserve rules)
+- DB copy normalized in Turso + local; scripts persisted for future re-runs

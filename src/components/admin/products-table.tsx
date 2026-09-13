@@ -65,7 +65,7 @@ export function AdminProductsTable({
     <div className="p-5 sm:p-8">
       <div className="flex flex-wrap items-end justify-between gap-3 border-b-2 border-pf-black pb-4">
         <div>
-          <p className="font-mono-tech text-[10px] font-bold uppercase tracking-[0.3em] text-pf-purple">
+          <p className="font-mono-tech text-[10px] font-bold uppercase tracking-[0.3em] text-pf-muted">
             INVENTORY MANAGEMENT
           </p>
           <h1 className="font-display text-3xl uppercase leading-none text-pf-black sm:text-4xl">
@@ -96,7 +96,7 @@ export function AdminProductsTable({
         </div>
       </div>
 
-      {/* Table — desktop */}
+      {/* Table - desktop */}
       <div className="mt-6 hidden overflow-x-auto border-2 border-pf-black bg-pf-paper md:block">
         <table className="w-full min-w-[820px] border-collapse text-left">
           <thead>
@@ -213,7 +213,7 @@ export function AdminProductsTable({
         )}
       </div>
 
-      {/* Cards — mobile */}
+      {/* Cards - mobile */}
       <ul className="mt-6 space-y-3 md:hidden">
         {filtered.map((p) => (
           <li key={p.id} className="border-2 border-pf-black bg-pf-paper p-3">
@@ -224,7 +224,7 @@ export function AdminProductsTable({
               <div className="min-w-0 flex-1">
                 <p className="truncate text-sm font-bold text-pf-black">{p.name}</p>
                 <p className="font-mono-tech text-[10px] uppercase text-pf-muted">
-                  {p.category} — {formatPrice(p.price, currency)} — {p.condition}
+                  {p.category} / {formatPrice(p.price, currency)} / {p.condition}
                 </p>
                 <p className="mt-1 font-mono-tech text-[11px] font-bold">
                   {totalStock(p)} UNITS {p.active ? "· LIVE" : "· HIDDEN"} {p.featured ? "· FEATURED" : ""}

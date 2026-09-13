@@ -77,9 +77,9 @@ export function categorySlug(name: string): string {
 
 export const SORT_OPTIONS = [
   { value: "newest", label: "NEWEST" },
-  { value: "price-asc", label: "PRICE: LOW — HIGH" },
-  { value: "price-desc", label: "PRICE: HIGH — LOW" },
-  { value: "az", label: "A — Z" },
+  { value: "price-asc", label: "PRICE: LOW TO HIGH" },
+  { value: "price-desc", label: "PRICE: HIGH TO LOW" },
+  { value: "az", label: "A-Z" },
 ] as const;
 
 export interface ShopFilters {

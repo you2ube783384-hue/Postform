@@ -74,7 +74,7 @@ export function PurchasePanel({ product }: { product: Product }) {
       maxStock: selectedStock,
     });
     toast.success("ADDED TO CART", {
-      description: `${product.name}${hasSizes ? ` — ${size}` : ""} × ${Math.min(qty, selectedStock)}`,
+      description: `${product.name}${hasSizes ? ` - ${size}` : ""} x ${Math.min(qty, selectedStock)}`,
     });
     return true;
   }
@@ -85,7 +85,7 @@ export function PurchasePanel({ product }: { product: Product }) {
 
   async function handleShare() {
     const url = window.location.href;
-    const title = `${product.brand ?? "POSTFORM"} — ${product.name}`;
+    const title = `${product.brand ?? "POSTFORM"} - ${product.name}`;
     if (navigator.share) {
       try {
         await navigator.share({ title, url });
@@ -148,14 +148,14 @@ export function PurchasePanel({ product }: { product: Product }) {
         <div>
           <div className="mb-2 flex items-center justify-between">
             <p className="font-mono-tech text-[11px] font-bold uppercase tracking-[0.2em] text-pf-black">
-              Size {size && <span className="text-pf-purple">— {size}</span>}
+              Size {size && <span className="text-pf-black">/ {size}</span>}
             </p>
             {product.sizeChart && (
               <button
                 type="button"
                 onClick={() => setChartOpen(!chartOpen)}
                 aria-expanded={chartOpen}
-                className="flex items-center gap-1 font-mono-tech text-[10px] font-bold uppercase tracking-widest text-pf-purple hover:underline"
+                className="flex items-center gap-1 font-mono-tech text-[10px] font-bold uppercase tracking-widest text-pf-black hover:underline"
               >
                 <FileText className="h-3 w-3" /> Size chart
               </button>
@@ -191,11 +191,11 @@ export function PurchasePanel({ product }: { product: Product }) {
         </div>
       )}
 
-      {/* Colour selector — only when more than one colour exists */}
+      {/* Colour selector - only when more than one colour exists */}
       {multiColor && (
         <div>
           <p className="mb-2 font-mono-tech text-[11px] font-bold uppercase tracking-[0.2em] text-pf-black">
-            Colour {color && <span className="text-pf-purple">— {color}</span>}
+            Colour {color && <span className="text-pf-black">/ {color}</span>}
           </p>
           <div className="flex flex-wrap gap-2" role="radiogroup" aria-label="Select colour">
             {colors.map((c) => (
@@ -255,7 +255,7 @@ export function PurchasePanel({ product }: { product: Product }) {
         )}
       </div>
 
-      {/* Primary actions — desktop/tablet */}
+      {/* Primary actions - desktop/tablet */}
       <div className="hidden flex-col gap-3 sm:flex">
         <div className="grid grid-cols-2 gap-3">
           <PFButton size="lg" variant="primary" onClick={doAddToCart} disabled={soldOut} className="h-14">
@@ -278,19 +278,19 @@ export function PurchasePanel({ product }: { product: Product }) {
       {/* Delivery info */}
       <div className="divide-y-2 border-2 border-pf-black bg-pf-paper">
         <div className="flex items-center gap-3 px-4 py-3">
-          <Truck className="h-5 w-5 shrink-0 text-pf-purple" strokeWidth={2} />
+          <Truck className="h-5 w-5 shrink-0 text-pf-black" strokeWidth={2} />
           <div>
             <p className="text-sm font-bold text-pf-black">Free international shipping</p>
-            <p className="text-xs text-pf-muted">Worldwide delivery on every order — no minimum.</p>
+            <p className="text-xs text-pf-muted">Worldwide delivery on every order, no minimum.</p>
           </div>
         </div>
         <div className="flex items-center gap-3 px-4 py-3">
-          <Undo2 className="h-5 w-5 shrink-0 text-pf-purple" strokeWidth={2} />
+          <Undo2 className="h-5 w-5 shrink-0 text-pf-black" strokeWidth={2} />
           <div>
             <p className="text-sm font-bold text-pf-black">Defect returns accepted</p>
             <p className="text-xs text-pf-muted">
               Unboxing video required.{" "}
-              <a href="/refund" className="text-pf-purple underline underline-offset-2">
+              <a href="/refund" className="text-pf-black underline underline-offset-2">
                 Policy
               </a>
             </p>

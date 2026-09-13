@@ -45,7 +45,7 @@ export function AdminSettingsForm({ initial }: { initial: StoreSettings }) {
     <div className="p-5 sm:p-8">
       <div className="flex flex-wrap items-end justify-between gap-3 border-b-2 border-pf-black pb-4">
         <div>
-          <p className="font-mono-tech text-[10px] font-bold uppercase tracking-[0.3em] text-pf-purple">
+          <p className="font-mono-tech text-[10px] font-bold uppercase tracking-[0.3em] text-pf-muted">
             STORE CONFIGURATION
           </p>
           <h1 className="font-display text-3xl uppercase leading-none text-pf-black sm:text-4xl">Settings</h1>
@@ -67,7 +67,7 @@ export function AdminSettingsForm({ initial }: { initial: StoreSettings }) {
           <div className="space-y-4 px-5 py-5">
             <div className="grid grid-cols-2 gap-3" role="radiogroup" aria-label="Shipping mode">
               {[
-                { value: "free", title: "FREE SHIPPING", desc: "Current business policy — every order ships free worldwide." },
+                { value: "free", title: "FREE SHIPPING", desc: "Current business policy: every order ships free worldwide." },
                 { value: "flat", title: "FLAT FEE", desc: "One configured fee applied to every order." },
               ].map((opt) => (
                 <button
@@ -105,7 +105,7 @@ export function AdminSettingsForm({ initial }: { initial: StoreSettings }) {
               </label>
             )}
             <p className="text-xs leading-relaxed text-pf-muted">
-              Shipping is deliberately a configurable setting — the current policy is free initial
+              Shipping is deliberately a configurable setting. The current policy is free initial
               shipping, with defect-return shipping covered by POSTFORM. Changes here immediately update
               checkout totals and the storefront shipping page.
             </p>
@@ -153,10 +153,10 @@ export function AdminSettingsForm({ initial }: { initial: StoreSettings }) {
                 ALSO CONFIGURED VIA ENVIRONMENT
               </p>
               <ul className="mt-1.5 space-y-1">
-                <li>ADMIN_PASSWORD — admin login password</li>
-                <li>ADMIN_SESSION_SECRET — session signing secret</li>
-                <li>TURSO_DATABASE_URL / TURSO_AUTH_TOKEN — database</li>
-                <li>PAYPAL_CLIENT_ID — payment provider (future)</li>
+                <li>ADMIN_PASSWORD: admin login password</li>
+                <li>ADMIN_SESSION_SECRET: session signing secret</li>
+                <li>TURSO_DATABASE_URL / TURSO_AUTH_TOKEN: database</li>
+                <li>PAYPAL_CLIENT_ID: payment provider (future)</li>
               </ul>
             </div>
           </div>

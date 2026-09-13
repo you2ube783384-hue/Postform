@@ -21,14 +21,14 @@ export default function StorefrontError({
 
   return (
     <div className="mx-auto flex max-w-[1600px] flex-col items-center gap-6 px-4 py-24 text-center sm:px-8 lg:px-12">
-      <p className="font-mono-tech text-[10px] font-bold uppercase tracking-[0.3em] text-pf-purple">
-        ERROR {error.digest ? `— ${error.digest.slice(0, 8)}` : ""}
+      <p className="font-mono-tech text-[10px] font-bold uppercase tracking-[0.3em] text-pf-muted">
+        ERROR {error.digest ? `- ${error.digest.slice(0, 8)}` : ""}
       </p>
       <h1 className="font-display text-4xl uppercase leading-none text-pf-black sm:text-5xl">
         Something went wrong
       </h1>
       <p className="max-w-md text-sm text-pf-muted">
-        The rack jammed while loading this page. Please try again — your cart
+        The rack jammed while loading this page. Please try again; your cart
         and saved items are untouched.
       </p>
       <div className="flex flex-wrap items-center justify-center gap-3">

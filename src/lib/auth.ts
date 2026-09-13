@@ -1,4 +1,4 @@
-// POSTFORM admin auth — HMAC-signed session tokens
+// POSTFORM admin auth - HMAC-signed session tokens
 // Works in both Node runtime (API routes) and Edge runtime (middleware) via Web Crypto.
 
 const COOKIE_NAME = "pf_admin";

@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import type { Product } from "@/lib/types";
 import { ProductCard } from "./product-card";
 import { cn } from "@/lib/utils";
@@ -31,14 +32,38 @@ export function ProductGrid({
   );
 }
 
+/**
+ * Horizontal scroll-snap rail of product cards. A distinct layout family
+ * from ProductGrid: cards flick horizontally with snap points instead of
+ * wrapping. Used for "fresh arrivals" breadth browsing.
+ */
+export function ProductRail({
+  products,
+  priorityCount = 2,
+}: {
+  products: Product[];
+  priorityCount?: number;
+}) {
+  return (
+    <div className="no-scrollbar -mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-2 sm:mx-0 sm:px-0">
+      {products.map((p, i) => (
+        <div
+          key={p.id}
+          className="flex w-[62vw] shrink-0 snap-start sm:w-[280px] lg:w-[300px]"
+        >
+          <ProductCard product={p} priority={i < priorityCount} />
+        </div>
+      ))}
+    </div>
+  );
+}
+
 export function SectionHeading({
-  kicker,
   title,
   link,
   linkLabel = "VIEW ALL",
   className,
 }: {
-  kicker: string;
   title: string;
   link?: string;
   linkLabel?: string;
@@ -46,14 +71,9 @@ export function SectionHeading({
 }) {
   return (
     <div className={cn("flex items-end justify-between gap-4 border-b-2 border-pf-black pb-3", className)}>
-      <div>
-        <p className="font-mono-tech text-[10px] font-bold uppercase tracking-[0.3em] text-pf-purple">
-          {kicker}
-        </p>
-        <h2 className="font-display text-2xl uppercase leading-none text-pf-black sm:text-3xl">
-          {title}
-        </h2>
-      </div>
+      <h2 className="font-display text-2xl uppercase leading-none text-pf-black sm:text-3xl">
+        {title}
+      </h2>
       {link && (
         <a
           href={link}

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { AdminShell } from "@/components/admin/admin-shell";
 
 export const metadata: Metadata = {
-  title: { default: "Admin", template: "%s — POSTFORM Admin" },
+  title: { default: "Admin", template: "%s - POSTFORM Admin" },
   robots: { index: false, follow: false },
 };
 

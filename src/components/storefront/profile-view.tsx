@@ -67,10 +67,10 @@ export function ProfileView() {
     }
     if (profile.addresses.some((a) => a.id === editing.id)) {
       updateAddress(editing);
-      toast.success("ADDRESS UPDATED", { description: `${editing.label} — ${editing.city}` });
+      toast.success("ADDRESS UPDATED", { description: `${editing.label} - ${editing.city}` });
     } else {
       addAddress(editing);
-      toast.success("ADDRESS SAVED", { description: `${editing.label} — ${editing.city}` });
+      toast.success("ADDRESS SAVED", { description: `${editing.label} - ${editing.city}` });
     }
     setEditing(null);
   }
@@ -90,8 +90,8 @@ export function ProfileView() {
     <div className="mx-auto max-w-[1100px] px-4 py-8 sm:px-8">
       <div className="flex flex-wrap items-end justify-between gap-3 border-b-2 border-pf-black pb-4">
         <div>
-          <p className="font-mono-tech text-[10px] font-bold uppercase tracking-[0.3em] text-pf-purple">
-            LOCAL PROFILE — NO ACCOUNT, NO SERVER
+          <p className="font-mono-tech text-[10px] font-bold uppercase tracking-[0.3em] text-pf-muted">
+            LOCAL PROFILE / NO ACCOUNT, NO SERVER
           </p>
           <h1 className="font-display text-4xl uppercase leading-none text-pf-black sm:text-5xl">
             Profile
@@ -100,9 +100,9 @@ export function ProfileView() {
       </div>
 
       <div className="mt-4 flex items-start gap-3 border-2 border-pf-black bg-pf-purple-soft/50 p-4">
-        <HardDriveDownload className="mt-0.5 h-5 w-5 shrink-0 text-pf-purple" strokeWidth={2} />
+        <HardDriveDownload className="mt-0.5 h-5 w-5 shrink-0 text-pf-black" strokeWidth={2} />
         <p className="text-xs leading-relaxed text-pf-ink">
-          Everything here lives in <strong>this browser&apos;s local storage</strong> — it never leaves your
+          Everything here lives in <strong>this browser&apos;s local storage</strong>. It never leaves your
           device and is used only to prefill checkout. Clearing your browser data removes it. There is no
           POSTFORM account system and no server-side customer database.
         </p>
@@ -111,7 +111,7 @@ export function ProfileView() {
       {/* PERSONAL INFO */}
       <section className="mt-8 border-2 border-pf-black bg-pf-paper" aria-labelledby="personal-heading">
         <div className="flex items-center gap-2 border-b-2 border-pf-black px-5 py-3">
-          <User className="h-4 w-4 text-pf-purple" strokeWidth={2.5} />
+          <User className="h-4 w-4 text-pf-black" strokeWidth={2.5} />
           <h2 id="personal-heading" className="font-mono-tech text-xs font-bold uppercase tracking-[0.25em]">
             Personal Information
           </h2>
@@ -132,7 +132,7 @@ export function ProfileView() {
         </div>
         <div className="flex items-center justify-between border-t border-pf-black/15 px-5 py-3">
           {savedToast ? (
-            <span className="font-mono-tech text-[10px] font-bold uppercase tracking-widest text-pf-purple">
+            <span className="font-mono-tech text-[10px] font-bold uppercase tracking-widest text-pf-black">
               ✓ SAVED TO THIS DEVICE
             </span>
           ) : (
@@ -150,7 +150,7 @@ export function ProfileView() {
       <section className="mt-8 border-2 border-pf-black bg-pf-paper" aria-labelledby="addr-heading">
         <div className="flex items-center justify-between border-b-2 border-pf-black px-5 py-3">
           <div className="flex items-center gap-2">
-            <MapPin className="h-4 w-4 text-pf-purple" strokeWidth={2.5} />
+            <MapPin className="h-4 w-4 text-pf-black" strokeWidth={2.5} />
             <h2 id="addr-heading" className="font-mono-tech text-xs font-bold uppercase tracking-[0.25em]">
               Saved Addresses
             </h2>
@@ -163,7 +163,7 @@ export function ProfileView() {
         <div className="px-5 py-5">
           {editing ? (
             <div className="border-2 border-pf-black bg-pf-cream p-4">
-              <p className="mb-4 font-mono-tech text-[10px] font-bold uppercase tracking-[0.25em] text-pf-purple">
+              <p className="mb-4 font-mono-tech text-[10px] font-bold uppercase tracking-[0.25em] text-pf-black">
                 {profile.addresses.some((a) => a.id === editing.id) ? "EDIT ADDRESS" : "NEW ADDRESS"}
               </p>
               <div className="grid gap-4 sm:grid-cols-2">
@@ -193,7 +193,7 @@ export function ProfileView() {
                     onChange={(e) => setEditing({ ...editing, country: e.target.value })}
                     className={cn(inputClass, "cursor-pointer")}
                   >
-                    <option value="">— SELECT —</option>
+                    <option value="">- SELECT -</option>
                     {COUNTRIES.map((c) => (
                       <option key={c} value={c}>{c}</option>
                     ))}
@@ -238,7 +238,7 @@ export function ProfileView() {
             </div>
           ) : profile.addresses.length === 0 ? (
             <p className="border-2 border-dashed border-pf-black/25 px-4 py-10 text-center font-mono-tech text-xs uppercase tracking-widest text-pf-muted">
-              NO SAVED ADDRESSES — ADD ONE TO SPEED UP CHECKOUT
+              NO SAVED ADDRESSES / ADD ONE TO SPEED UP CHECKOUT
             </p>
           ) : (
             <ul className="grid gap-4 sm:grid-cols-2">
@@ -289,9 +289,9 @@ export function ProfileView() {
                       type="button"
                       onClick={() => {
                         setDefaultAddress(a.id);
-                        toast.success("DEFAULT ADDRESS SET", { description: `${a.label} — ${a.city}` });
+                        toast.success("DEFAULT ADDRESS SET", { description: `${a.label} - ${a.city}` });
                       }}
-                      className="border-t-2 border-pf-black px-4 py-2 text-left font-mono-tech text-[10px] font-bold uppercase tracking-widest text-pf-purple transition-colors hover:bg-pf-yellow"
+                      className="border-t-2 border-pf-black px-4 py-2 text-left font-mono-tech text-[10px] font-bold uppercase tracking-widest text-pf-black transition-colors hover:bg-pf-yellow"
                     >
                       SET AS DEFAULT
                     </button>
@@ -334,7 +334,7 @@ export function ProfileView() {
       <div className="mt-6 flex items-center gap-3 border-2 border-dashed border-pf-black/20 p-3">
         <ConditionBadge condition="LOCAL ONLY" />
         <p className="text-[11px] text-pf-muted">
-          POSTFORM stores profiles in browser localStorage — device-specific by design. Order history is
+          POSTFORM stores profiles in browser localStorage, device-specific by design. Order history is
           intentionally not kept.
         </p>
       </div>

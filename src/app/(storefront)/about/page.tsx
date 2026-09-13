@@ -5,7 +5,7 @@ import { Breadcrumbs } from "@/components/storefront/breadcrumbs";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "POSTFORM is an international curated-stock fashion store — streetwear, sneakers and accessories sourced, graded and resold worldwide.",
+    "POSTFORM is an international curated-stock fashion store. Streetwear, sneakers and accessories sourced, graded and resold worldwide.",
 };
 
 export default function AboutPage() {
@@ -14,7 +14,7 @@ export default function AboutPage() {
       <Breadcrumbs items={[{ label: "ABOUT" }]} />
 
       <div className="mt-6 border-b-2 border-pf-black pb-6">
-        <p className="font-mono-tech text-[10px] font-bold uppercase tracking-[0.3em] text-pf-purple">
+        <p className="font-mono-tech text-[10px] font-bold uppercase tracking-[0.3em] text-pf-muted">
           THE OPERATION
         </p>
         <h1 className="mt-2 font-display text-5xl uppercase leading-[0.9] text-pf-black sm:text-6xl">
@@ -28,18 +28,18 @@ export default function AboutPage() {
         <div className="space-y-5 text-sm leading-relaxed text-pf-ink sm:text-base">
           <p>
             POSTFORM is an international reseller and curated-stock fashion store. We acquire available
-            clothing, footwear and accessories — new, used, vintage and everything in between — and resell
+            clothing, footwear and accessories (new, used, vintage and everything in between) and resell
             them to a worldwide audience. The business is deliberately simple: find the pieces worth
             wearing, grade them honestly, price them fairly, ship them anywhere.
           </p>
           <p>
             Our inventory rotates with whatever the market makes available. That means no endless
             catalogue, no manufactured hype drops, and no pretending a piece is rare when it isn&apos;t.
-            What you see on the rack is what exists. When it&apos;s gone, it&apos;s gone — and something
+            What you see on the rack is what exists. When it&apos;s gone, it&apos;s gone. Something
             else takes its place.
           </p>
           <p>
-            Every item carries an honest condition grade — NEW, LIKE NEW, EXCELLENT, USED or VINTAGE —
+            Every item carries an honest condition grade (NEW, LIKE NEW, EXCELLENT, USED or VINTAGE),
             decided by inspection, not marketing. We photograph what we sell and describe what we see. If
             a product arrives defective or significantly different from its description, we make it
             right; that&apos;s the deal.
@@ -63,10 +63,10 @@ export default function AboutPage() {
               {[
                 ["FOCUS", "STREETWEAR / SNEAKERS / ACCESSORIES"],
                 ["AUDIENCE", "MEN 18–30 + WORLDWIDE"],
-                ["SHIPPING", "FREE — INTERNATIONAL"],
+                ["SHIPPING", "FREE INTERNATIONAL"],
                 ["CONDITIONS", "NEW → VINTAGE"],
                 ["RETURNS", "DEFECT / MISMATCH + VIDEO"],
-                ["ACCOUNTS", "NONE — GUEST ONLY"],
+                ["ACCOUNTS", "NONE / GUEST ONLY"],
               ].map(([k, v]) => (
                 <div key={k} className="flex justify-between gap-3">
                   <dt className="text-pf-cream/50">{k}</dt>
@@ -82,12 +82,12 @@ export default function AboutPage() {
             </p>
             <a
               href="mailto:postformproducts@haren.uk"
-              className="mt-2 block break-all font-mono-tech text-sm font-bold text-pf-purple underline underline-offset-4"
+              className="mt-2 block break-all font-mono-tech text-sm font-bold text-pf-black underline underline-offset-4"
             >
               postformproducts@haren.uk
             </a>
             <p className="mt-3 text-xs leading-relaxed text-pf-muted">
-              Orders, returns and general questions all go through email — a human reads every one.
+              Orders, returns and general questions all go through email. A human reads every one.
             </p>
           </div>
         </aside>

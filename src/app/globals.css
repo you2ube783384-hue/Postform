@@ -96,7 +96,7 @@
 }
 
 @layer base {
-  /* Mobile bottom navigation height — used by fixed bars & page padding */
+  /* Mobile bottom navigation height - used by fixed bars & page padding */
   :root {
     --pf-bnav-h: 68px;
   }
@@ -120,7 +120,8 @@
     color: #141310;
   }
 
-  /* Visible keyboard focus — POSTFORM purple */
+  /* Visible keyboard focus - POSTFORM purple (functional a11y affordance,
+   * not decoration; the page accent stays yellow per the color lock) */
   :focus-visible {
     outline: 3px solid #6c4cf1;
     outline-offset: 2px;
@@ -164,7 +165,7 @@
     }
   }
 
-  /* Display typography — editorial fashion voice */
+  /* Display typography - editorial fashion voice */
   .font-display {
     font-family: var(--font-archivo-black), var(--font-archivo), sans-serif;
     letter-spacing: -0.02em;
@@ -187,20 +188,7 @@
     border-bottom: 2px solid #141310;
   }
 
-  /* Hard offset shadow — brutalist depth */
-  .pf-hard-shadow {
-    box-shadow: 4px 4px 0 0 #141310;
-  }
-
-  .pf-hard-shadow-sm {
-    box-shadow: 2px 2px 0 0 #141310;
-  }
-
-  .pf-hard-shadow-yellow {
-    box-shadow: 4px 4px 0 0 #ffd02e;
-  }
-
-  /* Press interaction — physical, tactile */
+  /* Press interaction - physical, tactile */
   .pf-press {
     transition:
       transform 120ms cubic-bezier(0.2, 0, 0, 1),
@@ -231,6 +219,59 @@
     content: "▌";
     color: #ffd02e;
     animation: pf-caret 1s steps(1) infinite;
+  }
+}
+
+/*
+ * Tailwind v4 @utility definitions.
+ * Custom utilities registered with @utility work with variants
+ * (hover:, active:, group-hover:, md: etc), unlike plain @layer
+ * components classes. The hard-shadow family powers POSTFORM's
+ * brutalist hover physics: elements lift and drop a real offset
+ * shadow on hover, then physically press flat on :active.
+ */
+@utility pf-hard-shadow {
+  box-shadow: 4px 4px 0 0 #141310;
+}
+@utility pf-hard-shadow-sm {
+  box-shadow: 2px 2px 0 0 #141310;
+}
+@utility pf-hard-shadow-lg {
+  box-shadow: 6px 6px 0 0 #141310;
+}
+@utility pf-hard-shadow-yellow {
+  box-shadow: 4px 4px 0 0 #ffd02e;
+}
+
+/* Hero entry choreography - motivated motion (hierarchy first).
+ * Runs only when the user allows motion; staggered via --pf-i index. */
+@keyframes pf-rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes pf-wipe {
+  from {
+    clip-path: inset(0 0 100% 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .pf-rise {
+    animation: pf-rise 0.55s cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-delay: calc(var(--pf-i, 0) * 90ms);
+  }
+  .pf-wipe {
+    animation: pf-wipe 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-delay: calc(var(--pf-i, 0) * 110ms);
   }
 }
 

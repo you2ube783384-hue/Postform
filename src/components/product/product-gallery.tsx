@@ -43,7 +43,7 @@ export function ProductGallery({ product }: { product: Product }) {
 
   return (
     <div className="space-y-3">
-      {/* Mobile — swipeable gallery */}
+      {/* Mobile - swipeable gallery */}
       <div className="relative lg:hidden">
         <div
           ref={scrollRef}
@@ -54,7 +54,7 @@ export function ProductGallery({ product }: { product: Product }) {
             const idx = Math.round(el.scrollLeft / el.clientWidth);
             if (idx !== active && idx >= 0 && idx < images.length) setActive(idx);
           }}
-          aria-label="Product image gallery — swipe to browse"
+          aria-label="Product image gallery, swipe to browse"
         >
           {images.map((img, i) => (
             <button
@@ -96,7 +96,7 @@ export function ProductGallery({ product }: { product: Product }) {
         </span>
       </div>
 
-      {/* Desktop — editorial gallery with thumbs */}
+      {/* Desktop - editorial gallery with thumbs */}
       <div className="hidden gap-3 lg:grid lg:grid-cols-[88px_1fr]">
         <div className="flex flex-col gap-3">
           {images.map((img, i) => (
@@ -220,7 +220,7 @@ export function ProductGallery({ product }: { product: Product }) {
           </div>
           <div className="flex items-center justify-between border-t-2 border-pf-black px-4 py-2 font-mono-tech text-[10px] uppercase tracking-widest text-pf-muted">
             <span>
-              {active + 1} / {images.length} — {current.alt ?? product.name}
+              {active + 1} / {images.length} · {current.alt ?? product.name}
             </span>
             <span className="hidden sm:block">ESC TO CLOSE / ← → TO NAVIGATE</span>
           </div>

@@ -3,7 +3,7 @@ import { db } from "@/lib/db";
 import { parseTags } from "@/lib/format";
 import type { Prisma } from "@prisma/client";
 
-// POST /api/admin/products — create a product
+// POST /api/admin/products - create a product
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
@@ -123,7 +123,7 @@ function isValidUrl(url: string): boolean {
   }
 }
 
-// GET /api/admin/products — list all products (incl. inactive)
+// GET /api/admin/products - list all products (incl. inactive)
 export async function GET() {
   try {
     const products = await db.product.findMany({

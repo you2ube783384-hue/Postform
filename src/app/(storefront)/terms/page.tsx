@@ -5,7 +5,7 @@ import { Breadcrumbs } from "@/components/storefront/breadcrumbs";
 export const metadata: Metadata = {
   title: "Terms & Conditions",
   description:
-    "POSTFORM terms & conditions — brand protection, verified payment methods (Visa, PayPal), product authenticity and terms modifications.",
+    "POSTFORM terms & conditions: brand protection, verified payment methods (Visa, PayPal), product authenticity and terms modifications.",
 };
 
 export default function TermsPage() {
@@ -14,8 +14,8 @@ export default function TermsPage() {
       <Breadcrumbs items={[{ label: "TERMS & CONDITIONS" }]} />
 
       <div className="mt-6 border-b-2 border-pf-black pb-6">
-        <p className="font-mono-tech text-[10px] font-bold uppercase tracking-[0.3em] text-pf-purple">
-          LEGAL — TERMS
+        <p className="font-mono-tech text-[10px] font-bold uppercase tracking-[0.3em] text-pf-muted">
+          LEGAL / TERMS
         </p>
         <h1 className="mt-2 font-display text-5xl uppercase leading-[0.9] text-pf-black sm:text-6xl">
           Terms

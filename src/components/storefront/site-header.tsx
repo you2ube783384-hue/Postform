@@ -91,7 +91,7 @@ export function SiteHeader() {
 
   return (
     <header className="sticky top-0 z-50 bg-pf-cream">
-      {/* Ticker strip — desktop/tablet only (mobile header stays compact) */}
+      {/* Ticker strip - desktop/tablet only (mobile header stays compact) */}
       <div className="hidden border-b-2 border-pf-black bg-pf-black text-pf-cream overflow-hidden sm:block">
         <div className="flex whitespace-nowrap py-1.5 font-mono-tech text-[10px] tracking-[0.2em] uppercase pf-marquee">
           {[0, 1].map((dup) => (
@@ -100,7 +100,7 @@ export function SiteHeader() {
                 "FREE INTERNATIONAL SHIPPING",
                 "CURATED RESALE STOCK",
                 "GLOBAL DELIVERY",
-                "SOURCED — VERIFIED — RESOLD",
+                "SOURCED / VERIFIED / RESOLD",
                 "NEW / USED / VINTAGE",
                 "DEFECT RETURNS ACCEPTED WITH VIDEO PROOF",
               ].map((t, i) => (
@@ -119,7 +119,7 @@ export function SiteHeader() {
       {/* Main bar */}
       <div className="border-b-2 border-pf-black">
         <div className="mx-auto grid max-w-[1600px] grid-cols-[auto_1fr_auto] items-stretch">
-          {/* Left — mobile menu / desktop marker */}
+          {/* Left - mobile menu / desktop marker */}
           <div className="flex items-center gap-1 px-3 py-3 sm:px-5">
             <button
               type="button"
@@ -134,18 +134,18 @@ export function SiteHeader() {
             </span>
           </div>
 
-          {/* Center — wordmark */}
+          {/* Center - wordmark */}
           <div className="flex items-center justify-center py-3">
             <Link
               href="/"
               className="font-display text-2xl leading-none tracking-tight text-pf-black sm:text-3xl lg:text-4xl"
-              aria-label="POSTFORM — home"
+              aria-label="POSTFORM home"
             >
               POSTFORM<span className="text-pf-yellow" style={{ WebkitTextStroke: "1.5px #141310" }}>▮</span>
             </Link>
           </div>
 
-          {/* Right — actions */}
+          {/* Right - actions */}
           <div className="flex items-center justify-end gap-1 px-3 py-3 sm:gap-1.5 sm:px-5">
             {/* Desktop inline search */}
             <div className="hidden items-center sm:flex">
@@ -166,7 +166,7 @@ export function SiteHeader() {
                   <button
                     type="submit"
                     aria-label="Submit search"
-                    className="flex h-10 w-10 items-center justify-center border-l-2 border-pf-black bg-pf-yellow transition-colors hover:bg-pf-soft-yellow"
+                    className="flex h-10 w-10 items-center justify-center border-l-2 border-pf-black bg-pf-yellow transition-colors hover:bg-pf-yellow-soft"
                   >
                     <Search className="h-4 w-4" strokeWidth={2.5} />
                   </button>
@@ -191,7 +191,7 @@ export function SiteHeader() {
               )}
             </div>
 
-            {/* Refund & profile — desktop/tablet only (mobile: profile lives in
+            {/* Refund & profile - desktop/tablet only (mobile: profile lives in
                 the bottom nav, refund in the drawer) */}
             <IconLink
               href="/refund"
@@ -212,7 +212,7 @@ export function SiteHeader() {
           </div>
         </div>
 
-        {/* Persistent mobile search — always visible on phones (spec §5) */}
+        {/* Persistent mobile search - always visible on phones (spec §5) */}
         <div className="border-t-2 border-pf-black bg-pf-paper px-3 py-2 sm:hidden">
           <form onSubmit={submitSearch} className="flex border-2 border-pf-black">
             <input
@@ -245,7 +245,7 @@ export function SiteHeader() {
         </div>
       </div>
 
-      {/* Category strip — mobile/tablet: horizontal scroll (spec §6) */}
+      {/* Category strip - mobile/tablet: horizontal scroll (spec §6) */}
       <nav
         aria-label="Product categories"
         className="border-b-2 border-pf-black bg-pf-paper lg:hidden"
@@ -280,7 +280,7 @@ export function SiteHeader() {
         </div>
       </nav>
 
-      {/* Category strip — desktop */}
+      {/* Category strip - desktop */}
       <nav aria-label="Product categories" className="hidden border-b-2 border-pf-black bg-pf-paper lg:block">
         <div className="mx-auto flex max-w-[1600px]">
           <Link
@@ -308,7 +308,7 @@ export function SiteHeader() {
             </Link>
           ))}
           <div className="flex flex-1 items-center justify-end px-6 py-2.5 font-mono-tech text-[10px] tracking-[0.2em] text-pf-muted uppercase">
-            STOCK ROTATES — MISS IT, LOSE IT
+            STOCK ROTATES. MISS IT, LOSE IT.
           </div>
         </div>
       </nav>
@@ -390,7 +390,7 @@ export function SiteHeader() {
               className="border-t-2 border-pf-black bg-pf-paper px-4 py-3 font-mono-tech text-[10px] tracking-[0.15em] text-pf-muted uppercase"
               style={{ paddingBottom: "calc(0.75rem + env(safe-area-inset-bottom))" }}
             >
-              FREE INTL SHIPPING — WORLDWIDE
+              FREE INTL SHIPPING / WORLDWIDE
             </div>
           </div>
         </div>

@@ -69,7 +69,7 @@ function FilterGroup({
             </span>
           )}
         </span>
-        <span aria-hidden className="text-pf-purple">
+        <span aria-hidden className="text-pf-black">
           {open ? "−" : "+"}
         </span>
       </button>
@@ -190,7 +190,7 @@ export function FilterPanel({
           <button
             type="button"
             onClick={clearAll}
-            className="flex items-center gap-1 font-mono-tech text-[10px] font-bold uppercase tracking-widest text-pf-purple hover:underline"
+            className="flex items-center gap-1 font-mono-tech text-[10px] font-bold uppercase tracking-widest text-pf-black hover:underline"
           >
             <X className="h-3 w-3" /> Clear all
           </button>
@@ -198,7 +198,7 @@ export function FilterPanel({
       </div>
 
       <div className="flex-1 overflow-y-auto px-4 py-2 lg:px-0">
-        {/* Category — only on /shop (not category pages) */}
+        {/* Category - only on /shop (not category pages) */}
         {!activeCategory && (
           <FilterGroup label="Category">
             <div className="flex flex-wrap gap-1.5 pb-2">
@@ -291,7 +291,7 @@ export function FilterPanel({
               aria-label="Minimum price"
               className="h-9 w-full border-2 border-pf-black bg-pf-paper px-2 font-mono-tech text-xs outline-none placeholder:text-pf-muted"
             />
-            <span className="font-mono-tech text-xs text-pf-muted">—</span>
+            <span className="font-mono-tech text-xs text-pf-muted">-</span>
             <input
               type="number"
               min={0}
@@ -369,9 +369,9 @@ export function ShopToolbar({
           className="h-10 cursor-pointer border-2 border-pf-cream/40 bg-pf-black px-2 font-mono-tech text-[11px] font-bold uppercase tracking-wider text-pf-cream outline-none hover:border-pf-yellow [&>option]:bg-pf-black [&>option]:text-pf-cream"
         >
           <option value="newest">NEWEST</option>
-          <option value="price-asc">PRICE: LOW — HIGH</option>
-          <option value="price-desc">PRICE: HIGH — LOW</option>
-          <option value="az">A — Z</option>
+          <option value="price-asc">PRICE: LOW TO HIGH</option>
+          <option value="price-desc">PRICE: HIGH TO LOW</option>
+          <option value="az">A-Z</option>
         </select>
       </div>
     </div>

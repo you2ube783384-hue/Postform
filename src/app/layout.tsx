@@ -26,8 +26,8 @@ const spaceMono = Space_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://postform-eight.vercel.app"),
   title: {
-    default: "POSTFORM — Curated Streetwear Resale",
-    template: "%s — POSTFORM",
+    default: "POSTFORM - Curated Streetwear Resale",
+    template: "%s - POSTFORM",
   },
   description:
     "POSTFORM is an international curated-stock fashion store. Streetwear, sneakers and accessories sourced, verified and resold worldwide. Free international shipping.",
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
     "hoodies",
   ],
   openGraph: {
-    title: "POSTFORM — Curated Streetwear Resale",
+    title: "POSTFORM - Curated Streetwear Resale",
     description:
       "Curated streetwear, sneakers and accessories. Sourced, verified, resold worldwide.",
     siteName: "POSTFORM",
@@ -50,7 +50,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "POSTFORM — Curated Streetwear Resale",
+    title: "POSTFORM - Curated Streetwear Resale",
     description:
       "Curated streetwear, sneakers and accessories. Sourced, verified, resold worldwide.",
   },

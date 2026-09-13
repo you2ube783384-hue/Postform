@@ -15,7 +15,7 @@ export async function generateMetadata({
   if (!cat) return { title: "Category Not Found" };
   return {
     title: `${cat.name}`,
-    description: `Shop POSTFORM ${cat.name.toLowerCase()} — curated resale stock with free international shipping.`,
+    description: `Shop POSTFORM ${cat.name.toLowerCase()}, curated resale stock with free international shipping.`,
   };
 }
 

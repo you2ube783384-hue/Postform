@@ -35,7 +35,7 @@ export function CartView({ settings }: { settings: StoreSettings }) {
     <div className="mx-auto max-w-[1600px] px-4 py-8 sm:px-8 lg:px-12">
       <div className="flex flex-wrap items-end justify-between gap-3 border-b-2 border-pf-black pb-4">
         <div>
-          <p className="font-mono-tech text-[10px] font-bold uppercase tracking-[0.3em] text-pf-purple">
+          <p className="font-mono-tech text-[10px] font-bold uppercase tracking-[0.3em] text-pf-muted">
             YOUR SELECTION
           </p>
           <h1 className="font-display text-4xl uppercase leading-none text-pf-black sm:text-5xl">
@@ -49,7 +49,7 @@ export function CartView({ settings }: { settings: StoreSettings }) {
         </div>
         <Link
           href="/shop"
-          className="font-mono-tech text-[11px] font-bold uppercase tracking-widest text-pf-purple underline-offset-4 hover:underline"
+          className="font-mono-tech text-[11px] font-bold uppercase tracking-widest text-pf-black underline-offset-4 hover:underline"
         >
           ← CONTINUE SHOPPING
         </Link>
@@ -60,7 +60,7 @@ export function CartView({ settings }: { settings: StoreSettings }) {
           <ShoppingBag className="h-12 w-12 text-pf-muted" strokeWidth={1.5} />
           <p className="font-display text-3xl uppercase text-pf-black">Your cart is empty</p>
           <p className="max-w-sm text-sm text-pf-muted">
-            Nothing selected yet. The rack is rotating — go find something worth wearing.
+            Nothing selected yet. The rack is rotating. Go find something worth wearing.
           </p>
           <Link
             href="/shop"
@@ -181,7 +181,7 @@ export function CartView({ settings }: { settings: StoreSettings }) {
                 <div className="flex justify-between">
                   <span className="text-pf-cream/70">SHIPPING</span>
                   <span className="font-bold text-pf-yellow">
-                    {shipping === 0 ? "FREE — WORLDWIDE" : formatPrice(shipping, settings.currency)}
+                    {shipping === 0 ? "FREE WORLDWIDE" : formatPrice(shipping, settings.currency)}
                   </span>
                 </div>
                 <div className="border-t-2 border-pf-cream/20 pt-3">
@@ -202,7 +202,7 @@ export function CartView({ settings }: { settings: StoreSettings }) {
                   Proceed to checkout <ArrowRight className="h-5 w-5" strokeWidth={2.5} />
                 </Link>
                 <p className="mt-3 text-center font-mono-tech text-[10px] uppercase tracking-widest text-pf-cream/50">
-                  NO ACCOUNT NEEDED — GUEST CHECKOUT
+                  NO ACCOUNT NEEDED / GUEST CHECKOUT
                 </p>
               </div>
             </div>

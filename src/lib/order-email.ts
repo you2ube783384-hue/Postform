@@ -1,4 +1,4 @@
-// POSTFORM order email generation — mailto: handoff (PRD §22, §42)
+// POSTFORM order email generation - mailto: handoff (PRD §22, §42)
 // Generated on the client only after checkout data is assembled.
 
 import type { CartItem, SavedAddress, StoreSettings } from "./types";
@@ -50,7 +50,7 @@ export function buildOrderEmailBody(order: OrderData, settings: StoreSettings): 
 
   lines.push("ORDER ITEMS");
   order.items.forEach((item, i) => {
-    lines.push(`[${i + 1}] ${item.brand ? item.brand + " — " : ""}${item.name}`);
+    lines.push(`[${i + 1}] ${item.brand ? item.brand + " - " : ""}${item.name}`);
     lines.push(
       `    Variant: ${[item.size ? `Size ${item.size}` : null, item.color ? `Colour ${item.color}` : null]
         .filter(Boolean)
@@ -81,13 +81,13 @@ export interface GeneratedOrderEmail {
   subject: string;
   body: string;
   mailtoUrl: string;
-  tooLong: boolean; // exceeds safe mailto length — offer copy fallback
+  tooLong: boolean; // exceeds safe mailto length - offer copy fallback
 }
 
 const SAFE_MAILTO_LENGTH = 1900;
 
 export function buildMailtoUrl(body: string, orderId: string, recipient: string): GeneratedOrderEmail {
-  const subject = `POSTFORM Order #${orderId.split("-")[1]} — New Order`;
+  const subject = `POSTFORM Order #${orderId.split("-")[1]} - New Order`;
   const mailtoUrl = `mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   return {
     subject,

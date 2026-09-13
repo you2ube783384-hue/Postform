@@ -150,7 +150,7 @@ export function CheckoutView({ settings }: { settings: StoreSettings }) {
       state: a.state ?? "",
       postalCode: a.postalCode,
     }));
-    toast.success(`ADDRESS LOADED — ${a.label.toUpperCase()}`);
+    toast.success(`ADDRESS LOADED - ${a.label.toUpperCase()}`);
   }
 
   function handleSubmit(e: React.FormEvent) {
@@ -204,13 +204,13 @@ export function CheckoutView({ settings }: { settings: StoreSettings }) {
     clearCart();
 
     // Open the default email application with the prefilled order
-    // (programmatic anchor — mailto: navigation without mutating window.location)
+    // (programmatic anchor - mailto: navigation without mutating window.location)
     const anchor = document.createElement("a");
     anchor.href = email.mailtoUrl;
     anchor.click();
 
     toast.success(`ORDER ${orderId} PREPARED`, {
-      description: "Your email app should have opened — press Send to complete the order request.",
+      description: "Your email app should have opened. Press Send to complete the order request.",
     });
   }
 
@@ -219,7 +219,7 @@ export function CheckoutView({ settings }: { settings: StoreSettings }) {
     const body = buildOrderEmailBody(confirmation, settings);
     try {
       await navigator.clipboard.writeText(
-        `To: ${settings.storeEmail}\nSubject: POSTFORM Order #${confirmation.orderId.split("-")[1]} — New Order\n\n${body}`
+        `To: ${settings.storeEmail}\nSubject: POSTFORM Order #${confirmation.orderId.split("-")[1]} - New Order\n\n${body}`
       );
       setCopied(true);
       toast.success("ORDER DETAILS COPIED", {
@@ -249,7 +249,7 @@ export function CheckoutView({ settings }: { settings: StoreSettings }) {
         <div className="border-2 border-pf-black bg-pf-paper">
           <div className="border-b-2 border-pf-black bg-pf-black px-6 py-8 text-center">
             <p className="font-mono-tech text-[10px] font-bold uppercase tracking-[0.3em] text-pf-yellow">
-              ORDER PREPARED — AWAITING YOUR SEND
+              ORDER PREPARED / AWAITING YOUR SEND
             </p>
             <p className="mt-3 font-display text-4xl uppercase text-pf-cream sm:text-5xl">
               {confirmation.orderId}
@@ -275,7 +275,7 @@ export function CheckoutView({ settings }: { settings: StoreSettings }) {
 
             {emailTooLong && (
               <p className="border-2 border-pf-red bg-pf-red/5 p-3 font-mono-tech text-[11px] font-bold uppercase tracking-wider text-pf-red">
-                ⚠ This order is large — some email apps may truncate prefilled text. Use “Copy order
+                ⚠ This order is large; some email apps may truncate prefilled text. Use “Copy order
                 details” below if anything looks cut off.
               </p>
             )}
@@ -293,7 +293,7 @@ export function CheckoutView({ settings }: { settings: StoreSettings }) {
                 <Mail className="h-5 w-5" /> Open email app again
               </PFButton>
               <PFButton variant="outline" size="lg" onClick={copyOrderDetails}>
-                {copied ? <Check className="h-5 w-5 text-pf-purple" /> : <Copy className="h-5 w-5" />}
+                {copied ? <Check className="h-5 w-5 text-pf-black" /> : <Copy className="h-5 w-5" />}
                 {copied ? "Copied to clipboard" : "Copy order details"}
               </PFButton>
             </div>
@@ -307,7 +307,7 @@ export function CheckoutView({ settings }: { settings: StoreSettings }) {
                   <li key={item.key} className="flex items-baseline justify-between gap-3 text-sm">
                     <span className="text-pf-ink">
                       {item.qty}× {item.name}
-                      {item.size ? ` — ${item.size}` : ""}
+                      {item.size ? ` - ${item.size}` : ""}
                     </span>
                     <span className="font-mono-tech font-bold">
                       {formatPrice(item.price * item.qty, settings.currency)}
@@ -323,7 +323,7 @@ export function CheckoutView({ settings }: { settings: StoreSettings }) {
                   </span>
                 </div>
                 <div className="mt-1 flex justify-between text-base font-bold">
-                  <span>TOTAL — {confirmation.paymentMethod.toUpperCase()}</span>
+                  <span>TOTAL / {confirmation.paymentMethod.toUpperCase()}</span>
                   <span>{formatPrice(confirmation.total, settings.currency)}</span>
                 </div>
               </div>
@@ -357,7 +357,7 @@ export function CheckoutView({ settings }: { settings: StoreSettings }) {
         <div className="mt-10 flex flex-col items-center gap-5 border-2 border-dashed border-pf-black/30 px-6 py-20 text-center">
           <p className="font-display text-2xl uppercase text-pf-black">Nothing to check out</p>
           <p className="max-w-sm text-sm text-pf-muted">
-            Your cart is empty. Add something from the rack first — then come back.
+            Your cart is empty. Add something from the rack first, then come back.
           </p>
           <Link
             href="/shop"
@@ -377,14 +377,14 @@ export function CheckoutView({ settings }: { settings: StoreSettings }) {
     <div className="mx-auto max-w-[1600px] px-4 py-8 sm:px-8 lg:px-12">
       <div className="flex flex-wrap items-end justify-between gap-3 border-b-2 border-pf-black pb-4">
         <div>
-          <p className="font-mono-tech text-[10px] font-bold uppercase tracking-[0.3em] text-pf-purple">
-            GUEST CHECKOUT — NO ACCOUNT NEEDED
+          <p className="font-mono-tech text-[10px] font-bold uppercase tracking-[0.3em] text-pf-muted">
+            GUEST CHECKOUT / NO ACCOUNT NEEDED
           </p>
           <h1 className="font-display text-4xl uppercase leading-none text-pf-black sm:text-5xl">Checkout</h1>
         </div>
         <Link
           href="/cart"
-          className="font-mono-tech text-[11px] font-bold uppercase tracking-widest text-pf-purple underline-offset-4 hover:underline"
+          className="font-mono-tech text-[11px] font-bold uppercase tracking-widest text-pf-black underline-offset-4 hover:underline"
         >
           ← BACK TO CART
         </Link>
@@ -396,7 +396,7 @@ export function CheckoutView({ settings }: { settings: StoreSettings }) {
           <section className="border-2 border-pf-black bg-pf-paper" aria-labelledby="sec-customer">
             <div className="flex items-center justify-between border-b-2 border-pf-black px-5 py-3">
               <h2 id="sec-customer" className="font-mono-tech text-xs font-bold uppercase tracking-[0.25em]">
-                <span className="mr-2 text-pf-purple">01</span> CUSTOMER
+                <span className="mr-2 text-pf-black">01</span> CUSTOMER
               </h2>
               <span className="font-mono-tech text-[10px] uppercase tracking-widest text-pf-muted">
                 ALL FIELDS REQUIRED
@@ -442,10 +442,10 @@ export function CheckoutView({ settings }: { settings: StoreSettings }) {
           <section className="border-2 border-pf-black bg-pf-paper" aria-labelledby="sec-address">
             <div className="flex items-center justify-between border-b-2 border-pf-black px-5 py-3">
               <h2 id="sec-address" className="font-mono-tech text-xs font-bold uppercase tracking-[0.25em]">
-                <span className="mr-2 text-pf-purple">02</span> DELIVERY ADDRESS
+                <span className="mr-2 text-pf-black">02</span> DELIVERY ADDRESS
               </h2>
               <span className="font-mono-tech text-[10px] uppercase tracking-widest text-pf-muted">
-                INTERNATIONAL — WORLDWIDE
+                INTERNATIONAL / WORLDWIDE
               </span>
             </div>
 
@@ -475,7 +475,7 @@ export function CheckoutView({ settings }: { settings: StoreSettings }) {
                     onChange={(e) => set("country", e.target.value)}
                     className={cn(inputClass, "cursor-pointer")}
                   >
-                    <option value="">— SELECT COUNTRY —</option>
+                    <option value="">- SELECT COUNTRY -</option>
                     {COUNTRIES.map((c) => (
                       <option key={c} value={c}>
                         {c}
@@ -572,7 +572,7 @@ export function CheckoutView({ settings }: { settings: StoreSettings }) {
           <section className="border-2 border-pf-black bg-pf-paper" aria-labelledby="sec-payment">
             <div className="flex items-center justify-between border-b-2 border-pf-black px-5 py-3">
               <h2 id="sec-payment" className="font-mono-tech text-xs font-bold uppercase tracking-[0.25em]">
-                <span className="mr-2 text-pf-purple">03</span> PAYMENT METHOD
+                <span className="mr-2 text-pf-black">03</span> PAYMENT METHOD
               </h2>
               <span className="flex items-center gap-1 font-mono-tech text-[10px] uppercase tracking-widest text-pf-muted">
                 <ShieldCheck className="h-3.5 w-3.5" /> SECURE PROVIDER
@@ -620,7 +620,7 @@ export function CheckoutView({ settings }: { settings: StoreSettings }) {
                 POSTFORM never sees or stores your card details. Your selected method is included with
                 the order request; a secure PayPal / card payment request follows once your order is
                 reviewed.{" "}
-                <Link href="/refund" className="text-pf-purple underline underline-offset-2">
+                <Link href="/refund" className="text-pf-black underline underline-offset-2">
                   Refund policy
                 </Link>
               </p>
@@ -631,8 +631,8 @@ export function CheckoutView({ settings }: { settings: StoreSettings }) {
           <section className="border-2 border-pf-black bg-pf-paper" aria-labelledby="sec-note">
             <div className="border-b-2 border-pf-black px-5 py-3">
               <h2 id="sec-note" className="font-mono-tech text-xs font-bold uppercase tracking-[0.25em]">
-                <span className="mr-2 text-pf-purple">04</span> CUSTOMER NOTE
-                <span className="ml-2 font-normal text-pf-muted">— OPTIONAL</span>
+                <span className="mr-2 text-pf-black">04</span> CUSTOMER NOTE
+                <span className="ml-2 font-normal text-pf-muted">/ OPTIONAL</span>
               </h2>
             </div>
             <div className="px-5 py-5">
@@ -650,12 +650,12 @@ export function CheckoutView({ settings }: { settings: StoreSettings }) {
           </section>
         </div>
 
-        {/* ORDER SUMMARY — always visible */}
+        {/* ORDER SUMMARY - always visible */}
         <aside className="lg:sticky lg:top-[136px] lg:self-start" aria-label="Order summary">
           <div className="border-2 border-pf-black bg-pf-black text-pf-cream">
             <div className="border-b-2 border-pf-cream/20 px-5 py-4">
               <p className="font-mono-tech text-[10px] font-bold uppercase tracking-[0.3em] text-pf-yellow">
-                YOUR ORDER — {items.length} ITEM{items.length === 1 ? "" : "S"}
+                YOUR ORDER / {items.length} ITEM{items.length === 1 ? "" : "S"}
               </p>
             </div>
             <ul className="max-h-72 divide-y divide-pf-cream/10 overflow-y-auto px-5 py-4">
@@ -671,7 +671,7 @@ export function CheckoutView({ settings }: { settings: StoreSettings }) {
                     <p className="font-mono-tech text-[10px] uppercase tracking-wider text-pf-cream/50">
                       {item.size ? `SZ ${item.size}` : ""}
                       {item.size && item.color ? " / " : ""}
-                      {item.color ?? ""} — ×{item.qty}
+                      {item.color ?? ""} ×{item.qty}
                     </p>
                   </div>
                   <p className="font-mono-tech text-xs font-bold text-pf-yellow">
@@ -688,7 +688,7 @@ export function CheckoutView({ settings }: { settings: StoreSettings }) {
               <div className="flex justify-between">
                 <span className="text-pf-cream/70">SHIPPING</span>
                 <span className="font-bold text-pf-yellow">
-                  {shipping === 0 ? "FREE — WORLDWIDE" : formatPrice(shipping, settings.currency)}
+                  {shipping === 0 ? "FREE WORLDWIDE" : formatPrice(shipping, settings.currency)}
                 </span>
               </div>
               <div className="flex items-baseline justify-between border-t border-pf-cream/20 pt-3">
@@ -710,7 +710,7 @@ export function CheckoutView({ settings }: { settings: StoreSettings }) {
                 <Mail className="h-5 w-5" strokeWidth={2.5} /> Generate order email
               </PFButton>
               <p className="text-center font-mono-tech text-[10px] leading-relaxed uppercase tracking-widest text-pf-cream/50">
-                OPENS YOUR EMAIL APP WITH EVERYTHING PREFILLED — YOU PRESS SEND
+                OPENS YOUR EMAIL APP WITH EVERYTHING PREFILLED / YOU PRESS SEND
               </p>
             </div>
           </div>

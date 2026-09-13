@@ -5,7 +5,7 @@ import { Breadcrumbs } from "@/components/storefront/breadcrumbs";
 export const metadata: Metadata = {
   title: "Privacy Policy",
   description:
-    "POSTFORM privacy policy — no tracking cookies, no analytics, no third-party pixels. Only the data you voluntarily provide to process an order.",
+    "POSTFORM privacy policy: no tracking cookies, no analytics, no third-party pixels. Only the data you voluntarily provide to process an order.",
 };
 
 export default function PrivacyPage() {
@@ -14,8 +14,8 @@ export default function PrivacyPage() {
       <Breadcrumbs items={[{ label: "PRIVACY POLICY" }]} />
 
       <div className="mt-6 border-b-2 border-pf-black pb-6">
-        <p className="font-mono-tech text-[10px] font-bold uppercase tracking-[0.3em] text-pf-purple">
-          LEGAL — PRIVACY
+        <p className="font-mono-tech text-[10px] font-bold uppercase tracking-[0.3em] text-pf-muted">
+          LEGAL / PRIVACY
         </p>
         <h1 className="mt-2 font-display text-5xl uppercase leading-[0.9] text-pf-black sm:text-6xl">
           Privacy
@@ -96,7 +96,7 @@ export default function PrivacyPage() {
               For any privacy concerns, please contact us directly at:{" "}
               <a
                 href="mailto:postformproducts@haren.uk"
-                className="font-mono-tech font-bold text-pf-purple underline underline-offset-4"
+                className="font-mono-tech font-bold text-pf-black underline underline-offset-4"
               >
                 postformproducts@haren.uk
               </a>

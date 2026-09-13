@@ -70,7 +70,7 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="flex min-h-screen bg-pf-cream">
-      {/* Sidebar — desktop */}
+      {/* Sidebar - desktop */}
       <aside className="sticky top-0 hidden h-screen w-60 shrink-0 flex-col border-r-2 border-pf-black bg-pf-black p-4 lg:flex">
         <Link href="/admin" className="mb-8 block px-2">
           <p className="font-display text-xl text-pf-cream">
@@ -82,7 +82,7 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
         </Link>
         <div className="flex-1">{nav}</div>
         <p className="font-mono-tech text-[9px] uppercase tracking-widest text-pf-cream/30">
-          ORDERS ARRIVE BY EMAIL —
+          ORDERS ARRIVE BY EMAIL.
           <br />
           NO ORDER CRM BY DESIGN
         </p>

@@ -6,7 +6,7 @@ export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Checkout",
-  description: "Complete your POSTFORM order — guest checkout, no account needed.",
+  description: "Complete your POSTFORM order. Guest checkout, no account needed.",
   robots: { index: false, follow: false },
 };
 

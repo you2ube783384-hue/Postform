@@ -31,8 +31,8 @@ export function WishlistView({ settings }: { settings: StoreSettings }) {
     <div className="mx-auto max-w-[1600px] px-4 py-8 sm:px-8 lg:px-12">
       <div className="flex flex-wrap items-end justify-between gap-3 border-b-2 border-pf-black pb-4">
         <div>
-          <p className="font-mono-tech text-[10px] font-bold uppercase tracking-[0.3em] text-pf-purple">
-            SAVED ON THIS DEVICE — NOT AN ACCOUNT
+          <p className="font-mono-tech text-[10px] font-bold uppercase tracking-[0.3em] text-pf-muted">
+            SAVED ON THIS DEVICE / NOT AN ACCOUNT
           </p>
           <h1 className="font-display text-4xl uppercase leading-none text-pf-black sm:text-5xl">
             Wishlist{" "}
@@ -60,7 +60,7 @@ export function WishlistView({ settings }: { settings: StoreSettings }) {
           <Heart className="h-12 w-12 text-pf-muted" strokeWidth={1.5} />
           <p className="font-display text-3xl uppercase text-pf-black">Nothing saved yet</p>
           <p className="max-w-sm text-sm text-pf-muted">
-            Tap the heart on any product to keep an eye on it. Your wishlist lives in this browser only —
+            Tap the heart on any product to keep an eye on it. Your wishlist lives in this browser only,
             no account, no tracking.
           </p>
           <Link
@@ -94,7 +94,7 @@ export function WishlistView({ settings }: { settings: StoreSettings }) {
                     NO IMAGE
                   </span>
                 )}
-                <span className="absolute left-2 top-2 border border-pf-black bg-pf-purple-soft px-2 py-0.5 font-mono-tech text-[10px] font-bold uppercase tracking-widest text-pf-purple">
+                <span className="absolute left-2 top-2 border border-pf-black bg-pf-yellow px-2 py-0.5 font-mono-tech text-[10px] font-bold uppercase tracking-widest text-pf-black">
                   {item.condition}
                 </span>
               </Link>
@@ -135,7 +135,7 @@ export function WishlistView({ settings }: { settings: StoreSettings }) {
                   </button>
                 </div>
                 <p className="font-mono-tech text-[9px] uppercase tracking-widest text-pf-muted">
-                  SAVED {new Date(item.addedAt).toLocaleDateString("en-GB").toUpperCase()} — AVAILABILITY
+                  SAVED {new Date(item.addedAt).toLocaleDateString("en-GB").toUpperCase()} / AVAILABILITY
                   CHECKED ON VIEW
                 </p>
               </div>

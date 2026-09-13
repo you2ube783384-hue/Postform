@@ -39,7 +39,7 @@ export default async function AdminDashboard() {
     <div className="p-5 sm:p-8">
       <div className="flex flex-wrap items-end justify-between gap-3 border-b-2 border-pf-black pb-4">
         <div>
-          <p className="font-mono-tech text-[10px] font-bold uppercase tracking-[0.3em] text-pf-purple">
+          <p className="font-mono-tech text-[10px] font-bold uppercase tracking-[0.3em] text-pf-muted">
             CONTROL ROOM
           </p>
           <h1 className="font-display text-3xl uppercase leading-none text-pf-black sm:text-4xl">
@@ -58,7 +58,7 @@ export default async function AdminDashboard() {
       <div className="mt-6 grid grid-cols-2 gap-3 lg:grid-cols-4">
         {stats.map((s) => (
           <div key={s.label} className="border-2 border-pf-black bg-pf-paper p-4">
-            <s.icon className="h-5 w-5 text-pf-purple" strokeWidth={2.5} />
+            <s.icon className="h-5 w-5 text-pf-black" strokeWidth={2.5} />
             <p className="mt-3 font-display text-3xl leading-none text-pf-black">{s.value}</p>
             <p className="mt-1 font-mono-tech text-[10px] uppercase tracking-[0.2em] text-pf-muted">
               {s.label}
@@ -87,7 +87,7 @@ export default async function AdminDashboard() {
                 <div className="min-w-0 flex-1">
                   <p className="truncate text-sm font-bold text-pf-black">{p.name}</p>
                   <p className="font-mono-tech text-[10px] uppercase tracking-wider text-pf-muted">
-                    {p.category} — {formatPrice(p.price, settings.currency)} — {totalStock(p)} IN STOCK
+                    {p.category} / {formatPrice(p.price, settings.currency)} / {totalStock(p)} IN STOCK
                   </p>
                 </div>
                 <Link
@@ -119,7 +119,7 @@ export default async function AdminDashboard() {
                   <ul className="mt-2 space-y-1 text-xs text-pf-ink">
                     {soldOut.map((p) => (
                       <li key={p.id}>
-                        SOLD OUT —{" "}
+                        SOLD OUT.{" "}
                         <Link href={`/admin/products/${p.id}/edit`} className="font-bold underline underline-offset-2">
                           {p.name}
                         </Link>
@@ -127,7 +127,7 @@ export default async function AdminDashboard() {
                     ))}
                     {lowStock.map((p) => (
                       <li key={p.id}>
-                        LOW ({totalStock(p)}) —{" "}
+                        LOW ({totalStock(p)}).{" "}
                         <Link href={`/admin/products/${p.id}/edit`} className="font-bold underline underline-offset-2">
                           {p.name}
                         </Link>
@@ -166,7 +166,7 @@ export default async function AdminDashboard() {
                 <p className="mt-2 text-xs leading-relaxed text-pf-cream/70">
                   Customers submit orders via the generated order email to{" "}
                   <span className="break-all font-mono-tech text-pf-cream">{settings.storeEmail}</span>. Check
-                  that inbox — there is no order dashboard by design.
+                  that inbox. There is no order dashboard by design.
                 </p>
               </div>
             </div>

@@ -35,7 +35,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.7,
     }));
   } catch {
-    // DB unavailable — static pages still ship
+    // DB unavailable - static pages still ship
   }
 
   return [...staticPages, ...categoryPages, ...productPages];

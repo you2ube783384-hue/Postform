@@ -6,7 +6,7 @@ export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
   title: "Shop All",
   description:
-    "Browse the full POSTFORM catalogue — streetwear, sneakers and accessories, new, used and vintage. Free international shipping.",
+    "Browse the full POSTFORM catalogue. Streetwear, sneakers and accessories, new, used and vintage. Free international shipping.",
 };
 
 export default async function ShopPage({

@@ -3,14 +3,14 @@ import Link from "next/link";
 export default function NotFound() {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-background px-4 text-center">
-      <p className="font-mono-tech text-[10px] font-bold uppercase tracking-[0.3em] text-pf-purple">
-        ERROR 404 — FILE NOT FOUND
+      <p className="font-mono-tech text-[10px] font-bold uppercase tracking-[0.3em] text-pf-muted">
+        ERROR 404 / FILE NOT FOUND
       </p>
       <h1 className="mt-4 font-display text-6xl uppercase leading-none text-pf-black sm:text-8xl">
         Dead<br />End<span className="text-pf-yellow" style={{ WebkitTextStroke: "3px #141310" }}>.</span>
       </h1>
       <p className="mt-6 max-w-md text-sm leading-relaxed text-pf-muted">
-        This page doesn&apos;t exist — or the piece you were looking for has already rotated out of stock.
+        This page doesn&apos;t exist, or the piece you were looking for has already rotated out of stock.
       </p>
       <div className="mt-8 flex flex-wrap justify-center gap-3">
         <Link

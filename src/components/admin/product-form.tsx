@@ -227,7 +227,7 @@ export function AdminProductForm({
     <div className="p-5 sm:p-8">
       <div className="flex flex-wrap items-end justify-between gap-3 border-b-2 border-pf-black pb-4">
         <div>
-          <p className="font-mono-tech text-[10px] font-bold uppercase tracking-[0.3em] text-pf-purple">
+          <p className="font-mono-tech text-[10px] font-bold uppercase tracking-[0.3em] text-pf-muted">
             {editing ? "EDITING PRODUCT" : "NEW PRODUCT"}
           </p>
           <h1 className="font-display text-3xl uppercase leading-none text-pf-black sm:text-4xl">
@@ -252,7 +252,7 @@ export function AdminProductForm({
       <div className="mt-6 grid gap-6 xl:grid-cols-[1fr_360px]">
         <div className="space-y-6">
           {/* BASICS */}
-          <FormSection id="sec-basics" title="01 — PRODUCT BASICS" hint="NAME + CATEGORY REQUIRED">
+          <FormSection id="sec-basics" title="01. PRODUCT BASICS" hint="NAME + CATEGORY REQUIRED">
             <div className="grid gap-4 sm:grid-cols-2">
               <label className="block sm:col-span-2">
                 <span className="mb-1 block font-mono-tech text-[10px] font-bold uppercase tracking-[0.2em]">
@@ -265,7 +265,7 @@ export function AdminProductForm({
                   CATEGORY <span className="text-pf-red">*</span>
                 </span>
                 <select value={category} onChange={(e) => setCategory(e.target.value)} className={cn(inputClass, "cursor-pointer")}>
-                  <option value="">— SELECT —</option>
+                  <option value="">- SELECT -</option>
                   {CATEGORIES.map((c) => (
                     <option key={c.slug} value={c.name}>{c.name}</option>
                   ))}
@@ -307,21 +307,21 @@ export function AdminProductForm({
               </label>
               <label className="block sm:col-span-2">
                 <span className="mb-1 block font-mono-tech text-[10px] font-bold uppercase tracking-[0.2em]">
-                  SIZE CHART — OPTIONAL
+                  SIZE CHART / OPTIONAL
                 </span>
                 <textarea
                   value={sizeChart}
                   onChange={(e) => setSizeChart(e.target.value)}
                   rows={4}
                   className="w-full border-2 border-pf-black bg-pf-paper p-3 font-mono-tech text-xs outline-none placeholder:text-pf-muted/60 focus:bg-white"
-                  placeholder={"SIZE — CHEST — LENGTH\nM — 50cm — 69cm"}
+                  placeholder={"SIZE / CHEST / LENGTH\nM / 50cm / 69cm"}
                 />
               </label>
             </div>
           </FormSection>
 
           {/* PRICING */}
-          <FormSection id="sec-pricing" title="02 — PRICING" hint="SELLING PRICE REQUIRED">
+          <FormSection id="sec-pricing" title="02. PRICING" hint="SELLING PRICE REQUIRED">
             <div className="grid gap-4 sm:grid-cols-2">
               <label className="block">
                 <span className="mb-1 block font-mono-tech text-[10px] font-bold uppercase tracking-[0.2em]">
@@ -339,7 +339,7 @@ export function AdminProductForm({
               </label>
               <label className="block">
                 <span className="mb-1 block font-mono-tech text-[10px] font-bold uppercase tracking-[0.2em]">
-                  ORIGINAL / MRP ({currency}) — OPTIONAL
+                  ORIGINAL / MRP ({currency}) / OPTIONAL
                 </span>
                 <input
                   type="number"
@@ -355,7 +355,7 @@ export function AdminProductForm({
           </FormSection>
 
           {/* VARIANTS */}
-          <FormSection id="sec-variants" title="03 — VARIANTS & STOCK" hint={`${totalStockUnits} TOTAL UNITS`}>
+          <FormSection id="sec-variants" title="03. VARIANTS & STOCK" hint={`${totalStockUnits} TOTAL UNITS`}>
             <div className="mb-4 flex flex-wrap items-center gap-2">
               <span className="font-mono-tech text-[10px] font-bold uppercase tracking-widest text-pf-muted">
                 QUICK ADD:
@@ -442,14 +442,14 @@ export function AdminProductForm({
             </PFButton>
 
             <p className="mt-3 text-xs leading-relaxed text-pf-muted">
-              Stock is variant-aware — a size with 0 stock shows as visibly unavailable on the storefront
+              Stock is variant-aware: a size with 0 stock shows as visibly unavailable on the storefront
               and cannot be selected. Leave colour blank when a product has a single colour (no meaningless
               selectors are shown).
             </p>
           </FormSection>
 
           {/* MEDIA */}
-          <FormSection id="sec-media" title="04 — MEDIA" hint={`${images.length} IMAGE${images.length === 1 ? "" : "S"} — FIRST IS PRIMARY`}>
+          <FormSection id="sec-media" title="04. MEDIA" hint={`${images.length} IMAGE${images.length === 1 ? "" : "S"}  / FIRST IS PRIMARY`}>
             <div className="space-y-3">
               {/* Existing images */}
               {images.map((img, i) => (
@@ -468,7 +468,7 @@ export function AdminProductForm({
                       onChange={(e) => setImages((imgs) => imgs.map((x, j) => (j === i ? { ...x, alt: e.target.value } : x)))}
                       aria-label={`Alt text for image ${i + 1}`}
                       className="h-8 w-full border-2 border-pf-black bg-pf-paper px-2 text-xs outline-none focus:bg-white"
-                      placeholder="ALT TEXT — describe the image"
+                      placeholder="ALT TEXT: describe the image"
                     />
                   </div>
                   <div className="flex gap-1">
@@ -511,7 +511,7 @@ export function AdminProductForm({
 
               <p className="flex items-start gap-2 text-xs leading-relaxed text-pf-muted">
                 <ImageOff className="mt-0.5 h-4 w-4 shrink-0" />
-                POSTFORM stores image URLs, not uploads — host images anywhere reachable (your own
+                POSTFORM stores image URLs, not uploads. Host images anywhere reachable (your own
                 hosting, CDN or Git-backed assets). URLs are validated; the first image becomes the
                 product card&apos;s primary.
               </p>
@@ -519,11 +519,11 @@ export function AdminProductForm({
           </FormSection>
 
           {/* MERCHANDISING */}
-          <FormSection id="sec-merch" title="05 — MERCHANDISING">
+          <FormSection id="sec-merch" title="05. MERCHANDISING">
             <div className="space-y-4">
               <label className="block">
                 <span className="mb-1 block font-mono-tech text-[10px] font-bold uppercase tracking-[0.2em]">
-                  TAGS — COMMA SEPARATED
+                  TAGS / COMMA SEPARATED
                 </span>
                 <input type="text" value={tags} onChange={(e) => setTags(e.target.value)} className={inputClass} placeholder="streetwear, cotton, archive" />
               </label>
@@ -571,7 +571,7 @@ export function AdminProductForm({
           </FormSection>
         </div>
 
-        {/* PREVIEW — sticky */}
+        {/* PREVIEW - sticky */}
         <aside className="xl:sticky xl:top-6 xl:self-start" aria-label="Storefront preview">
           <div className="border-2 border-pf-black bg-pf-paper">
             <div className="border-b-2 border-pf-black bg-pf-black px-4 py-3">
@@ -617,7 +617,7 @@ export function AdminProductForm({
               <div className="mt-4 space-y-2 font-mono-tech text-[10px] uppercase tracking-widest text-pf-muted">
                 <p className="flex justify-between">
                   <span>SLUG</span>
-                  <span className="truncate pl-2 text-right text-pf-black">{slugPreview || "—"}</span>
+                  <span className="truncate pl-2 text-right text-pf-black">{slugPreview || "-"}</span>
                 </p>
                 <p className="flex justify-between">
                   <span>VARIANTS</span>

@@ -5,7 +5,7 @@ import { Breadcrumbs } from "@/components/storefront/breadcrumbs";
 export const metadata: Metadata = {
   title: "Return & Refund",
   description:
-    "POSTFORM return & refund policy — defect and significant-mismatch returns with unboxing video proof. Defect return shipping covered by us. 5-7 business day refunds.",
+    "POSTFORM return & refund policy: defect and significant-mismatch returns with unboxing video proof. Defect return shipping covered by us. 5-7 business day refunds.",
 };
 
 export default function RefundPage() {
@@ -14,8 +14,8 @@ export default function RefundPage() {
       <Breadcrumbs items={[{ label: "RETURN & REFUND" }]} />
 
       <div className="mt-6 border-b-2 border-pf-black pb-6">
-        <p className="font-mono-tech text-[10px] font-bold uppercase tracking-[0.3em] text-pf-purple">
-          LEGAL — REFUND
+        <p className="font-mono-tech text-[10px] font-bold uppercase tracking-[0.3em] text-pf-muted">
+          LEGAL / REFUND
         </p>
         <h1 className="mt-2 font-display text-5xl uppercase leading-[0.9] text-pf-black sm:text-6xl">
           Return
@@ -92,7 +92,7 @@ export default function RefundPage() {
               To start a return, email us at{" "}
               <a
                 href="mailto:postformproducts@haren.uk"
-                className="font-mono-tech font-bold text-pf-purple underline underline-offset-4"
+                className="font-mono-tech font-bold text-pf-black underline underline-offset-4"
               >
                 postformproducts@haren.uk
               </a>{" "}
